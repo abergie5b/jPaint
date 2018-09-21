@@ -1,0 +1,199 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ApplicationState	../model/persistence/ApplicationState.java	/^    public ApplicationState(IUiModule uiModule) {$/;"	m	class:ApplicationState
+ApplicationState	../model/persistence/ApplicationState.java	/^public class ApplicationState implements IApplicationState, Serializable {$/;"	c
+BLACK	../model/ShapeColor.java	/^    BLACK,$/;"	e	enum:ShapeColor	file:
+BLUE	../model/ShapeColor.java	/^    BLUE,$/;"	e	enum:ShapeColor	file:
+CHOOSE_PRIMARY_COLOR	../view/EventName.java	/^	CHOOSE_PRIMARY_COLOR {$/;"	e	enum:EventName	file:
+CHOOSE_SECONDARY_COLOR	../view/EventName.java	/^	CHOOSE_SECONDARY_COLOR {$/;"	e	enum:EventName	file:
+CHOOSE_SHADING_TYPE	../view/EventName.java	/^	CHOOSE_SHADING_TYPE {$/;"	e	enum:EventName	file:
+CHOOSE_SHAPE	../view/EventName.java	/^	CHOOSE_SHAPE{$/;"	e	enum:EventName	file:
+CHOOSE_START_POINT_ENDPOINT_MODE	../view/EventName.java	/^	CHOOSE_START_POINT_ENDPOINT_MODE {$/;"	e	enum:EventName	file:
+COPY	../view/EventName.java	/^	COPY,$/;"	e	enum:EventName	file:
+CYAN	../model/ShapeColor.java	/^    CYAN,$/;"	e	enum:ShapeColor	file:
+ChoosePrimaryColorDialog	../model/dialogs/ChoosePrimaryColorDialog.java	/^    public ChoosePrimaryColorDialog(IApplicationState applicationState) {$/;"	m	class:ChoosePrimaryColorDialog
+ChoosePrimaryColorDialog	../model/dialogs/ChoosePrimaryColorDialog.java	/^public class ChoosePrimaryColorDialog implements IDialogChoice<ShapeColor> {$/;"	c
+ChooseSecondaryColorDialog	../model/dialogs/ChooseSecondaryColorDialog.java	/^    public ChooseSecondaryColorDialog(IApplicationState applicationState) {$/;"	m	class:ChooseSecondaryColorDialog
+ChooseSecondaryColorDialog	../model/dialogs/ChooseSecondaryColorDialog.java	/^public class ChooseSecondaryColorDialog implements IDialogChoice<ShapeColor> {$/;"	c
+ChooseShadingTypeDialog	../model/dialogs/ChooseShadingTypeDialog.java	/^    public ChooseShadingTypeDialog(IApplicationState applicationState) {$/;"	m	class:ChooseShadingTypeDialog
+ChooseShadingTypeDialog	../model/dialogs/ChooseShadingTypeDialog.java	/^public class ChooseShadingTypeDialog implements IDialogChoice<ShapeShadingType> {$/;"	c
+ChooseShapeDialog	../model/dialogs/ChooseShapeDialog.java	/^    public ChooseShapeDialog(IApplicationState applicationState) {$/;"	m	class:ChooseShapeDialog
+ChooseShapeDialog	../model/dialogs/ChooseShapeDialog.java	/^public class ChooseShapeDialog implements IDialogChoice<ShapeType> {$/;"	c
+ChooseStartAndEndPointModeDialog	../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    public ChooseStartAndEndPointModeDialog(IApplicationState applicationState) {$/;"	m	class:ChooseStartAndEndPointModeDialog
+ChooseStartAndEndPointModeDialog	../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^public class ChooseStartAndEndPointModeDialog implements IDialogChoice<StartAndEndPointMode> {$/;"	c
+DARK_GRAY	../model/ShapeColor.java	/^    DARK_GRAY,$/;"	e	enum:ShapeColor	file:
+DELETE	../view/EventName.java	/^	DELETE$/;"	e	enum:EventName	file:
+DRAW	../model/StartAndEndPointMode.java	/^    DRAW,$/;"	e	enum:StartAndEndPointMode	file:
+DialogProvider	../model/dialogs/DialogProvider.java	/^    public DialogProvider(IApplicationState applicationState) {$/;"	m	class:DialogProvider
+DialogProvider	../model/dialogs/DialogProvider.java	/^public class DialogProvider implements IDialogProvider {$/;"	c
+ELLIPSE	../model/ShapeType.java	/^    ELLIPSE,$/;"	e	enum:ShapeType	file:
+EventName	../view/EventName.java	/^public enum EventName {$/;"	g
+FILLED_IN	../model/ShapeShadingType.java	/^    FILLED_IN,$/;"	e	enum:ShapeShadingType	file:
+GRAY	../model/ShapeColor.java	/^    GRAY,$/;"	e	enum:ShapeColor	file:
+GREEN	../model/ShapeColor.java	/^    GREEN,$/;"	e	enum:ShapeColor	file:
+Gui	../view/gui/Gui.java	/^    public Gui(IGuiWindow gui) {$/;"	m	class:Gui
+Gui	../view/gui/Gui.java	/^public class Gui implements IUiModule {$/;"	c
+GuiWindow	../view/gui/GuiWindow.java	/^    public GuiWindow(PaintCanvas canvas){$/;"	m	class:GuiWindow
+GuiWindow	../view/gui/GuiWindow.java	/^public class GuiWindow extends JFrame implements IGuiWindow {$/;"	c
+IApplicationState	../model/interfaces/IApplicationState.java	/^public interface IApplicationState {$/;"	i
+IDialogChoice	../view/interfaces/IDialogChoice.java	/^public interface IDialogChoice<T> {$/;"	i
+IDialogProvider	../model/interfaces/IDialogProvider.java	/^public interface IDialogProvider {$/;"	i
+IEventCallback	../view/interfaces/IEventCallback.java	/^public interface IEventCallback {$/;"	i
+IGuiWindow	../view/interfaces/IGuiWindow.java	/^public interface IGuiWindow {$/;"	i
+IJPaintController	../controller/IJPaintController.java	/^public interface IJPaintController {$/;"	i
+IUiModule	../view/interfaces/IUiModule.java	/^public interface IUiModule {$/;"	i
+JPaintController	../controller/JPaintController.java	/^    public JPaintController(IUiModule uiModule, IApplicationState applicationState) {$/;"	m	class:JPaintController
+JPaintController	../controller/JPaintController.java	/^public class JPaintController implements IJPaintController {$/;"	c
+LIGHT_GRAY	../model/ShapeColor.java	/^    LIGHT_GRAY,$/;"	e	enum:ShapeColor	file:
+MAGENTA	../model/ShapeColor.java	/^    MAGENTA,$/;"	e	enum:ShapeColor	file:
+MOVE	../model/StartAndEndPointMode.java	/^    MOVE$/;"	e	enum:StartAndEndPointMode	file:
+Main	../main/Main.java	/^public class Main {$/;"	c
+MyClass	../test.java	/^class MyClass {$/;"	c
+ORANGE	../model/ShapeColor.java	/^    ORANGE,$/;"	e	enum:ShapeColor	file:
+OUTLINE	../model/ShapeShadingType.java	/^    OUTLINE,$/;"	e	enum:ShapeShadingType	file:
+OUTLINE_AND_FILLED_IN	../model/ShapeShadingType.java	/^    OUTLINE_AND_FILLED_IN$/;"	e	enum:ShapeShadingType	file:
+PASTE	../view/EventName.java	/^	PASTE,$/;"	e	enum:EventName	file:
+PINK	../model/ShapeColor.java	/^    PINK,$/;"	e	enum:ShapeColor	file:
+PaintCanvas	../view/gui/PaintCanvas.java	/^public class PaintCanvas extends JComponent {$/;"	c
+RECTANGLE	../model/ShapeType.java	/^    RECTANGLE,$/;"	e	enum:ShapeType	file:
+RED	../model/ShapeColor.java	/^    RED,$/;"	e	enum:ShapeColor	file:
+REDO	../view/EventName.java	/^	REDO,$/;"	e	enum:EventName	file:
+SELECT	../model/StartAndEndPointMode.java	/^    SELECT,$/;"	e	enum:StartAndEndPointMode	file:
+ShapeColor	../model/ShapeColor.java	/^public enum ShapeColor {$/;"	g
+ShapeShadingType	../model/ShapeShadingType.java	/^public enum ShapeShadingType {$/;"	g
+ShapeType	../model/ShapeType.java	/^public enum ShapeType {$/;"	g
+StartAndEndPointMode	../model/StartAndEndPointMode.java	/^public enum StartAndEndPointMode {$/;"	g
+TRIANGLE	../model/ShapeType.java	/^    TRIANGLE$/;"	e	enum:ShapeType	file:
+UNDO	../view/EventName.java	/^	UNDO,$/;"	e	enum:EventName	file:
+WHITE	../model/ShapeColor.java	/^    WHITE,$/;"	e	enum:ShapeColor	file:
+YELLOW	../model/ShapeColor.java	/^    YELLOW$/;"	e	enum:ShapeColor	file:
+activePrimaryColor	../model/persistence/ApplicationState.java	/^    private ShapeColor activePrimaryColor;$/;"	f	class:ApplicationState	file:
+activeSecondaryColor	../model/persistence/ApplicationState.java	/^    private ShapeColor activeSecondaryColor;$/;"	f	class:ApplicationState	file:
+activeShapeShadingType	../model/persistence/ApplicationState.java	/^    private ShapeShadingType activeShapeShadingType;$/;"	f	class:ApplicationState	file:
+activeShapeType	../model/persistence/ApplicationState.java	/^    private ShapeType activeShapeType;$/;"	f	class:ApplicationState	file:
+activeStartAndEndPointMode	../model/persistence/ApplicationState.java	/^    private StartAndEndPointMode activeStartAndEndPointMode;$/;"	f	class:ApplicationState	file:
+addButtonToPanel	../view/gui/GuiWindow.java	/^	private void addButtonToPanel(EventName eventName, JPanel panel) {$/;"	m	class:GuiWindow	file:
+addEvent	../view/gui/Gui.java	/^	public void addEvent(EventName eventName, IEventCallback callback) {$/;"	m	class:Gui
+addEvent	../view/interfaces/IUiModule.java	/^    void addEvent(EventName eventName, IEventCallback command);$/;"	m	interface:IUiModule
+applicationState	../controller/JPaintController.java	/^    private final IApplicationState applicationState;$/;"	f	class:JPaintController	file:
+applicationState	../model/dialogs/ChoosePrimaryColorDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChoosePrimaryColorDialog	file:
+applicationState	../model/dialogs/ChooseSecondaryColorDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseSecondaryColorDialog	file:
+applicationState	../model/dialogs/ChooseShadingTypeDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseShadingTypeDialog	file:
+applicationState	../model/dialogs/ChooseShapeDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseShapeDialog	file:
+applicationState	../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseStartAndEndPointModeDialog	file:
+applicationState	../model/dialogs/DialogProvider.java	/^    private final IApplicationState applicationState;$/;"	f	class:DialogProvider	file:
+choosePrimaryColorDialog	../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeColor> choosePrimaryColorDialog;$/;"	f	class:DialogProvider	file:
+chooseSecondaryColorDialog	../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeColor> chooseSecondaryColorDialog;$/;"	f	class:DialogProvider	file:
+chooseShadingTypeDialog	../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeShadingType> chooseShadingTypeDialog;$/;"	f	class:DialogProvider	file:
+chooseShapeDialog	../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeType> chooseShapeDialog;$/;"	f	class:DialogProvider	file:
+chooseStartAndEndPointModeDialog	../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<StartAndEndPointMode> chooseStartAndEndPointModeDialog;$/;"	f	class:DialogProvider	file:
+controller	../controller/IJPaintController.java	/^package controller;$/;"	p
+controller	../controller/JPaintController.java	/^package controller;$/;"	p
+createBackgroundPanel	../view/gui/GuiWindow.java	/^    private JPanel createBackgroundPanel() {$/;"	m	class:GuiWindow	file:
+createButton	../view/gui/GuiWindow.java	/^	private JButton createButton(EventName eventName) {$/;"	m	class:GuiWindow	file:
+createButtonBorder	../view/gui/GuiWindow.java	/^	private Border createButtonBorder() {$/;"	m	class:GuiWindow	file:
+createButtonPanel	../view/gui/GuiWindow.java	/^	private JPanel createButtonPanel() {$/;"	m	class:GuiWindow	file:
+createMenu	../view/gui/GuiWindow.java	/^    private JPanel createMenu() {$/;"	m	class:GuiWindow	file:
+createWindow	../view/gui/GuiWindow.java	/^	private JPanel createWindow() {$/;"	m	class:GuiWindow	file:
+defaultButtonDimensions	../view/gui/GuiWindow.java	/^    private final Insets defaultButtonDimensions $/;"	f	class:GuiWindow	file:
+defaultHeight	../view/gui/GuiWindow.java	/^    private final int defaultHeight = 800;$/;"	f	class:GuiWindow	file:
+defaultTitle	../view/gui/GuiWindow.java	/^    private final String defaultTitle = "JPaint";$/;"	f	class:GuiWindow	file:
+defaultWidth	../view/gui/GuiWindow.java	/^    private final int defaultWidth = 1250;$/;"	f	class:GuiWindow	file:
+dialogProvider	../model/persistence/ApplicationState.java	/^    private final IDialogProvider dialogProvider;$/;"	f	class:ApplicationState	file:
+eventButtons	../view/gui/GuiWindow.java	/^    private final Map<EventName, JButton> eventButtons = new HashMap<>();$/;"	f	class:GuiWindow	file:
+getActivePrimaryColor	../model/interfaces/IApplicationState.java	/^    ShapeColor getActivePrimaryColor();$/;"	m	interface:IApplicationState
+getActivePrimaryColor	../model/persistence/ApplicationState.java	/^    public ShapeColor getActivePrimaryColor() {$/;"	m	class:ApplicationState
+getActiveSecondaryColor	../model/interfaces/IApplicationState.java	/^    ShapeColor getActiveSecondaryColor();$/;"	m	interface:IApplicationState
+getActiveSecondaryColor	../model/persistence/ApplicationState.java	/^    public ShapeColor getActiveSecondaryColor() {$/;"	m	class:ApplicationState
+getActiveShapeShadingType	../model/interfaces/IApplicationState.java	/^    ShapeShadingType getActiveShapeShadingType();$/;"	m	interface:IApplicationState
+getActiveShapeShadingType	../model/persistence/ApplicationState.java	/^    public ShapeShadingType getActiveShapeShadingType() {$/;"	m	class:ApplicationState
+getActiveShapeType	../model/interfaces/IApplicationState.java	/^    ShapeType getActiveShapeType();$/;"	m	interface:IApplicationState
+getActiveShapeType	../model/persistence/ApplicationState.java	/^    public ShapeType getActiveShapeType() {$/;"	m	class:ApplicationState
+getActiveStartAndEndPointMode	../model/interfaces/IApplicationState.java	/^    StartAndEndPointMode getActiveStartAndEndPointMode();$/;"	m	interface:IApplicationState
+getActiveStartAndEndPointMode	../model/persistence/ApplicationState.java	/^    public StartAndEndPointMode getActiveStartAndEndPointMode() {$/;"	m	class:ApplicationState
+getButton	../view/gui/GuiWindow.java	/^	public JButton getButton(EventName eventName) {$/;"	m	class:GuiWindow
+getButton	../view/interfaces/IGuiWindow.java	/^    JButton getButton(EventName eventName);$/;"	m	interface:IGuiWindow
+getChoosePrimaryColorDialog	../model/dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeColor> getChoosePrimaryColorDialog() {$/;"	m	class:DialogProvider
+getChoosePrimaryColorDialog	../model/interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeColor> getChoosePrimaryColorDialog();$/;"	m	interface:IDialogProvider
+getChooseSecondaryColorDialog	../model/dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeColor> getChooseSecondaryColorDialog() {$/;"	m	class:DialogProvider
+getChooseSecondaryColorDialog	../model/interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeColor> getChooseSecondaryColorDialog();$/;"	m	interface:IDialogProvider
+getChooseShadingTypeDialog	../model/dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeShadingType> getChooseShadingTypeDialog() {$/;"	m	class:DialogProvider
+getChooseShadingTypeDialog	../model/interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeShadingType> getChooseShadingTypeDialog();$/;"	m	interface:IDialogProvider
+getChooseShapeDialog	../model/dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeType> getChooseShapeDialog() {$/;"	m	class:DialogProvider
+getChooseShapeDialog	../model/interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeType> getChooseShapeDialog();$/;"	m	interface:IDialogProvider
+getChooseStartAndEndPointModeDialog	../model/dialogs/DialogProvider.java	/^    public IDialogChoice<StartAndEndPointMode> getChooseStartAndEndPointModeDialog() {$/;"	m	class:DialogProvider
+getChooseStartAndEndPointModeDialog	../model/interfaces/IDialogProvider.java	/^    IDialogChoice<StartAndEndPointMode> getChooseStartAndEndPointModeDialog();$/;"	m	interface:IDialogProvider
+getCurrentSelection	../model/dialogs/ChoosePrimaryColorDialog.java	/^    public ShapeColor getCurrentSelection() {$/;"	m	class:ChoosePrimaryColorDialog
+getCurrentSelection	../model/dialogs/ChooseSecondaryColorDialog.java	/^    public ShapeColor getCurrentSelection() {$/;"	m	class:ChooseSecondaryColorDialog
+getCurrentSelection	../model/dialogs/ChooseShadingTypeDialog.java	/^    public ShapeShadingType getCurrentSelection() {$/;"	m	class:ChooseShadingTypeDialog
+getCurrentSelection	../model/dialogs/ChooseShapeDialog.java	/^    public ShapeType getCurrentSelection() {$/;"	m	class:ChooseShapeDialog
+getCurrentSelection	../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    public StartAndEndPointMode getCurrentSelection() {$/;"	m	class:ChooseStartAndEndPointModeDialog
+getCurrentSelection	../view/interfaces/IDialogChoice.java	/^    T getCurrentSelection();$/;"	m	interface:IDialogChoice
+getDialogOptions	../model/dialogs/ChoosePrimaryColorDialog.java	/^    public ShapeColor[] getDialogOptions() {$/;"	m	class:ChoosePrimaryColorDialog
+getDialogOptions	../model/dialogs/ChooseSecondaryColorDialog.java	/^    public ShapeColor[] getDialogOptions() {$/;"	m	class:ChooseSecondaryColorDialog
+getDialogOptions	../model/dialogs/ChooseShadingTypeDialog.java	/^    public ShapeShadingType[] getDialogOptions() {$/;"	m	class:ChooseShadingTypeDialog
+getDialogOptions	../model/dialogs/ChooseShapeDialog.java	/^    public ShapeType[] getDialogOptions() {$/;"	m	class:ChooseShapeDialog
+getDialogOptions	../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    public StartAndEndPointMode[] getDialogOptions() {$/;"	m	class:ChooseStartAndEndPointModeDialog
+getDialogOptions	../view/interfaces/IDialogChoice.java	/^    T[] getDialogOptions();$/;"	m	interface:IDialogChoice
+getDialogResponse	../view/gui/Gui.java	/^    public <T> T getDialogResponse(IDialogChoice dialogSettings) {$/;"	m	class:Gui
+getDialogResponse	../view/interfaces/IUiModule.java	/^    <T> T getDialogResponse(IDialogChoice dialogChoice);$/;"	m	interface:IUiModule
+getDialogText	../model/dialogs/ChoosePrimaryColorDialog.java	/^    public String getDialogText() {$/;"	m	class:ChoosePrimaryColorDialog
+getDialogText	../model/dialogs/ChooseSecondaryColorDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseSecondaryColorDialog
+getDialogText	../model/dialogs/ChooseShadingTypeDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseShadingTypeDialog
+getDialogText	../model/dialogs/ChooseShapeDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseShapeDialog
+getDialogText	../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseStartAndEndPointModeDialog
+getDialogText	../view/interfaces/IDialogChoice.java	/^    String getDialogText();$/;"	m	interface:IDialogChoice
+getDialogTitle	../model/dialogs/ChoosePrimaryColorDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChoosePrimaryColorDialog
+getDialogTitle	../model/dialogs/ChooseSecondaryColorDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseSecondaryColorDialog
+getDialogTitle	../model/dialogs/ChooseShadingTypeDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseShadingTypeDialog
+getDialogTitle	../model/dialogs/ChooseShapeDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseShapeDialog
+getDialogTitle	../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseStartAndEndPointModeDialog
+getDialogTitle	../view/interfaces/IDialogChoice.java	/^    String getDialogTitle();$/;"	m	interface:IDialogChoice
+getGraphics2D	../view/gui/PaintCanvas.java	/^    public Graphics2D getGraphics2D() {$/;"	m	class:PaintCanvas
+gui	../view/gui/Gui.java	/^    private final IGuiWindow gui;$/;"	f	class:Gui	file:
+main	../main/Main.java	/^    public static void main(String[] args){$/;"	m	class:Main
+main	../main/Main.java	/^package main;$/;"	p
+main	../test.java	/^    public static void main(int argc, String[] argv)$/;"	m	class:MyClass
+model	../model/ShapeColor.java	/^package model;$/;"	p
+model	../model/ShapeShadingType.java	/^package model;$/;"	p
+model	../model/ShapeType.java	/^package model;$/;"	p
+model	../model/StartAndEndPointMode.java	/^package model;$/;"	p
+model.dialogs	../model/dialogs/ChoosePrimaryColorDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../model/dialogs/ChooseSecondaryColorDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../model/dialogs/ChooseShadingTypeDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../model/dialogs/ChooseShapeDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../model/dialogs/DialogProvider.java	/^package model.dialogs;$/;"	p
+model.interfaces	../model/interfaces/IApplicationState.java	/^package model.interfaces;$/;"	p
+model.interfaces	../model/interfaces/IDialogProvider.java	/^package model.interfaces;$/;"	p
+model.persistence	../model/persistence/ApplicationState.java	/^package model.persistence;$/;"	p
+run	../view/interfaces/IEventCallback.java	/^	void run();$/;"	m	interface:IEventCallback
+serialVersionUID	../model/persistence/ApplicationState.java	/^    private static final long serialVersionUID = -5545483996576839007L;$/;"	f	class:ApplicationState	file:
+setActivePrimaryColor	../model/interfaces/IApplicationState.java	/^    void setActivePrimaryColor();$/;"	m	interface:IApplicationState
+setActivePrimaryColor	../model/persistence/ApplicationState.java	/^    public void setActivePrimaryColor() {$/;"	m	class:ApplicationState
+setActiveSecondaryColor	../model/interfaces/IApplicationState.java	/^    void setActiveSecondaryColor();$/;"	m	interface:IApplicationState
+setActiveSecondaryColor	../model/persistence/ApplicationState.java	/^    public void setActiveSecondaryColor() {$/;"	m	class:ApplicationState
+setActiveShadingType	../model/interfaces/IApplicationState.java	/^    void setActiveShadingType();$/;"	m	interface:IApplicationState
+setActiveShadingType	../model/persistence/ApplicationState.java	/^    public void setActiveShadingType() {$/;"	m	class:ApplicationState
+setActiveShape	../model/interfaces/IApplicationState.java	/^    void setActiveShape();$/;"	m	interface:IApplicationState
+setActiveShape	../model/persistence/ApplicationState.java	/^    public void setActiveShape() {$/;"	m	class:ApplicationState
+setActiveStartAndEndPointMode	../model/interfaces/IApplicationState.java	/^    void setActiveStartAndEndPointMode();$/;"	m	interface:IApplicationState
+setActiveStartAndEndPointMode	../model/persistence/ApplicationState.java	/^    public void setActiveStartAndEndPointMode() {$/;"	m	class:ApplicationState
+setDefaults	../model/persistence/ApplicationState.java	/^    private void setDefaults() {$/;"	m	class:ApplicationState	file:
+setup	../controller/IJPaintController.java	/^    void setup();$/;"	m	interface:IJPaintController
+setup	../controller/JPaintController.java	/^    public void setup() {$/;"	m	class:JPaintController
+setupEvents	../controller/JPaintController.java	/^    private void setupEvents() {$/;"	m	class:JPaintController	file:
+uiModule	../controller/JPaintController.java	/^    private final IUiModule uiModule;$/;"	f	class:JPaintController	file:
+uiModule	../model/persistence/ApplicationState.java	/^    private final IUiModule uiModule;$/;"	f	class:ApplicationState	file:
+view	../view/EventName.java	/^package view;$/;"	p
+view.gui	../view/gui/Gui.java	/^package view.gui;$/;"	p
+view.gui	../view/gui/GuiWindow.java	/^package view.gui;$/;"	p
+view.gui	../view/gui/PaintCanvas.java	/^package view.gui;$/;"	p
+view.interfaces	../view/interfaces/IDialogChoice.java	/^package view.interfaces;$/;"	p
+view.interfaces	../view/interfaces/IEventCallback.java	/^package view.interfaces;$/;"	p
+view.interfaces	../view/interfaces/IGuiWindow.java	/^package view.interfaces;$/;"	p
+view.interfaces	../view/interfaces/IUiModule.java	/^package view.interfaces;$/;"	p

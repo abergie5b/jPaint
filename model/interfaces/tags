@@ -1,0 +1,131 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ApplicationState	../persistence/ApplicationState.java	/^    public ApplicationState(IUiModule uiModule) {$/;"	m	class:ApplicationState
+ApplicationState	../persistence/ApplicationState.java	/^public class ApplicationState implements IApplicationState, Serializable {$/;"	c
+BLACK	../ShapeColor.java	/^    BLACK,$/;"	e	enum:ShapeColor	file:
+BLUE	../ShapeColor.java	/^    BLUE,$/;"	e	enum:ShapeColor	file:
+CYAN	../ShapeColor.java	/^    CYAN,$/;"	e	enum:ShapeColor	file:
+ChoosePrimaryColorDialog	../dialogs/ChoosePrimaryColorDialog.java	/^    public ChoosePrimaryColorDialog(IApplicationState applicationState) {$/;"	m	class:ChoosePrimaryColorDialog
+ChoosePrimaryColorDialog	../dialogs/ChoosePrimaryColorDialog.java	/^public class ChoosePrimaryColorDialog implements IDialogChoice<ShapeColor> {$/;"	c
+ChooseSecondaryColorDialog	../dialogs/ChooseSecondaryColorDialog.java	/^    public ChooseSecondaryColorDialog(IApplicationState applicationState) {$/;"	m	class:ChooseSecondaryColorDialog
+ChooseSecondaryColorDialog	../dialogs/ChooseSecondaryColorDialog.java	/^public class ChooseSecondaryColorDialog implements IDialogChoice<ShapeColor> {$/;"	c
+ChooseShadingTypeDialog	../dialogs/ChooseShadingTypeDialog.java	/^    public ChooseShadingTypeDialog(IApplicationState applicationState) {$/;"	m	class:ChooseShadingTypeDialog
+ChooseShadingTypeDialog	../dialogs/ChooseShadingTypeDialog.java	/^public class ChooseShadingTypeDialog implements IDialogChoice<ShapeShadingType> {$/;"	c
+ChooseShapeDialog	../dialogs/ChooseShapeDialog.java	/^    public ChooseShapeDialog(IApplicationState applicationState) {$/;"	m	class:ChooseShapeDialog
+ChooseShapeDialog	../dialogs/ChooseShapeDialog.java	/^public class ChooseShapeDialog implements IDialogChoice<ShapeType> {$/;"	c
+ChooseStartAndEndPointModeDialog	../dialogs/ChooseStartAndEndPointModeDialog.java	/^    public ChooseStartAndEndPointModeDialog(IApplicationState applicationState) {$/;"	m	class:ChooseStartAndEndPointModeDialog
+ChooseStartAndEndPointModeDialog	../dialogs/ChooseStartAndEndPointModeDialog.java	/^public class ChooseStartAndEndPointModeDialog implements IDialogChoice<StartAndEndPointMode> {$/;"	c
+DARK_GRAY	../ShapeColor.java	/^    DARK_GRAY,$/;"	e	enum:ShapeColor	file:
+DRAW	../StartAndEndPointMode.java	/^    DRAW,$/;"	e	enum:StartAndEndPointMode	file:
+DialogProvider	../dialogs/DialogProvider.java	/^    public DialogProvider(IApplicationState applicationState) {$/;"	m	class:DialogProvider
+DialogProvider	../dialogs/DialogProvider.java	/^public class DialogProvider implements IDialogProvider {$/;"	c
+ELLIPSE	../ShapeType.java	/^    ELLIPSE,$/;"	e	enum:ShapeType	file:
+FILLED_IN	../ShapeShadingType.java	/^    FILLED_IN,$/;"	e	enum:ShapeShadingType	file:
+GRAY	../ShapeColor.java	/^    GRAY,$/;"	e	enum:ShapeColor	file:
+GREEN	../ShapeColor.java	/^    GREEN,$/;"	e	enum:ShapeColor	file:
+IApplicationState	../interfaces/IApplicationState.java	/^public interface IApplicationState {$/;"	i
+IDialogProvider	../interfaces/IDialogProvider.java	/^public interface IDialogProvider {$/;"	i
+LIGHT_GRAY	../ShapeColor.java	/^    LIGHT_GRAY,$/;"	e	enum:ShapeColor	file:
+MAGENTA	../ShapeColor.java	/^    MAGENTA,$/;"	e	enum:ShapeColor	file:
+MOVE	../StartAndEndPointMode.java	/^    MOVE$/;"	e	enum:StartAndEndPointMode	file:
+ORANGE	../ShapeColor.java	/^    ORANGE,$/;"	e	enum:ShapeColor	file:
+OUTLINE	../ShapeShadingType.java	/^    OUTLINE,$/;"	e	enum:ShapeShadingType	file:
+OUTLINE_AND_FILLED_IN	../ShapeShadingType.java	/^    OUTLINE_AND_FILLED_IN$/;"	e	enum:ShapeShadingType	file:
+PINK	../ShapeColor.java	/^    PINK,$/;"	e	enum:ShapeColor	file:
+RECTANGLE	../ShapeType.java	/^    RECTANGLE,$/;"	e	enum:ShapeType	file:
+RED	../ShapeColor.java	/^    RED,$/;"	e	enum:ShapeColor	file:
+SELECT	../StartAndEndPointMode.java	/^    SELECT,$/;"	e	enum:StartAndEndPointMode	file:
+ShapeColor	../ShapeColor.java	/^public enum ShapeColor {$/;"	g
+ShapeShadingType	../ShapeShadingType.java	/^public enum ShapeShadingType {$/;"	g
+ShapeType	../ShapeType.java	/^public enum ShapeType {$/;"	g
+StartAndEndPointMode	../StartAndEndPointMode.java	/^public enum StartAndEndPointMode {$/;"	g
+TRIANGLE	../ShapeType.java	/^    TRIANGLE$/;"	e	enum:ShapeType	file:
+WHITE	../ShapeColor.java	/^    WHITE,$/;"	e	enum:ShapeColor	file:
+YELLOW	../ShapeColor.java	/^    YELLOW$/;"	e	enum:ShapeColor	file:
+activePrimaryColor	../persistence/ApplicationState.java	/^    private ShapeColor activePrimaryColor;$/;"	f	class:ApplicationState	file:
+activeSecondaryColor	../persistence/ApplicationState.java	/^    private ShapeColor activeSecondaryColor;$/;"	f	class:ApplicationState	file:
+activeShapeShadingType	../persistence/ApplicationState.java	/^    private ShapeShadingType activeShapeShadingType;$/;"	f	class:ApplicationState	file:
+activeShapeType	../persistence/ApplicationState.java	/^    private ShapeType activeShapeType;$/;"	f	class:ApplicationState	file:
+activeStartAndEndPointMode	../persistence/ApplicationState.java	/^    private StartAndEndPointMode activeStartAndEndPointMode;$/;"	f	class:ApplicationState	file:
+applicationState	../dialogs/ChoosePrimaryColorDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChoosePrimaryColorDialog	file:
+applicationState	../dialogs/ChooseSecondaryColorDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseSecondaryColorDialog	file:
+applicationState	../dialogs/ChooseShadingTypeDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseShadingTypeDialog	file:
+applicationState	../dialogs/ChooseShapeDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseShapeDialog	file:
+applicationState	../dialogs/ChooseStartAndEndPointModeDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseStartAndEndPointModeDialog	file:
+applicationState	../dialogs/DialogProvider.java	/^    private final IApplicationState applicationState;$/;"	f	class:DialogProvider	file:
+choosePrimaryColorDialog	../dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeColor> choosePrimaryColorDialog;$/;"	f	class:DialogProvider	file:
+chooseSecondaryColorDialog	../dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeColor> chooseSecondaryColorDialog;$/;"	f	class:DialogProvider	file:
+chooseShadingTypeDialog	../dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeShadingType> chooseShadingTypeDialog;$/;"	f	class:DialogProvider	file:
+chooseShapeDialog	../dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeType> chooseShapeDialog;$/;"	f	class:DialogProvider	file:
+chooseStartAndEndPointModeDialog	../dialogs/DialogProvider.java	/^    private final IDialogChoice<StartAndEndPointMode> chooseStartAndEndPointModeDialog;$/;"	f	class:DialogProvider	file:
+dialogProvider	../persistence/ApplicationState.java	/^    private final IDialogProvider dialogProvider;$/;"	f	class:ApplicationState	file:
+getActivePrimaryColor	../interfaces/IApplicationState.java	/^    ShapeColor getActivePrimaryColor();$/;"	m	interface:IApplicationState
+getActivePrimaryColor	../persistence/ApplicationState.java	/^    public ShapeColor getActivePrimaryColor() {$/;"	m	class:ApplicationState
+getActiveSecondaryColor	../interfaces/IApplicationState.java	/^    ShapeColor getActiveSecondaryColor();$/;"	m	interface:IApplicationState
+getActiveSecondaryColor	../persistence/ApplicationState.java	/^    public ShapeColor getActiveSecondaryColor() {$/;"	m	class:ApplicationState
+getActiveShapeShadingType	../interfaces/IApplicationState.java	/^    ShapeShadingType getActiveShapeShadingType();$/;"	m	interface:IApplicationState
+getActiveShapeShadingType	../persistence/ApplicationState.java	/^    public ShapeShadingType getActiveShapeShadingType() {$/;"	m	class:ApplicationState
+getActiveShapeType	../interfaces/IApplicationState.java	/^    ShapeType getActiveShapeType();$/;"	m	interface:IApplicationState
+getActiveShapeType	../persistence/ApplicationState.java	/^    public ShapeType getActiveShapeType() {$/;"	m	class:ApplicationState
+getActiveStartAndEndPointMode	../interfaces/IApplicationState.java	/^    StartAndEndPointMode getActiveStartAndEndPointMode();$/;"	m	interface:IApplicationState
+getActiveStartAndEndPointMode	../persistence/ApplicationState.java	/^    public StartAndEndPointMode getActiveStartAndEndPointMode() {$/;"	m	class:ApplicationState
+getChoosePrimaryColorDialog	../dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeColor> getChoosePrimaryColorDialog() {$/;"	m	class:DialogProvider
+getChoosePrimaryColorDialog	../interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeColor> getChoosePrimaryColorDialog();$/;"	m	interface:IDialogProvider
+getChooseSecondaryColorDialog	../dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeColor> getChooseSecondaryColorDialog() {$/;"	m	class:DialogProvider
+getChooseSecondaryColorDialog	../interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeColor> getChooseSecondaryColorDialog();$/;"	m	interface:IDialogProvider
+getChooseShadingTypeDialog	../dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeShadingType> getChooseShadingTypeDialog() {$/;"	m	class:DialogProvider
+getChooseShadingTypeDialog	../interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeShadingType> getChooseShadingTypeDialog();$/;"	m	interface:IDialogProvider
+getChooseShapeDialog	../dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeType> getChooseShapeDialog() {$/;"	m	class:DialogProvider
+getChooseShapeDialog	../interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeType> getChooseShapeDialog();$/;"	m	interface:IDialogProvider
+getChooseStartAndEndPointModeDialog	../dialogs/DialogProvider.java	/^    public IDialogChoice<StartAndEndPointMode> getChooseStartAndEndPointModeDialog() {$/;"	m	class:DialogProvider
+getChooseStartAndEndPointModeDialog	../interfaces/IDialogProvider.java	/^    IDialogChoice<StartAndEndPointMode> getChooseStartAndEndPointModeDialog();$/;"	m	interface:IDialogProvider
+getCurrentSelection	../dialogs/ChoosePrimaryColorDialog.java	/^    public ShapeColor getCurrentSelection() {$/;"	m	class:ChoosePrimaryColorDialog
+getCurrentSelection	../dialogs/ChooseSecondaryColorDialog.java	/^    public ShapeColor getCurrentSelection() {$/;"	m	class:ChooseSecondaryColorDialog
+getCurrentSelection	../dialogs/ChooseShadingTypeDialog.java	/^    public ShapeShadingType getCurrentSelection() {$/;"	m	class:ChooseShadingTypeDialog
+getCurrentSelection	../dialogs/ChooseShapeDialog.java	/^    public ShapeType getCurrentSelection() {$/;"	m	class:ChooseShapeDialog
+getCurrentSelection	../dialogs/ChooseStartAndEndPointModeDialog.java	/^    public StartAndEndPointMode getCurrentSelection() {$/;"	m	class:ChooseStartAndEndPointModeDialog
+getDialogOptions	../dialogs/ChoosePrimaryColorDialog.java	/^    public ShapeColor[] getDialogOptions() {$/;"	m	class:ChoosePrimaryColorDialog
+getDialogOptions	../dialogs/ChooseSecondaryColorDialog.java	/^    public ShapeColor[] getDialogOptions() {$/;"	m	class:ChooseSecondaryColorDialog
+getDialogOptions	../dialogs/ChooseShadingTypeDialog.java	/^    public ShapeShadingType[] getDialogOptions() {$/;"	m	class:ChooseShadingTypeDialog
+getDialogOptions	../dialogs/ChooseShapeDialog.java	/^    public ShapeType[] getDialogOptions() {$/;"	m	class:ChooseShapeDialog
+getDialogOptions	../dialogs/ChooseStartAndEndPointModeDialog.java	/^    public StartAndEndPointMode[] getDialogOptions() {$/;"	m	class:ChooseStartAndEndPointModeDialog
+getDialogText	../dialogs/ChoosePrimaryColorDialog.java	/^    public String getDialogText() {$/;"	m	class:ChoosePrimaryColorDialog
+getDialogText	../dialogs/ChooseSecondaryColorDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseSecondaryColorDialog
+getDialogText	../dialogs/ChooseShadingTypeDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseShadingTypeDialog
+getDialogText	../dialogs/ChooseShapeDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseShapeDialog
+getDialogText	../dialogs/ChooseStartAndEndPointModeDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseStartAndEndPointModeDialog
+getDialogTitle	../dialogs/ChoosePrimaryColorDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChoosePrimaryColorDialog
+getDialogTitle	../dialogs/ChooseSecondaryColorDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseSecondaryColorDialog
+getDialogTitle	../dialogs/ChooseShadingTypeDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseShadingTypeDialog
+getDialogTitle	../dialogs/ChooseShapeDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseShapeDialog
+getDialogTitle	../dialogs/ChooseStartAndEndPointModeDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseStartAndEndPointModeDialog
+model	../ShapeColor.java	/^package model;$/;"	p
+model	../ShapeShadingType.java	/^package model;$/;"	p
+model	../ShapeType.java	/^package model;$/;"	p
+model	../StartAndEndPointMode.java	/^package model;$/;"	p
+model.dialogs	../dialogs/ChoosePrimaryColorDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../dialogs/ChooseSecondaryColorDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../dialogs/ChooseShadingTypeDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../dialogs/ChooseShapeDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../dialogs/ChooseStartAndEndPointModeDialog.java	/^package model.dialogs;$/;"	p
+model.dialogs	../dialogs/DialogProvider.java	/^package model.dialogs;$/;"	p
+model.interfaces	../interfaces/IApplicationState.java	/^package model.interfaces;$/;"	p
+model.interfaces	../interfaces/IDialogProvider.java	/^package model.interfaces;$/;"	p
+model.persistence	../persistence/ApplicationState.java	/^package model.persistence;$/;"	p
+serialVersionUID	../persistence/ApplicationState.java	/^    private static final long serialVersionUID = -5545483996576839007L;$/;"	f	class:ApplicationState	file:
+setActivePrimaryColor	../interfaces/IApplicationState.java	/^    void setActivePrimaryColor();$/;"	m	interface:IApplicationState
+setActivePrimaryColor	../persistence/ApplicationState.java	/^    public void setActivePrimaryColor() {$/;"	m	class:ApplicationState
+setActiveSecondaryColor	../interfaces/IApplicationState.java	/^    void setActiveSecondaryColor();$/;"	m	interface:IApplicationState
+setActiveSecondaryColor	../persistence/ApplicationState.java	/^    public void setActiveSecondaryColor() {$/;"	m	class:ApplicationState
+setActiveShadingType	../interfaces/IApplicationState.java	/^    void setActiveShadingType();$/;"	m	interface:IApplicationState
+setActiveShadingType	../persistence/ApplicationState.java	/^    public void setActiveShadingType() {$/;"	m	class:ApplicationState
+setActiveShape	../interfaces/IApplicationState.java	/^    void setActiveShape();$/;"	m	interface:IApplicationState
+setActiveShape	../persistence/ApplicationState.java	/^    public void setActiveShape() {$/;"	m	class:ApplicationState
+setActiveStartAndEndPointMode	../interfaces/IApplicationState.java	/^    void setActiveStartAndEndPointMode();$/;"	m	interface:IApplicationState
+setActiveStartAndEndPointMode	../persistence/ApplicationState.java	/^    public void setActiveStartAndEndPointMode() {$/;"	m	class:ApplicationState
+setDefaults	../persistence/ApplicationState.java	/^    private void setDefaults() {$/;"	m	class:ApplicationState	file:
+uiModule	../persistence/ApplicationState.java	/^    private final IUiModule uiModule;$/;"	f	class:ApplicationState	file:
