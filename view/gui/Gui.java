@@ -18,8 +18,13 @@ public class Gui implements IUiModule {
     }
 
     @Override
-    public void setStatusMenu(StateModel stateModel) {
-        gui.setStatusMenu(stateModel);
+    public void setStatusMenu() {
+        gui.setStatusMenu();
+    }
+
+    @Override
+    public void setStateModel(StateModel stateModel) {
+        gui.setStateModel(stateModel);
     }
     
 	@Override

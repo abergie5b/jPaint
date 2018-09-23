@@ -7,5 +7,6 @@ import javax.swing.*;
 
 public interface IGuiWindow {
     JButton getButton(EventName eventName);
-    void setStatusMenu(StateModel shapeType);
+    void setStatusMenu();
+    void setStateModel(StateModel shapeType);
 }

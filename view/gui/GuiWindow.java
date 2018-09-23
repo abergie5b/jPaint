@@ -1,6 +1,7 @@
 package view.gui;
 
 import model.StateModel;
+import model.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +10,13 @@ import java.util.NoSuchElementException;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.*;
 
 import view.interfaces.IGuiWindow;
 import view.EventName;
 
+import java.awt.event.*;
+import java.awt.geom.*;
 import java.awt.*;
 
 public class GuiWindow extends JFrame implements IGuiWindow {
@@ -21,19 +25,23 @@ public class GuiWindow extends JFrame implements IGuiWindow {
     private final String defaultTitle = "JPaint";
     private final Insets defaultButtonDimensions = new Insets(5, 8, 5, 8);
     private final Map<EventName, JButton> eventButtons = new HashMap<>();
-    private JLabel label1;
-    private JLabel label2;
-    private JLabel label3;
-    private JLabel label4;
-    private JLabel label5;
+    private JLabel label1 = new JLabel("");
+    private JLabel label2 = new JLabel("");
+    private JLabel label3 = new JLabel("");
+    private JLabel label4 = new JLabel("");
+    private JLabel label5 = new JLabel("");
+    private PaintCanvas canvas;
+    private StateModel stateModel;
 
     public GuiWindow(PaintCanvas canvas){
+        this.canvas = canvas;
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(defaultTitle);
         setSize(defaultWidth, defaultHeight);
         JPanel window = createWindow();
         window.add(canvas, BorderLayout.CENTER);
+        addMouseListeners();
 		validate();
     }
 
@@ -46,12 +54,65 @@ public class GuiWindow extends JFrame implements IGuiWindow {
 	}
 
     @Override
-    public void setStatusMenu(StateModel stateModel) {
+    public void setStateModel(StateModel stateModel) {
+        this.stateModel = stateModel;
+    }
+
+    @Override
+    public void setStatusMenu() {
         label1.setText("(" + "SHAPE: " + stateModel.shapeType.name() + ")");
         label2.setText("(" + "COLORS:  " + stateModel.primaryColor.name() + ",");
         label3.setText(stateModel.secondaryColor.name() + ")");
         label4.setText("(" + "SHADING: " + stateModel.shapeShadingType.name() + ")");
         label5.setText("(" + "MODE: " + stateModel.startAndEndPointMode.name() + ")");
+    }
+
+    public void setCanvasShape(Shape shape) {
+        this.canvas.setShape(shape);
+    }
+
+    private void addMouseListeners() {
+        MouseEventListener mouseListener = new MouseEventListener();
+        this.canvas.addMouseMotionListener(mouseListener);
+        this.canvas.addMouseListener(mouseListener);
+    }
+
+    private class MouseEventListener extends MouseInputAdapter {
+        private int mouseX;
+        private int mouseY;
+        public MouseEventListener() 
+        { 
+            this.mouseX = 0;
+            this.mouseY = 0;
+        } 
+        @Override
+        public void mousePressed(MouseEvent evt) {
+            int startX = evt.getX();
+            int startY = evt.getY();
+            mouseX = startX;
+            mouseY = startY;
+        }
+        @Override
+        public void mouseDragged(MouseEvent evt) {
+            int endX = evt.getX();
+            int endY = evt.getY();
+            //mouseX = endX;
+            //mouseY = endY;
+            //repaint();
+        }
+        @Override
+        public void mouseReleased(MouseEvent evt) {
+            int endX = evt.getX();
+            int endY = evt.getY();
+            if (stateModel.shapeType == ShapeType.RECTANGLE)
+            {
+                Shape s = new Rectangle(mouseX, mouseY, endX - mouseX, endY - mouseY);
+                setCanvasShape(s);
+                mouseX = endX;
+                mouseY = endY;
+                repaint();
+            }
+        }
     }
 
 	private JPanel createWindow() {
@@ -75,12 +136,6 @@ public class GuiWindow extends JFrame implements IGuiWindow {
 
     private JPanel createStatusMenu() {
         JPanel statusPanel = createStatusPanel();
-
-        label1 = new JLabel("");
-        label2 = new JLabel("");
-        label3 = new JLabel("");
-        label4 = new JLabel("");
-        label5 = new JLabel("");
 
         statusPanel.add(label1);
         statusPanel.add(label2);

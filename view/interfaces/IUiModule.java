@@ -5,6 +5,7 @@ import view.EventName;
 
 public interface IUiModule {
     void addEvent(EventName eventName, IEventCallback command);
-    void setStatusMenu(StateModel shapeType);
+    void setStatusMenu();
+    void setStateModel(StateModel shapeType);
     <T> T getDialogResponse(IDialogChoice dialogChoice);
 }

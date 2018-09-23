@@ -22,51 +22,60 @@ public class ApplicationState implements IApplicationState, Serializable {
     private ShapeColor activeSecondaryColor;
     private ShapeShadingType activeShapeShadingType;
     private StartAndEndPointMode activeStartAndEndPointMode;
+    private StateModel stateModel;
 
     public ApplicationState(IUiModule uiModule) {
         this.uiModule = uiModule;
         this.dialogProvider = new DialogProvider(this);
         setDefaults();
-    }
-
-    public void setStatusMenu() {
-        StateModel stateModel = new StateModel(activeShapeType, 
-                                               activePrimaryColor,
-                                               activeSecondaryColor, 
-                                               activeShapeShadingType,
-                                               activeStartAndEndPointMode
-                                              );
-        uiModule.setStatusMenu(stateModel);
+        stateModel = new StateModel(activeShapeType, 
+                                    activePrimaryColor,
+                                    activeSecondaryColor, 
+                                    activeShapeShadingType,
+                                    activeStartAndEndPointMode
+                                    );
+        uiModule.setStateModel(stateModel);
+        uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveShape() {
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
-        setStatusMenu();
+        stateModel.shapeType = activeShapeType;
+        uiModule.setStateModel(stateModel);
+        uiModule.setStatusMenu();
     }
 
     @Override
     public void setActivePrimaryColor() {
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
-        setStatusMenu();
+        stateModel.primaryColor = activePrimaryColor;
+        uiModule.setStateModel(stateModel);
+        uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveSecondaryColor() {
         activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
-        setStatusMenu();
+        stateModel.secondaryColor = activeSecondaryColor;
+        uiModule.setStateModel(stateModel);
+        uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveShadingType() {
         activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
-        setStatusMenu();
+        stateModel.shapeShadingType = activeShapeShadingType;
+        uiModule.setStateModel(stateModel);
+        uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveStartAndEndPointMode() {
         activeStartAndEndPointMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog());
-        setStatusMenu();
+        stateModel.startAndEndPointMode = activeStartAndEndPointMode;
+        uiModule.setStateModel(stateModel);
+        uiModule.setStatusMenu();
     }
 
     @Override
@@ -100,6 +109,5 @@ public class ApplicationState implements IApplicationState, Serializable {
         activeSecondaryColor = ShapeColor.GREEN;
         activeShapeShadingType = ShapeShadingType.FILLED_IN;
         activeStartAndEndPointMode = StartAndEndPointMode.DRAW;
-        setStatusMenu();
     }
 }
