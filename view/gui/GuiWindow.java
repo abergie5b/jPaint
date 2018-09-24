@@ -3,6 +3,12 @@ package view.gui;
 import model.StateModel;
 import model.*;
 
+import view.interfaces.IGuiWindow;
+import view.EventName;
+import view.gui.PaintCanvas;
+
+import controller.MouseEventListener;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -12,10 +18,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 
-import view.interfaces.IGuiWindow;
-import view.EventName;
-
-import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.*;
 
@@ -41,7 +43,6 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         setSize(defaultWidth, defaultHeight);
         JPanel window = createWindow();
         window.add(canvas, BorderLayout.CENTER);
-        addMouseListeners();
 		validate();
     }
 
@@ -59,6 +60,11 @@ public class GuiWindow extends JFrame implements IGuiWindow {
     }
 
     @Override
+    public PaintCanvas getCanvas() {
+        return this.canvas;
+    }
+
+    @Override
     public void setStatusMenu() {
         label1.setText("(" + "SHAPE: " + stateModel.shapeType.name() + ")");
         label2.setText("(" + "COLORS:  " + stateModel.primaryColor.name() + ",");
@@ -71,48 +77,32 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         this.canvas.setShape(shape);
     }
 
-    private void addMouseListeners() {
-        MouseEventListener mouseListener = new MouseEventListener();
+    public void setShapeColor(ShapeColor color) {
+        this.canvas.setColor(color);
+    }
+
+    public void setShapeShading(ShapeShadingType shading) {
+        this.canvas.setShading(shading);
+    }
+
+    public void setStartAndEndPointMode(StartAndEndPointMode mode) {
+        this.canvas.setMode(mode);
+    }
+
+    @Override
+    public void addMouseListeners(MouseEventListener mouseListener) {
         this.canvas.addMouseMotionListener(mouseListener);
         this.canvas.addMouseListener(mouseListener);
     }
 
-    private class MouseEventListener extends MouseInputAdapter {
-        private int mouseX;
-        private int mouseY;
-        public MouseEventListener() 
-        { 
-            this.mouseX = 0;
-            this.mouseY = 0;
-        } 
-        @Override
-        public void mousePressed(MouseEvent evt) {
-            int startX = evt.getX();
-            int startY = evt.getY();
-            mouseX = startX;
-            mouseY = startY;
-        }
-        @Override
-        public void mouseDragged(MouseEvent evt) {
-            int endX = evt.getX();
-            int endY = evt.getY();
-            //mouseX = endX;
-            //mouseY = endY;
-            //repaint();
-        }
-        @Override
-        public void mouseReleased(MouseEvent evt) {
-            int endX = evt.getX();
-            int endY = evt.getY();
-            if (stateModel.shapeType == ShapeType.RECTANGLE)
-            {
-                Shape s = new Rectangle(mouseX, mouseY, endX - mouseX, endY - mouseY);
-                setCanvasShape(s);
-                mouseX = endX;
-                mouseY = endY;
-                repaint();
-            }
-        }
+    private JPanel createStatusMenu() {
+        JPanel statusPanel = createStatusPanel();
+        statusPanel.add(label1);
+        statusPanel.add(label2);
+        statusPanel.add(label3);
+        statusPanel.add(label4);
+        statusPanel.add(label5);
+        return statusPanel;
     }
 
 	private JPanel createWindow() {
@@ -132,18 +122,6 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         }
 
         return buttonPanel;
-    }
-
-    private JPanel createStatusMenu() {
-        JPanel statusPanel = createStatusPanel();
-
-        statusPanel.add(label1);
-        statusPanel.add(label2);
-        statusPanel.add(label3);
-        statusPanel.add(label4);
-        statusPanel.add(label5);
-
-        return statusPanel;
     }
 
 	private void addButtonToPanel(EventName eventName, JPanel panel) {

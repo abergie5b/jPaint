@@ -1,6 +1,15 @@
 package controller;
 
+import java.awt.event.*;
+import java.awt.geom.*;
+import java.awt.*;
+
+import javax.swing.event.*;
+import javax.swing.*;
+
 import model.interfaces.IApplicationState;
+import model.*;
+
 import view.EventName;
 import view.interfaces.IUiModule;
 
@@ -11,6 +20,7 @@ public class JPaintController implements IJPaintController {
     public JPaintController(IUiModule uiModule, IApplicationState applicationState) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
+        this.uiModule.addMouseListeners(new MouseEventListener(uiModule, applicationState));
     }
 
     @Override

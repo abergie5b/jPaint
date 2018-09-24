@@ -2,12 +2,18 @@ package view.gui;
 
 import javax.swing.*;
 
+import java.awt.geom.*;
+import java.awt.*;
+
 import view.EventName;
 import view.interfaces.IDialogChoice;
 import view.interfaces.IEventCallback;
 import view.interfaces.IGuiWindow;
 import view.interfaces.IUiModule;
-import model.StateModel;
+
+import controller.MouseEventListener;
+
+import model.*;
 
 public class Gui implements IUiModule {
 
@@ -18,8 +24,38 @@ public class Gui implements IUiModule {
     }
 
     @Override
+    public void setCanvasShape(Shape s) {
+        gui.setCanvasShape(s);
+    }
+
+    @Override
+    public void setShapeColor(ShapeColor c) {
+        gui.setShapeColor(c);
+    }
+
+    @Override
+    public void setShapeShading(ShapeShadingType shading) {
+        gui.setShapeShading(shading);
+    }
+
+    @Override
+    public void setStartAndEndPointMode(StartAndEndPointMode mode) {
+        gui.setStartAndEndPointMode(mode);
+    }
+
+    @Override 
+    public PaintCanvas getCanvas() {
+        return gui.getCanvas();
+    }
+
+    @Override
     public void setStatusMenu() {
         gui.setStatusMenu();
+    }
+
+    @Override
+    public void addMouseListeners(MouseEventListener mouseListener) {
+        gui.addMouseListeners(mouseListener);
     }
 
     @Override

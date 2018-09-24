@@ -5,14 +5,31 @@ import java.awt.*;
 
 import java.util.ArrayList;
 
+import model.*;
+
 public class PaintCanvas extends JPanel {
     private Shape shape;    
+    private ShapeColor color;    
+    private ShapeShadingType shading;    
+    private StartAndEndPointMode mode;    
 
     public PaintCanvas() {
     }
 
-    public void setShape(Shape s) {
-        this.shape = s;
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
+
+    public void setColor(ShapeColor color) {
+        this.color = color;
+    }
+
+    public void setShading(ShapeShadingType shading) {
+        this.shading = shading;
+    }
+
+    public void setMode(StartAndEndPointMode mode) {
+        this.mode = mode;
     }
 
     public Graphics2D getGraphics2D() {
