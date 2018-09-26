@@ -36,34 +36,25 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
     public void mouseDragged(MouseEvent evt) {
         int endX = evt.getX();
         int endY = evt.getY();
-        //mouseX = endX;
-        //mouseY = endY;
-        //repaint();
     }
     @Override
     public void mouseReleased(MouseEvent evt) {
         int endX = evt.getX();
         int endY = evt.getY();
-        Shape s = null;
-        if (applicationState.getActiveShapeType() == ShapeType.RECTANGLE)
-        {
-            s = new Rectangle(mouseX, mouseY, endX - mouseX, endY - mouseY);
-        }
-        else if (applicationState.getActiveShapeType() == ShapeType.ELLIPSE)
-        {
-            s = new Ellipse2D.Double(mouseX, mouseY, endX - mouseX, endY - mouseY);
-        }
-        else if (applicationState.getActiveShapeType() == ShapeType.TRIANGLE)
-        {
-            //s = new Triangle(mouseX, mouseY, endX - mouseX, endY - mouseY);
-        }
-        if (s != null)
-        {
-            uiModule.setCanvasShape(s);
-            uiModule.getCanvas().repaint();
-        }
+        StateModel stateModel = new StateModel(applicationState.getActiveShapeType(),
+                                               applicationState.getActivePrimaryColor(),
+                                               applicationState.getActiveSecondaryColor(),
+                                               applicationState.getActiveShapeShadingType(),
+                                               applicationState.getActiveStartAndEndPointMode()
+        );
+        uiModule.setCanvasShape(stateModel.shapeToObject(mouseX, mouseY, endX, endY));
+        uiModule.setShapeColor(stateModel.primaryColorToObject());
+        uiModule.setShapeSecondaryColor(stateModel.setShapeSecondaryColor());
+        uiModule.setShapeShading(stateModel.shapeShadingType);
+        uiModule.setStartAndEndPointMode(stateModel.startAndEndPointMode);
         mouseX = endX;
         mouseY = endY;
+        uiModule.getCanvas().repaint();
     }
 }
 

@@ -16,7 +16,8 @@ public interface IGuiWindow {
     void setStatusMenu();
     void setStateModel(StateModel shapeType);
     void setCanvasShape(Shape s);
-    void setShapeColor(ShapeColor color);
+    void setShapeColor(Color color);
+    void setShapeSecondaryColor(Color color);
     void setShapeShading(ShapeShadingType shading);
     void setStartAndEndPointMode(StartAndEndPointMode mode);
     PaintCanvas getCanvas();

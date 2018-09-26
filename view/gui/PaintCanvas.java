@@ -9,7 +9,8 @@ import model.*;
 
 public class PaintCanvas extends JPanel {
     private Shape shape;    
-    private ShapeColor color;    
+    private Color primaryColor;    
+    private Color secondaryColor;    
     private ShapeShadingType shading;    
     private StartAndEndPointMode mode;    
 
@@ -20,8 +21,12 @@ public class PaintCanvas extends JPanel {
         this.shape = shape;
     }
 
-    public void setColor(ShapeColor color) {
-        this.color = color;
+    public void setColor(Color color) {
+        this.primaryColor = color;
+    }
+
+    public void setSecondaryColor(Color color) {
+        this.secondaryColor = color;
     }
 
     public void setShading(ShapeShadingType shading) {
@@ -39,9 +44,14 @@ public class PaintCanvas extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(Color.BLUE);
-        g2d.setBackground(Color.BLUE);
         if (shape != null)
-            g2d.draw(shape);
+        {
+            System.out.println(shape + " " + primaryColor + " " + secondaryColor + " " + shading + " " + mode);
+            g2d.setPaint(primaryColor);
+            g2d.fill(shape);
+            g2d.setStroke(new BasicStroke(3)); // set border width
+            g2d.setPaint(secondaryColor); // set border color
+            g2d.draw(shape); // draw outline
+        }
     }
 }

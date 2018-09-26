@@ -834,6 +834,7 @@ IDialogProvider	../../jPaint/model/interfaces/IDialogProvider.java	/^public inte
 IEventCallback	../../jPaint/view/interfaces/IEventCallback.java	/^public interface IEventCallback {$/;"	i
 IGuiWindow	../../jPaint/view/interfaces/IGuiWindow.java	/^public interface IGuiWindow {$/;"	i
 IJPaintController	../../jPaint/controller/IJPaintController.java	/^public interface IJPaintController {$/;"	i
+IMouseEventListener	../../jPaint/controller/IMouseEventListener.java	/^public interface IMouseEventListener {$/;"	i
 INCRINIT_NORMAL	../../blackbird/extern/sqlite3/src/sqlite3.c	87469;"	d	file:
 INCRINIT_ROOT	../../blackbird/extern/sqlite3/src/sqlite3.c	87471;"	d	file:
 INCRINIT_TASK	../../blackbird/extern/sqlite3/src/sqlite3.c	87470;"	d	file:
@@ -1120,7 +1121,7 @@ Migration	../../cliffcover/ccms/ccms_auth/migrations/0001_initial.py	/^class Mig
 Module	../../blackbird/extern/sqlite3/src/sqlite3.c	/^struct Module {$/;"	s	file:
 Module	../../blackbird/extern/sqlite3/src/sqlite3.c	/^typedef struct Module Module;$/;"	t	typeref:struct:Module	file:
 MouseEventListener	../../jPaint/controller/MouseEventListener.java	/^    public MouseEventListener(IUiModule uiModule, IApplicationState applicationState) $/;"	m	class:MouseEventListener
-MouseEventListener	../../jPaint/controller/MouseEventListener.java	/^public class MouseEventListener extends MouseInputAdapter {$/;"	c
+MouseEventListener	../../jPaint/controller/MouseEventListener.java	/^public class MouseEventListener extends MouseInputAdapter implements IMouseEventListener {$/;"	c
 MurexTrade	../../imatch-pycron/pyods-sql.py	/^class MurexTrade:$/;"	c
 NB	../../blackbird/extern/sqlite3/src/sqlite3.c	65471;"	d	file:
 NCELL	../../blackbird/extern/sqlite3/src/sqlite3.c	162828;"	d	file:
@@ -4691,6 +4692,7 @@ collation_needed16	../../blackbird/extern/sqlite3/include/sqlite3ext.h	/^  int  
 collation_needed16	../../blackbird/extern/sqlite3/src/sqlite3.c	/^  int  (*collation_needed16)(sqlite3*,void*,void(*)(void*,sqlite3*,$/;"	m	struct:sqlite3_api_routines	file:
 collect_credentials	../../cliffcover/c3/c3/ccms_client.py	/^    def collect_credentials(self):$/;"	m	class:CCMSClient
 collect_credentials	../../cliffcover/ccms/ccms_auth/views.py	/^def collect_credentials(request):$/;"	f
+color	../../jPaint/view/gui/PaintCanvas.java	/^    private ShapeColor color;    $/;"	f	class:PaintCanvas	file:
 columnIndex	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static int columnIndex(Table *pTab, const char *zCol){$/;"	f	file:
 columnMallocFailure	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void columnMallocFailure(sqlite3_stmt *pStmt)$/;"	f	file:
 columnMem	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static Mem *columnMem(sqlite3_stmt *pStmt, int i){$/;"	f	file:
@@ -4781,6 +4783,7 @@ context_db_handle	../../blackbird/extern/sqlite3/include/sqlite3ext.h	/^  sqlite
 context_db_handle	../../blackbird/extern/sqlite3/src/sqlite3.c	/^  sqlite3 *(*context_db_handle)(sqlite3_context*);$/;"	m	struct:sqlite3_api_routines	file:
 continuePrompt	../../blackbird/extern/sqlite3/src/shell.c	/^static char continuePrompt[20]; \/* Continuation prompt. default: "   ...> " *\/$/;"	v	file:
 controller	../../jPaint/controller/IJPaintController.java	/^package controller;$/;"	p
+controller	../../jPaint/controller/IMouseEventListener.java	/^package controller;$/;"	p
 controller	../../jPaint/controller/JPaintController.java	/^package controller;$/;"	p
 controller	../../jPaint/controller/MouseEventListener.java	/^package controller;$/;"	p
 convertCompoundSelectToSubquery	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static int convertCompoundSelectToSubquery(Walker *pWalker, Select *p){$/;"	f	file:
@@ -6167,6 +6170,10 @@ getBool	../../blackbird/src/parameters.cpp	/^bool getBool(std::string value) {$/
 getBorrowInfo	../../blackbird/src/exchanges/okcoin.cpp	/^void getBorrowInfo(Parameters& params)$/;"	f	namespace:OKCoin
 getButton	../../jPaint/view/gui/GuiWindow.java	/^	public JButton getButton(EventName eventName) {$/;"	m	class:GuiWindow
 getButton	../../jPaint/view/interfaces/IGuiWindow.java	/^    JButton getButton(EventName eventName);$/;"	m	interface:IGuiWindow
+getCanvas	../../jPaint/view/gui/Gui.java	/^    public PaintCanvas getCanvas() {$/;"	m	class:Gui
+getCanvas	../../jPaint/view/gui/GuiWindow.java	/^    public PaintCanvas getCanvas() {$/;"	m	class:GuiWindow
+getCanvas	../../jPaint/view/interfaces/IGuiWindow.java	/^    PaintCanvas getCanvas();$/;"	m	interface:IGuiWindow
+getCanvas	../../jPaint/view/interfaces/IUiModule.java	/^    PaintCanvas getCanvas();$/;"	m	interface:IUiModule
 getCellInfo	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static SQLITE_NOINLINE void getCellInfo(BtCursor *pCur){$/;"	f	file:
 getChoosePrimaryColorDialog	../../jPaint/model/dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeColor> getChoosePrimaryColorDialog() {$/;"	m	class:DialogProvider
 getChoosePrimaryColorDialog	../../jPaint/model/interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeColor> getChoosePrimaryColorDialog();$/;"	m	interface:IDialogProvider
@@ -7296,6 +7303,7 @@ mnReg	../../blackbird/extern/sqlite3/src/sqlite3.c	/^  int mnReg, mxReg;       \
 mnReq	../../blackbird/extern/sqlite3/src/sqlite3.c	/^  int mnReq, mxReq;                 \/* Min and max heap requests sizes *\/$/;"	m	struct:Sqlite3Config	file:
 mode	../../blackbird/extern/sqlite3/src/shell.c	/^  int mode;              \/* An output mode setting *\/$/;"	m	struct:ShellState	file:
 mode	../../blackbird/extern/sqlite3/src/shell.c	/^  int mode;           \/* Mode prior to ".explain on" *\/$/;"	m	struct:SavedModeInfo	file:
+mode	../../jPaint/view/gui/PaintCanvas.java	/^    private StartAndEndPointMode mode;    $/;"	f	class:PaintCanvas	file:
 modeDescr	../../blackbird/extern/sqlite3/src/shell.c	/^static const char *modeDescr[] = {$/;"	v	file:
 model	../../jPaint/model/ShapeColor.java	/^package model;$/;"	p
 model	../../jPaint/model/ShapeShadingType.java	/^package model;$/;"	p
@@ -7325,8 +7333,11 @@ model_to_dict_excluding	../../cliffcover/ccs/ccs/helpers.py	/^def model_to_dict_
 model_to_dict_including	../../cliffcover/ccs/build/lib/ccs/helpers.py	/^def model_to_dict_including(instance, *including):$/;"	f
 model_to_dict_including	../../cliffcover/ccs/ccs/helpers.py	/^def model_to_dict_including(instance, *including):$/;"	f
 modifyPagePointer	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static int modifyPagePointer(MemPage *pPage, Pgno iFrom, Pgno iTo, u8 eType){$/;"	f	file:
+mouseDragged	../../jPaint/controller/IMouseEventListener.java	/^    void mouseDragged(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mouseDragged	../../jPaint/controller/MouseEventListener.java	/^    public void mouseDragged(MouseEvent evt) {$/;"	m	class:MouseEventListener
+mousePressed	../../jPaint/controller/IMouseEventListener.java	/^    void mousePressed(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mousePressed	../../jPaint/controller/MouseEventListener.java	/^    public void mousePressed(MouseEvent evt) {$/;"	m	class:MouseEventListener
+mouseReleased	../../jPaint/controller/IMouseEventListener.java	/^    void mouseReleased(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mouseReleased	../../jPaint/controller/MouseEventListener.java	/^    public void mouseReleased(MouseEvent evt) {$/;"	m	class:MouseEventListener
 mouseX	../../jPaint/controller/MouseEventListener.java	/^    private int mouseX;$/;"	f	class:MouseEventListener	file:
 mouseY	../../jPaint/controller/MouseEventListener.java	/^    private int mouseY;$/;"	f	class:MouseEventListener	file:
@@ -9677,6 +9688,7 @@ setCanvasShape	../../jPaint/view/interfaces/IGuiWindow.java	/^    void setCanvas
 setCanvasShape	../../jPaint/view/interfaces/IUiModule.java	/^    void setCanvasShape(Shape s);$/;"	m	interface:IUiModule
 setChildPtrmaps	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static int setChildPtrmaps(MemPage *pPage){$/;"	f	file:
 setChildPtrmaps	../../blackbird/extern/sqlite3/src/sqlite3.c	62445;"	d	file:
+setColor	../../jPaint/view/gui/PaintCanvas.java	/^    public void setColor(ShapeColor color) {$/;"	m	class:PaintCanvas
 setDateTimeToCurrent	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static int setDateTimeToCurrent(sqlite3_context *context, DateTime *p){$/;"	f	file:
 setDefaults	../../jPaint/model/persistence/ApplicationState.java	/^    private void setDefaults() {$/;"	m	class:ApplicationState	file:
 setDestPgsz	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static int setDestPgsz(sqlite3_backup *p){$/;"	f	file:
@@ -9685,15 +9697,29 @@ setGetterMethod	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void setGe
 setJoinExpr	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void setJoinExpr(Expr *p, int iTable){$/;"	f	file:
 setLikeOptFlag	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void setLikeOptFlag(sqlite3 *db, const char *zName, u8 flagVal){$/;"	f	file:
 setMaster	../../blackbird/extern/sqlite3/src/sqlite3.c	/^  u8 setMaster;               \/* True if a m-j name has been written to jrnl *\/$/;"	m	struct:Pager	file:
+setMode	../../jPaint/view/gui/PaintCanvas.java	/^    public void setMode(StartAndEndPointMode mode) {$/;"	m	class:PaintCanvas
 setPageReferenced	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void setPageReferenced(IntegrityCk *pCheck, Pgno iPg){$/;"	f	file:
 setPendingFd	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void setPendingFd(unixFile *pFile){$/;"	f	file:
 setPragmaResultColumnNames	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void setPragmaResultColumnNames($/;"	f	file:
 setRawDateNumber	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void setRawDateNumber(DateTime *p, double r){$/;"	f	file:
 setResultStrOrError	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void setResultStrOrError($/;"	f	file:
 setSectorSize	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static void setSectorSize(Pager *pPager){$/;"	f	file:
-setShape	../../jPaint/view/gui/PaintCanvas.java	/^    public void setShape(Shape s) {$/;"	m	class:PaintCanvas
+setShading	../../jPaint/view/gui/PaintCanvas.java	/^    public void setShading(ShapeShadingType shading) {$/;"	m	class:PaintCanvas
+setShape	../../jPaint/view/gui/PaintCanvas.java	/^    public void setShape(Shape shape) {$/;"	m	class:PaintCanvas
+setShapeColor	../../jPaint/view/gui/Gui.java	/^    public void setShapeColor(ShapeColor c) {$/;"	m	class:Gui
+setShapeColor	../../jPaint/view/gui/GuiWindow.java	/^    public void setShapeColor(ShapeColor color) {$/;"	m	class:GuiWindow
+setShapeColor	../../jPaint/view/interfaces/IGuiWindow.java	/^    void setShapeColor(ShapeColor color);$/;"	m	interface:IGuiWindow
+setShapeColor	../../jPaint/view/interfaces/IUiModule.java	/^    void setShapeColor(ShapeColor c);$/;"	m	interface:IUiModule
+setShapeShading	../../jPaint/view/gui/Gui.java	/^    public void setShapeShading(ShapeShadingType shading) {$/;"	m	class:Gui
+setShapeShading	../../jPaint/view/gui/GuiWindow.java	/^    public void setShapeShading(ShapeShadingType shading) {$/;"	m	class:GuiWindow
+setShapeShading	../../jPaint/view/interfaces/IGuiWindow.java	/^    void setShapeShading(ShapeShadingType shading);$/;"	m	interface:IGuiWindow
+setShapeShading	../../jPaint/view/interfaces/IUiModule.java	/^    void setShapeShading(ShapeShadingType shading);$/;"	m	interface:IUiModule
 setSharedCacheTableLock	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static int setSharedCacheTableLock(Btree *p, Pgno iTable, u8 eLock){$/;"	f	file:
 setSharedCacheTableLock	../../blackbird/extern/sqlite3/src/sqlite3.c	58851;"	d	file:
+setStartAndEndPointMode	../../jPaint/view/gui/Gui.java	/^    public void setStartAndEndPointMode(StartAndEndPointMode mode) {$/;"	m	class:Gui
+setStartAndEndPointMode	../../jPaint/view/gui/GuiWindow.java	/^    public void setStartAndEndPointMode(StartAndEndPointMode mode) {$/;"	m	class:GuiWindow
+setStartAndEndPointMode	../../jPaint/view/interfaces/IGuiWindow.java	/^    void setStartAndEndPointMode(StartAndEndPointMode mode);$/;"	m	interface:IGuiWindow
+setStartAndEndPointMode	../../jPaint/view/interfaces/IUiModule.java	/^    void setStartAndEndPointMode(StartAndEndPointMode mode);$/;"	m	interface:IUiModule
 setStateModel	../../jPaint/view/gui/Gui.java	/^    public void setStateModel(StateModel stateModel) {$/;"	m	class:Gui
 setStateModel	../../jPaint/view/gui/GuiWindow.java	/^    public void setStateModel(StateModel stateModel) {$/;"	m	class:GuiWindow
 setStateModel	../../jPaint/view/interfaces/IGuiWindow.java	/^    void setStateModel(StateModel shapeType);$/;"	m	interface:IGuiWindow
@@ -9716,6 +9742,7 @@ setup	../../jPaint/controller/IJPaintController.java	/^    void setup();$/;"	m	i
 setup	../../jPaint/controller/JPaintController.java	/^    public void setup() {$/;"	m	class:JPaintController
 setupEvents	../../jPaint/controller/JPaintController.java	/^    private void setupEvents() {$/;"	m	class:JPaintController	file:
 setupLookaside	../../blackbird/extern/sqlite3/src/sqlite3.c	/^static int setupLookaside(sqlite3 *db, void *pBuf, int sz, int cnt){$/;"	f	file:
+shading	../../jPaint/view/gui/PaintCanvas.java	/^    private ShapeShadingType shading;    $/;"	f	class:PaintCanvas	file:
 shape	../../jPaint/view/gui/PaintCanvas.java	/^    private Shape shape;    $/;"	f	class:PaintCanvas	file:
 shapeShadingType	../../jPaint/model/StateModel.java	/^    public ShapeShadingType shapeShadingType;$/;"	f	class:StateModel
 shapeType	../../jPaint/model/StateModel.java	/^    public ShapeType shapeType;$/;"	f	class:StateModel

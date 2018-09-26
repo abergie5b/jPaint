@@ -24,13 +24,6 @@ public class Main {
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
 
-        // For example purposes only; remove from your final project.
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         //Graphics2D graphics2d = paintCanvas.getGraphics2D();
         //graphics2d.setColor(Color.GREEN);
         //graphics2d.fillRect(12, 13, 200, 400);

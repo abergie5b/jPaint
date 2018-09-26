@@ -20,7 +20,8 @@ public interface IUiModule {
     void setStateModel(StateModel shapeType);
     void addMouseListeners(MouseEventListener mouseListener);
     void setCanvasShape(Shape s);
-    void setShapeColor(ShapeColor c);
+    void setShapeColor(Color c);
+    void setShapeSecondaryColor(Color c);
     void setShapeShading(ShapeShadingType shading);
     void setStartAndEndPointMode(StartAndEndPointMode mode);
     PaintCanvas getCanvas();

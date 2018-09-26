@@ -29,8 +29,13 @@ public class Gui implements IUiModule {
     }
 
     @Override
-    public void setShapeColor(ShapeColor c) {
+    public void setShapeColor(Color c) {
         gui.setShapeColor(c);
+    }
+
+    @Override
+    public void setShapeSecondaryColor(Color c) {
+        gui.setShapeSecondaryColor(c);
     }
 
     @Override

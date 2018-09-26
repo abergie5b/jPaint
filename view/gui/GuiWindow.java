@@ -77,8 +77,12 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         this.canvas.setShape(shape);
     }
 
-    public void setShapeColor(ShapeColor color) {
+    public void setShapeColor(Color color) {
         this.canvas.setColor(color);
+    }
+
+    public void setShapeSecondaryColor(Color color) {
+        this.canvas.setSecondaryColor(color);
     }
 
     public void setShapeShading(ShapeShadingType shading) {
