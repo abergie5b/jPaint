@@ -13,8 +13,37 @@ public class PaintCanvas extends JPanel {
     private Color secondaryColor;    
     private ShapeShadingType shading;    
     private StartAndEndPointMode mode;    
+    private ArrayList<Shape> shapes;
 
     public PaintCanvas() {
+        shapes = new ArrayList<Shape>();
+    }
+
+    public Shape getShapeFromBuffer(Point point) {
+        Shape _shape = null;
+        for (Shape s: shapes)
+        {
+            if (s.contains(point))
+            {
+                _shape = s;
+            }
+        }
+        return _shape;
+    }
+
+    public boolean pointContainsShape(Point point) {
+        for (Shape s: shapes)
+        {
+            if (s.contains(point))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void addShape(Shape shape) {
+        shapes.add(shape);
     }
 
     public void setShape(Shape shape) {
@@ -42,16 +71,31 @@ public class PaintCanvas extends JPanel {
     }
     
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        System.out.println(shape + " " + primaryColor + " " + secondaryColor + " " + shading + " " + mode);
+        //super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
-        if (shape != null)
+        if (shape == null)
         {
-            System.out.println(shape + " " + primaryColor + " " + secondaryColor + " " + shading + " " + mode);
+            return;
+        }
+        g2d.setStroke(new BasicStroke(3));
+
+        if (shading == ShapeShadingType.FILLED_IN)
+        {
             g2d.setPaint(primaryColor);
             g2d.fill(shape);
-            g2d.setStroke(new BasicStroke(3)); // set border width
-            g2d.setPaint(secondaryColor); // set border color
-            g2d.draw(shape); // draw outline
         }
+        else if (shading == ShapeShadingType.OUTLINE)
+        {
+            g2d.setPaint(secondaryColor);
+        }
+        else if (shading == ShapeShadingType.OUTLINE_AND_FILLED_IN)
+        {
+            g2d.setPaint(primaryColor);
+            g2d.fill(shape);
+            g2d.setPaint(secondaryColor);
+        }
+        g2d.draw(shape);
+        addShape(shape);
     }
 }

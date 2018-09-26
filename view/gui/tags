@@ -45,6 +45,7 @@ IDialogProvider	../../model/interfaces/IDialogProvider.java	/^public interface I
 IEventCallback	../../view/interfaces/IEventCallback.java	/^public interface IEventCallback {$/;"	i
 IGuiWindow	../../view/interfaces/IGuiWindow.java	/^public interface IGuiWindow {$/;"	i
 IJPaintController	../../controller/IJPaintController.java	/^public interface IJPaintController {$/;"	i
+IMouseEventListener	../../controller/IMouseEventListener.java	/^public interface IMouseEventListener {$/;"	i
 IUiModule	../../view/interfaces/IUiModule.java	/^public interface IUiModule {$/;"	i
 JPaintController	../../controller/JPaintController.java	/^    public JPaintController(IUiModule uiModule, IApplicationState applicationState) {$/;"	m	class:JPaintController
 JPaintController	../../controller/JPaintController.java	/^public class JPaintController implements IJPaintController {$/;"	c
@@ -53,7 +54,7 @@ MAGENTA	../../model/ShapeColor.java	/^    MAGENTA,$/;"	e	enum:ShapeColor	file:
 MOVE	../../model/StartAndEndPointMode.java	/^    MOVE$/;"	e	enum:StartAndEndPointMode	file:
 Main	../../main/Main.java	/^public class Main {$/;"	c
 MouseEventListener	../../controller/MouseEventListener.java	/^    public MouseEventListener(IUiModule uiModule, IApplicationState applicationState) $/;"	m	class:MouseEventListener
-MouseEventListener	../../controller/MouseEventListener.java	/^public class MouseEventListener extends MouseInputAdapter {$/;"	c
+MouseEventListener	../../controller/MouseEventListener.java	/^public class MouseEventListener extends MouseInputAdapter implements IMouseEventListener {$/;"	c
 ORANGE	../../model/ShapeColor.java	/^    ORANGE,$/;"	e	enum:ShapeColor	file:
 OUTLINE	../../model/ShapeShadingType.java	/^    OUTLINE,$/;"	e	enum:ShapeShadingType	file:
 OUTLINE_AND_FILLED_IN	../../model/ShapeShadingType.java	/^    OUTLINE_AND_FILLED_IN$/;"	e	enum:ShapeShadingType	file:
@@ -102,6 +103,7 @@ chooseShadingTypeDialog	../../model/dialogs/DialogProvider.java	/^    private fi
 chooseShapeDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeType> chooseShapeDialog;$/;"	f	class:DialogProvider	file:
 chooseStartAndEndPointModeDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<StartAndEndPointMode> chooseStartAndEndPointModeDialog;$/;"	f	class:DialogProvider	file:
 controller	../../controller/IJPaintController.java	/^package controller;$/;"	p
+controller	../../controller/IMouseEventListener.java	/^package controller;$/;"	p
 controller	../../controller/JPaintController.java	/^package controller;$/;"	p
 controller	../../controller/MouseEventListener.java	/^package controller;$/;"	p
 createBackgroundPanel	../../view/gui/GuiWindow.java	/^    private JPanel createBackgroundPanel() {$/;"	m	class:GuiWindow	file:
@@ -130,6 +132,10 @@ getActiveStartAndEndPointMode	../../model/interfaces/IApplicationState.java	/^  
 getActiveStartAndEndPointMode	../../model/persistence/ApplicationState.java	/^    public StartAndEndPointMode getActiveStartAndEndPointMode() {$/;"	m	class:ApplicationState
 getButton	../../view/gui/GuiWindow.java	/^	public JButton getButton(EventName eventName) {$/;"	m	class:GuiWindow
 getButton	../../view/interfaces/IGuiWindow.java	/^    JButton getButton(EventName eventName);$/;"	m	interface:IGuiWindow
+getCanvas	../../view/gui/Gui.java	/^    public PaintCanvas getCanvas() {$/;"	m	class:Gui
+getCanvas	../../view/gui/GuiWindow.java	/^    public PaintCanvas getCanvas() {$/;"	m	class:GuiWindow
+getCanvas	../../view/interfaces/IGuiWindow.java	/^    PaintCanvas getCanvas();$/;"	m	interface:IGuiWindow
+getCanvas	../../view/interfaces/IUiModule.java	/^    PaintCanvas getCanvas();$/;"	m	interface:IUiModule
 getChoosePrimaryColorDialog	../../model/dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeColor> getChoosePrimaryColorDialog() {$/;"	m	class:DialogProvider
 getChoosePrimaryColorDialog	../../model/interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeColor> getChoosePrimaryColorDialog();$/;"	m	interface:IDialogProvider
 getChooseSecondaryColorDialog	../../model/dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeColor> getChooseSecondaryColorDialog() {$/;"	m	class:DialogProvider
@@ -175,6 +181,7 @@ label4	../../view/gui/GuiWindow.java	/^    private JLabel label4 = new JLabel(""
 label5	../../view/gui/GuiWindow.java	/^    private JLabel label5 = new JLabel("");$/;"	f	class:GuiWindow	file:
 main	../../main/Main.java	/^    public static void main(String[] args){$/;"	m	class:Main
 main	../../main/Main.java	/^package main;$/;"	p
+mode	../../view/gui/PaintCanvas.java	/^    private StartAndEndPointMode mode;    $/;"	f	class:PaintCanvas	file:
 model	../../model/ShapeColor.java	/^package model;$/;"	p
 model	../../model/ShapeShadingType.java	/^package model;$/;"	p
 model	../../model/ShapeType.java	/^package model;$/;"	p
@@ -189,15 +196,22 @@ model.dialogs	../../model/dialogs/DialogProvider.java	/^package model.dialogs;$/
 model.interfaces	../../model/interfaces/IApplicationState.java	/^package model.interfaces;$/;"	p
 model.interfaces	../../model/interfaces/IDialogProvider.java	/^package model.interfaces;$/;"	p
 model.persistence	../../model/persistence/ApplicationState.java	/^package model.persistence;$/;"	p
+mouseDragged	../../controller/IMouseEventListener.java	/^    void mouseDragged(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mouseDragged	../../controller/MouseEventListener.java	/^    public void mouseDragged(MouseEvent evt) {$/;"	m	class:MouseEventListener
+mousePressed	../../controller/IMouseEventListener.java	/^    void mousePressed(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mousePressed	../../controller/MouseEventListener.java	/^    public void mousePressed(MouseEvent evt) {$/;"	m	class:MouseEventListener
+mouseReleased	../../controller/IMouseEventListener.java	/^    void mouseReleased(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mouseReleased	../../controller/MouseEventListener.java	/^    public void mouseReleased(MouseEvent evt) {$/;"	m	class:MouseEventListener
 mouseX	../../controller/MouseEventListener.java	/^    private int mouseX;$/;"	f	class:MouseEventListener	file:
 mouseY	../../controller/MouseEventListener.java	/^    private int mouseY;$/;"	f	class:MouseEventListener	file:
 paintComponent	../../view/gui/PaintCanvas.java	/^    public void paintComponent(Graphics g) {$/;"	m	class:PaintCanvas
 primaryColor	../../model/StateModel.java	/^    public ShapeColor primaryColor;$/;"	f	class:StateModel
+primaryColor	../../view/gui/PaintCanvas.java	/^    private Color primaryColor;    $/;"	f	class:PaintCanvas	file:
+primaryColorToObject	../../model/StateModel.java	/^    public Color primaryColorToObject() {$/;"	m	class:StateModel
 run	../../view/interfaces/IEventCallback.java	/^	void run();$/;"	m	interface:IEventCallback
 secondaryColor	../../model/StateModel.java	/^    public ShapeColor secondaryColor;$/;"	f	class:StateModel
+secondaryColor	../../view/gui/PaintCanvas.java	/^    private Color secondaryColor;    $/;"	f	class:PaintCanvas	file:
+secondaryColorToObject	../../model/StateModel.java	/^    public Color secondaryColorToObject() {$/;"	m	class:StateModel
 serialVersionUID	../../model/persistence/ApplicationState.java	/^    private static final long serialVersionUID = -5545483996576839007L;$/;"	f	class:ApplicationState	file:
 setActivePrimaryColor	../../model/interfaces/IApplicationState.java	/^    void setActivePrimaryColor();$/;"	m	interface:IApplicationState
 setActivePrimaryColor	../../model/persistence/ApplicationState.java	/^    public void setActivePrimaryColor() {$/;"	m	class:ApplicationState
@@ -213,8 +227,28 @@ setCanvasShape	../../view/gui/Gui.java	/^    public void setCanvasShape(Shape s)
 setCanvasShape	../../view/gui/GuiWindow.java	/^    public void setCanvasShape(Shape shape) {$/;"	m	class:GuiWindow
 setCanvasShape	../../view/interfaces/IGuiWindow.java	/^    void setCanvasShape(Shape s);$/;"	m	interface:IGuiWindow
 setCanvasShape	../../view/interfaces/IUiModule.java	/^    void setCanvasShape(Shape s);$/;"	m	interface:IUiModule
+setColor	../../view/gui/PaintCanvas.java	/^    public void setColor(Color color) {$/;"	m	class:PaintCanvas
 setDefaults	../../model/persistence/ApplicationState.java	/^    private void setDefaults() {$/;"	m	class:ApplicationState	file:
-setShape	../../view/gui/PaintCanvas.java	/^    public void setShape(Shape s) {$/;"	m	class:PaintCanvas
+setMode	../../view/gui/PaintCanvas.java	/^    public void setMode(StartAndEndPointMode mode) {$/;"	m	class:PaintCanvas
+setSecondaryColor	../../view/gui/PaintCanvas.java	/^    public void setSecondaryColor(Color color) {$/;"	m	class:PaintCanvas
+setShading	../../view/gui/PaintCanvas.java	/^    public void setShading(ShapeShadingType shading) {$/;"	m	class:PaintCanvas
+setShape	../../view/gui/PaintCanvas.java	/^    public void setShape(Shape shape) {$/;"	m	class:PaintCanvas
+setShapeColor	../../view/gui/Gui.java	/^    public void setShapeColor(Color c) {$/;"	m	class:Gui
+setShapeColor	../../view/gui/GuiWindow.java	/^    public void setShapeColor(Color color) {$/;"	m	class:GuiWindow
+setShapeColor	../../view/interfaces/IGuiWindow.java	/^    void setShapeColor(Color color);$/;"	m	interface:IGuiWindow
+setShapeColor	../../view/interfaces/IUiModule.java	/^    void setShapeColor(Color c);$/;"	m	interface:IUiModule
+setShapeSecondaryColor	../../view/gui/Gui.java	/^    public void setShapeSecondaryColor(Color c) {$/;"	m	class:Gui
+setShapeSecondaryColor	../../view/gui/GuiWindow.java	/^    public void setShapeSecondaryColor(Color color) {$/;"	m	class:GuiWindow
+setShapeSecondaryColor	../../view/interfaces/IGuiWindow.java	/^    void setShapeSecondaryColor(Color color);$/;"	m	interface:IGuiWindow
+setShapeSecondaryColor	../../view/interfaces/IUiModule.java	/^    void setShapeSecondaryColor(Color c);$/;"	m	interface:IUiModule
+setShapeShading	../../view/gui/Gui.java	/^    public void setShapeShading(ShapeShadingType shading) {$/;"	m	class:Gui
+setShapeShading	../../view/gui/GuiWindow.java	/^    public void setShapeShading(ShapeShadingType shading) {$/;"	m	class:GuiWindow
+setShapeShading	../../view/interfaces/IGuiWindow.java	/^    void setShapeShading(ShapeShadingType shading);$/;"	m	interface:IGuiWindow
+setShapeShading	../../view/interfaces/IUiModule.java	/^    void setShapeShading(ShapeShadingType shading);$/;"	m	interface:IUiModule
+setStartAndEndPointMode	../../view/gui/Gui.java	/^    public void setStartAndEndPointMode(StartAndEndPointMode mode) {$/;"	m	class:Gui
+setStartAndEndPointMode	../../view/gui/GuiWindow.java	/^    public void setStartAndEndPointMode(StartAndEndPointMode mode) {$/;"	m	class:GuiWindow
+setStartAndEndPointMode	../../view/interfaces/IGuiWindow.java	/^    void setStartAndEndPointMode(StartAndEndPointMode mode);$/;"	m	interface:IGuiWindow
+setStartAndEndPointMode	../../view/interfaces/IUiModule.java	/^    void setStartAndEndPointMode(StartAndEndPointMode mode);$/;"	m	interface:IUiModule
 setStateModel	../../view/gui/Gui.java	/^    public void setStateModel(StateModel stateModel) {$/;"	m	class:Gui
 setStateModel	../../view/gui/GuiWindow.java	/^    public void setStateModel(StateModel stateModel) {$/;"	m	class:GuiWindow
 setStateModel	../../view/interfaces/IGuiWindow.java	/^    void setStateModel(StateModel shapeType);$/;"	m	interface:IGuiWindow
@@ -226,8 +260,10 @@ setStatusMenu	../../view/interfaces/IUiModule.java	/^    void setStatusMenu();$/
 setup	../../controller/IJPaintController.java	/^    void setup();$/;"	m	interface:IJPaintController
 setup	../../controller/JPaintController.java	/^    public void setup() {$/;"	m	class:JPaintController
 setupEvents	../../controller/JPaintController.java	/^    private void setupEvents() {$/;"	m	class:JPaintController	file:
+shading	../../view/gui/PaintCanvas.java	/^    private ShapeShadingType shading;    $/;"	f	class:PaintCanvas	file:
 shape	../../view/gui/PaintCanvas.java	/^    private Shape shape;    $/;"	f	class:PaintCanvas	file:
 shapeShadingType	../../model/StateModel.java	/^    public ShapeShadingType shapeShadingType;$/;"	f	class:StateModel
+shapeToObject	../../model/StateModel.java	/^    public Shape shapeToObject(int mouseX, int mouseY, int endX, int endY) {$/;"	m	class:StateModel
 shapeType	../../model/StateModel.java	/^    public ShapeType shapeType;$/;"	f	class:StateModel
 startAndEndPointMode	../../model/StateModel.java	/^    public StartAndEndPointMode startAndEndPointMode;$/;"	f	class:StateModel
 stateModel	../../model/persistence/ApplicationState.java	/^    private StateModel stateModel;$/;"	f	class:ApplicationState	file:

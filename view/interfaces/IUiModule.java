@@ -24,6 +24,7 @@ public interface IUiModule {
     void setShapeSecondaryColor(Color c);
     void setShapeShading(ShapeShadingType shading);
     void setStartAndEndPointMode(StartAndEndPointMode mode);
+    void updateCanvasSettings(StateModel stateModel);
     PaintCanvas getCanvas();
     <T> T getDialogResponse(IDialogChoice dialogChoice);
 }

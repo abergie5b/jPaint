@@ -3,6 +3,9 @@ package model;
 import java.awt.*;
 import java.awt.geom.*;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
 public class StateModel {
 
     public ShapeType shapeType;
@@ -40,26 +43,46 @@ public class StateModel {
     }
 
     public Color primaryColorToObject() {
-        if (primaryColor == ShapeColor.BLUE)
+        Field[] fields = Color.class.getDeclaredFields();
+        for (Field f: fields) 
         {
-            return Color.BLUE;
+            if (primaryColor.name() == f.getName() && Modifier.isStatic(f.getModifiers()))
+            {
+                try
+                {
+                    return (Color)Color.class.getDeclaredField(primaryColor.name()).get(null);
+                }
+                catch (NoSuchFieldException e)
+                {
+                }
+                catch (IllegalAccessException e)
+                {
+                }
+            }
         }
-        else if (primaryColor == ShapeColor.GREEN)
-        {
-            return Color.GREEN;
-        }
+        // #TODO throw error
         return Color.BLACK;
     }
 
     public Color secondaryColorToObject() {
-        if (secondaryColor == ShapeColor.BLUE)
+        Field[] fields = Color.class.getDeclaredFields();
+        for (Field f: fields) 
         {
-            return Color.BLUE;
+            if (secondaryColor.name() == f.getName() && Modifier.isStatic(f.getModifiers()))
+            {
+                try
+                {
+                    return (Color)Color.class.getDeclaredField(secondaryColor.name()).get(null);
+                }
+                catch (NoSuchFieldException e)
+                {
+                }
+                catch (IllegalAccessException e)
+                {
+                }
+            }
         }
-        else if (secondaryColor == ShapeColor.GREEN)
-        {
-            return Color.GREEN;
-        }
+        // #TODO throw error
         return Color.BLACK;
     }
 

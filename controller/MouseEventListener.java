@@ -31,6 +31,7 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         int startY = evt.getY();
         mouseX = startX;
         mouseY = startY;
+        Shape s = uiModule.getCanvas().getShapeFromBuffer(evt.getPoint());
     }
     @Override
     public void mouseDragged(MouseEvent evt) {
@@ -48,10 +49,7 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
                                                applicationState.getActiveStartAndEndPointMode()
         );
         uiModule.setCanvasShape(stateModel.shapeToObject(mouseX, mouseY, endX, endY));
-        uiModule.setShapeColor(stateModel.primaryColorToObject());
-        uiModule.setShapeSecondaryColor(stateModel.setShapeSecondaryColor());
-        uiModule.setShapeShading(stateModel.shapeShadingType);
-        uiModule.setStartAndEndPointMode(stateModel.startAndEndPointMode);
+        uiModule.updateCanvasSettings(stateModel);
         mouseX = endX;
         mouseY = endY;
         uiModule.getCanvas().repaint();

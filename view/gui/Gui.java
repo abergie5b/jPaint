@@ -54,6 +54,14 @@ public class Gui implements IUiModule {
     }
 
     @Override
+    public void updateCanvasSettings(StateModel stateModel) {
+        setShapeColor(stateModel.primaryColorToObject());
+        setShapeSecondaryColor(stateModel.secondaryColorToObject());
+        setShapeShading(stateModel.shapeShadingType);
+        setStartAndEndPointMode(stateModel.startAndEndPointMode);
+    }
+
+    @Override
     public void setStatusMenu() {
         gui.setStatusMenu();
     }
@@ -75,13 +83,16 @@ public class Gui implements IUiModule {
 	}
 
     @Override
-    public <T> T getDialogResponse(IDialogChoice dialogSettings) {
+    public <T> T getDialogResponse(IDialogChoice dialogSettings) 
+    {
         Object selectedValue = JOptionPane.showInputDialog(null,
-                dialogSettings.getDialogText(), dialogSettings.getDialogTitle(),
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                dialogSettings.getDialogOptions(),
-                dialogSettings.getCurrentSelection());
+                                                           dialogSettings.getDialogText(), 
+                                                           dialogSettings.getDialogTitle(),
+                                                           JOptionPane.PLAIN_MESSAGE,
+                                                           null,
+                                                           dialogSettings.getDialogOptions(),
+                                                           dialogSettings.getCurrentSelection()
+        );
         return selectedValue == null
                 ? (T)dialogSettings.getCurrentSelection()
                 : (T)selectedValue;
