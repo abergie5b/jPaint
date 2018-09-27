@@ -13,11 +13,13 @@ import view.interfaces.IUiModule;
 
 import model.*;
 
-public class Gui implements IUiModule {
+public class Gui implements IUiModule 
+{
 
     private final IGuiWindow gui;
 
-    public Gui(IGuiWindow gui) {
+    public Gui(IGuiWindow gui) 
+    {
         this.gui = gui;
     }
 

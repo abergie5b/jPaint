@@ -8,6 +8,7 @@ import java.lang.reflect.Modifier;
 
 public class StateModelAdapter {
 
+    public Shape shape;
     public ShapeType shapeType;
     public Color primaryColor;
     public Color secondaryColor;
@@ -16,6 +17,7 @@ public class StateModelAdapter {
 
     public StateModelAdapter(ShapeType shapeType, ShapeColor primaryColor, ShapeColor secondaryColor, ShapeShadingType shapeShadingType, StartAndEndPointMode startAndEndPointMode) 
     {
+        this.shape = null;
         this.shapeType = shapeType;
         this.primaryColor = this.colorToObject(primaryColor);
         this.secondaryColor = this.colorToObject(secondaryColor);
@@ -50,6 +52,10 @@ public class StateModelAdapter {
         this.secondaryColor = this.colorToObject(color);
     }
 
+    public void setShape(int mouseX, int mouseY, int endX, int endY) {
+        this.shape = shapeToObject(mouseX, mouseY, endX, endY);
+    }
+
     public Shape createShape(int mouseX, int mouseY, int endX, int endY) {
         Shape shape = shapeToObject(mouseX, mouseY, endX, endY);
         return shape;
@@ -68,6 +74,7 @@ public class StateModelAdapter {
                 //return new Triangle(mouseX, mouseY, endX - mouseX, endY - mouseY);
                 break;
             default:
+                // #TODO throw error
                 shape = new Rectangle(mouseX, mouseY, endX - mouseX, endY - mouseY);
                 break;
         }

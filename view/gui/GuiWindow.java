@@ -18,7 +18,8 @@ import javax.swing.event.*;
 import java.awt.geom.*;
 import java.awt.*;
 
-public class GuiWindow extends JFrame implements IGuiWindow {
+public class GuiWindow extends JFrame implements IGuiWindow 
+{
     private final int defaultWidth = 1080;
     private final int defaultHeight = 720;
     private final String defaultTitle = "~JPaint~";
@@ -32,7 +33,8 @@ public class GuiWindow extends JFrame implements IGuiWindow {
     private PaintCanvas canvas;
     private StateModelAdapter stateModel;
 
-    public GuiWindow(PaintCanvas canvas){
+    public GuiWindow(PaintCanvas canvas)
+    {
         this.canvas = canvas;
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -40,6 +40,16 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
     public void mouseDragged(MouseEvent evt) {
         int endX = evt.getX();
         int endY = evt.getY();
+        PaintCanvas canvas  = uiModule.getCanvas();
+        StateModelAdapter adapter = new StateModelAdapter(applicationState.getActiveShapeType(),
+                                                          applicationState.getActivePrimaryColor(),
+                                                          applicationState.getActiveSecondaryColor(),
+                                                          applicationState.getActiveShapeShadingType(),
+                                                          applicationState.getActiveStartAndEndPointMode()
+        );
+        adapter.setShape(mouseX, mouseY, endX, endY);
+        canvas.updateShapeSettings(adapter);
+        canvas.repaint();
     }
 
     @Override
@@ -53,10 +63,11 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
                                                           applicationState.getActiveShapeShadingType(),
                                                           applicationState.getActiveStartAndEndPointMode()
         );
+        adapter.setShape(mouseX, mouseY, endX, endY);
         canvas.updateShapeSettings(adapter);
-        canvas.setShape(adapter.createShape(mouseX, mouseY, endX, endY));
         mouseX = endX;
         mouseY = endY;
+        canvas.addShapeAttribute(adapter);
         canvas.repaint();
     }
 }

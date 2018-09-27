@@ -15,11 +15,11 @@ public class PaintCanvas extends JPanel
     private Color secondaryColor;    
     private ShapeShadingType shading;    
     private StartAndEndPointMode mode;    
-    private ArrayList<Shape> shapes;
+    private ArrayList<StateModelAdapter> shapes;
 
     public PaintCanvas() 
     {
-        shapes = new ArrayList<Shape>();
+        shapes = new ArrayList<StateModelAdapter>();
     }
 
     public void addMouseListeners(MouseEventListener mouseEventListener) {
@@ -27,11 +27,8 @@ public class PaintCanvas extends JPanel
         this.addMouseListener(mouseEventListener);
     }
 
-    public void setShape(Shape shape) {
-        this.shape = shape;
-    }
-
     public void updateShapeSettings(StateModelAdapter stateModel) {
+        this.shape = stateModel.shape;
         this.primaryColor = stateModel.primaryColor;
         this.secondaryColor = stateModel.secondaryColor;
         this.shading = stateModel.shapeShadingType;
@@ -40,17 +37,17 @@ public class PaintCanvas extends JPanel
 
     public Shape getShapeFromBuffer(Point point) {
         Shape _shape = null;
-        for (Shape s: shapes)
+        for (StateModelAdapter s: shapes)
         {
-            if (s.contains(point))
+            if (s.shape.contains(point))
             {
-                _shape = s;
+                _shape = s.shape;
             }
         }
         return _shape;
     }
 
-    private void addShape(Shape _shape) {
+    public void addShapeAttribute(StateModelAdapter _shape) {
         shapes.add(_shape);
     }
 
@@ -60,7 +57,7 @@ public class PaintCanvas extends JPanel
     
     public void paintComponent(Graphics g) {
         System.out.println(shape + " " + primaryColor + " " + secondaryColor + " " + shading + " " + mode);
-        //super.paintComponent(g);
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
         if (shape == null)
         {
@@ -68,22 +65,24 @@ public class PaintCanvas extends JPanel
         }
         g2d.setStroke(new BasicStroke(3));
 
-        if (shading == ShapeShadingType.FILLED_IN)
+        for (StateModelAdapter s: shapes)
         {
-            g2d.setPaint(primaryColor);
-            g2d.fill(shape);
+            if (s.shapeShadingType == ShapeShadingType.FILLED_IN)
+            {
+                g2d.setPaint(s.primaryColor);
+                g2d.fill(s.shape);
+            }
+            else if (s.shapeShadingType == ShapeShadingType.OUTLINE)
+            {
+                g2d.setPaint(s.secondaryColor);
+            }
+            else if (s.shapeShadingType == ShapeShadingType.OUTLINE_AND_FILLED_IN)
+            {
+                g2d.setPaint(s.primaryColor);
+                g2d.fill(s.shape);
+                g2d.setPaint(s.secondaryColor);
+            }
+            g2d.draw(s.shape);
         }
-        else if (shading == ShapeShadingType.OUTLINE)
-        {
-            g2d.setPaint(secondaryColor);
-        }
-        else if (shading == ShapeShadingType.OUTLINE_AND_FILLED_IN)
-        {
-            g2d.setPaint(primaryColor);
-            g2d.fill(shape);
-            g2d.setPaint(secondaryColor);
-        }
-        g2d.draw(shape);
-        addShape(shape);
     }
 }
