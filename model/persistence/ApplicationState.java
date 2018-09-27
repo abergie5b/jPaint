@@ -41,6 +41,16 @@ public class ApplicationState implements IApplicationState, Serializable
     }
 
     @Override
+    public void undo() {
+        uiModule.getCanvas().undo();
+    }
+
+    @Override
+    public void redo() {
+        uiModule.getCanvas().redo();
+    }
+
+    @Override
     public void setActiveShape() {
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
         stateModel.setShapeType(activeShapeType);

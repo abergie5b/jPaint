@@ -6,6 +6,10 @@ import model.ShapeType;
 import model.StartAndEndPointMode;
 
 public interface IApplicationState {
+    void undo();
+
+    void redo();
+
     void setActiveShape();
 
     void setActivePrimaryColor();

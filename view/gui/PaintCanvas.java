@@ -11,28 +11,49 @@ import controller.MouseEventListener;
 public class PaintCanvas extends JPanel 
 {
     private Shape shape;    
+    private StateModelAdapter mouseDraggedShape;    
     private Color primaryColor;    
     private Color secondaryColor;    
     private ShapeShadingType shading;    
     private StartAndEndPointMode mode;    
     private ArrayList<StateModelAdapter> shapes;
+    private ArrayList<StateModelAdapter> shapeHistory;
 
     public PaintCanvas() 
     {
         shapes = new ArrayList<StateModelAdapter>();
+        shapeHistory = new ArrayList<StateModelAdapter>();
+    }
+
+    private int getNumberOfShapes() {
+        return shapes.size();
+    }
+
+    private int getNumberOfShapeHistory() {
+        return shapeHistory.size();
+    }
+
+    public void redo() {
+        if (getNumberOfShapeHistory() > 0) {
+            StateModelAdapter s = shapeHistory.get(getNumberOfShapeHistory() - 1);
+            shapeHistory.remove(getNumberOfShapeHistory() - 1);
+            shapes.add(s);
+        }
+        repaint();
+    }
+
+    public void undo() {
+        if (getNumberOfShapes() > 0) {
+            StateModelAdapter s = shapes.get(getNumberOfShapes() - 1);
+            shapes.remove(getNumberOfShapes() - 1);
+            shapeHistory.add(s);
+        }
+        repaint();
     }
 
     public void addMouseListeners(MouseEventListener mouseEventListener) {
         this.addMouseMotionListener(mouseEventListener);
         this.addMouseListener(mouseEventListener);
-    }
-
-    public void updateShapeSettings(StateModelAdapter stateModel) {
-        this.shape = stateModel.shape;
-        this.primaryColor = stateModel.primaryColor;
-        this.secondaryColor = stateModel.secondaryColor;
-        this.shading = stateModel.shapeShadingType;
-        this.mode = stateModel.startAndEndPointMode;
     }
 
     public Shape getShapeFromBuffer(Point point) {
@@ -51,21 +72,25 @@ public class PaintCanvas extends JPanel
         shapes.add(_shape);
     }
 
+    public void setTempShape(StateModelAdapter _shape) {
+        this.mouseDraggedShape = _shape;
+    }
+
     private Graphics2D getGraphics2D() {
         return (Graphics2D)getGraphics();
     }
     
     public void paintComponent(Graphics g) {
-        System.out.println(shape + " " + primaryColor + " " + secondaryColor + " " + shading + " " + mode);
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
-        if (shape == null)
-        {
-            return;
-        }
         g2d.setStroke(new BasicStroke(3));
 
-        for (StateModelAdapter s: shapes)
+        ArrayList<StateModelAdapter> allShapes = new ArrayList<StateModelAdapter> (shapes);
+        if (this.mouseDraggedShape != null)
+        {
+            allShapes.add(this.mouseDraggedShape);
+        }
+        for (StateModelAdapter s: allShapes)
         {
             if (s.shapeShadingType == ShapeShadingType.FILLED_IN)
             {
@@ -84,5 +109,6 @@ public class PaintCanvas extends JPanel
             }
             g2d.draw(s.shape);
         }
+        this.mouseDraggedShape = null;
     }
 }

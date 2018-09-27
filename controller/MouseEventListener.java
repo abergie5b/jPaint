@@ -40,16 +40,29 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
     public void mouseDragged(MouseEvent evt) {
         int endX = evt.getX();
         int endY = evt.getY();
-        PaintCanvas canvas  = uiModule.getCanvas();
-        StateModelAdapter adapter = new StateModelAdapter(applicationState.getActiveShapeType(),
-                                                          applicationState.getActivePrimaryColor(),
-                                                          applicationState.getActiveSecondaryColor(),
-                                                          applicationState.getActiveShapeShadingType(),
-                                                          applicationState.getActiveStartAndEndPointMode()
-        );
-        adapter.setShape(mouseX, mouseY, endX, endY);
-        canvas.updateShapeSettings(adapter);
-        canvas.repaint();
+        StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
+        switch (mode) 
+        {
+            case DRAW:  
+            {
+                PaintCanvas canvas  = uiModule.getCanvas();
+                StateModelAdapter adapter = new StateModelAdapter(applicationState.getActiveShapeType(),
+                                                                  applicationState.getActivePrimaryColor(),
+                                                                  applicationState.getActiveSecondaryColor(),
+                                                                  applicationState.getActiveShapeShadingType(),
+                                                                  applicationState.getActiveStartAndEndPointMode()
+                );
+                adapter.setShape(mouseX, mouseY, endX, endY);
+                canvas.setTempShape(adapter);
+                canvas.repaint();
+            }
+            case SELECT:
+                break;
+            case MOVE:
+                break;
+        }
+        //mouseX = endX;
+        //mouseY = endY;
     }
 
     @Override
@@ -64,11 +77,10 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
                                                           applicationState.getActiveStartAndEndPointMode()
         );
         adapter.setShape(mouseX, mouseY, endX, endY);
-        canvas.updateShapeSettings(adapter);
-        mouseX = endX;
-        mouseY = endY;
         canvas.addShapeAttribute(adapter);
         canvas.repaint();
+        mouseX = endX;
+        mouseY = endY;
     }
 }
 
