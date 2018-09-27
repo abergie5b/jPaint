@@ -17,14 +17,7 @@ import java.awt.geom.*;
 public interface IUiModule {
     void addEvent(EventName eventName, IEventCallback command);
     void setStatusMenu();
-    void setStateModel(StateModel shapeType);
-    void addMouseListeners(MouseEventListener mouseListener);
-    void setCanvasShape(Shape s);
-    void setShapeColor(Color c);
-    void setShapeSecondaryColor(Color c);
-    void setShapeShading(ShapeShadingType shading);
-    void setStartAndEndPointMode(StartAndEndPointMode mode);
-    void updateCanvasSettings(StateModel stateModel);
+    void setStateModel(StateModelAdapter shapeType);
     PaintCanvas getCanvas();
     <T> T getDialogResponse(IDialogChoice dialogChoice);
 }

@@ -1,6 +1,6 @@
 package model.persistence;
 
-import model.StateModel;
+import model.StateModelAdapter;
 import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
@@ -12,7 +12,8 @@ import view.interfaces.IUiModule;
 
 import java.io.Serializable;
 
-public class ApplicationState implements IApplicationState, Serializable {
+public class ApplicationState implements IApplicationState, Serializable 
+{
     private static final long serialVersionUID = -5545483996576839007L;
     private final IUiModule uiModule;
     private final IDialogProvider dialogProvider;
@@ -22,18 +23,19 @@ public class ApplicationState implements IApplicationState, Serializable {
     private ShapeColor activeSecondaryColor;
     private ShapeShadingType activeShapeShadingType;
     private StartAndEndPointMode activeStartAndEndPointMode;
-    private StateModel stateModel;
+    private StateModelAdapter stateModel;
 
-    public ApplicationState(IUiModule uiModule) {
+    public ApplicationState(IUiModule uiModule) 
+    {
         this.uiModule = uiModule;
         this.dialogProvider = new DialogProvider(this);
         setDefaults();
-        stateModel = new StateModel(activeShapeType, 
-                                    activePrimaryColor,
-                                    activeSecondaryColor, 
-                                    activeShapeShadingType,
-                                    activeStartAndEndPointMode
-                                    );
+        stateModel = new StateModelAdapter(activeShapeType, 
+                                           activePrimaryColor,
+                                           activeSecondaryColor, 
+                                           activeShapeShadingType,
+                                           activeStartAndEndPointMode
+                                           );
         uiModule.setStateModel(stateModel);
         uiModule.setStatusMenu();
     }
@@ -41,7 +43,7 @@ public class ApplicationState implements IApplicationState, Serializable {
     @Override
     public void setActiveShape() {
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
-        stateModel.shapeType = activeShapeType;
+        stateModel.setShapeType(activeShapeType);
         uiModule.setStateModel(stateModel);
         uiModule.setStatusMenu();
     }
@@ -49,7 +51,7 @@ public class ApplicationState implements IApplicationState, Serializable {
     @Override
     public void setActivePrimaryColor() {
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
-        stateModel.primaryColor = activePrimaryColor;
+        stateModel.updatePrimaryColor(activePrimaryColor);
         uiModule.setStateModel(stateModel);
         uiModule.setStatusMenu();
     }
@@ -57,7 +59,7 @@ public class ApplicationState implements IApplicationState, Serializable {
     @Override
     public void setActiveSecondaryColor() {
         activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
-        stateModel.secondaryColor = activeSecondaryColor;
+        stateModel.updateSecondaryColor(activeSecondaryColor);
         uiModule.setStateModel(stateModel);
         uiModule.setStatusMenu();
     }

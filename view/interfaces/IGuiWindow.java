@@ -14,12 +14,6 @@ import java.awt.*;
 public interface IGuiWindow {
     JButton getButton(EventName eventName);
     void setStatusMenu();
-    void setStateModel(StateModel shapeType);
-    void setCanvasShape(Shape s);
-    void setShapeColor(Color color);
-    void setShapeSecondaryColor(Color color);
-    void setShapeShading(ShapeShadingType shading);
-    void setStartAndEndPointMode(StartAndEndPointMode mode);
+    void setStateModel(StateModelAdapter shapeType);
     PaintCanvas getCanvas();
-    void addMouseListeners(MouseEventListener mouseListener);
 }

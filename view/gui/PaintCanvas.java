@@ -6,8 +6,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import model.*;
+import controller.MouseEventListener;
 
-public class PaintCanvas extends JPanel {
+public class PaintCanvas extends JPanel 
+{
     private Shape shape;    
     private Color primaryColor;    
     private Color secondaryColor;    
@@ -15,8 +17,25 @@ public class PaintCanvas extends JPanel {
     private StartAndEndPointMode mode;    
     private ArrayList<Shape> shapes;
 
-    public PaintCanvas() {
+    public PaintCanvas() 
+    {
         shapes = new ArrayList<Shape>();
+    }
+
+    public void addMouseListeners(MouseEventListener mouseEventListener) {
+        this.addMouseMotionListener(mouseEventListener);
+        this.addMouseListener(mouseEventListener);
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
+
+    public void updateShapeSettings(StateModelAdapter stateModel) {
+        this.primaryColor = stateModel.primaryColor;
+        this.secondaryColor = stateModel.secondaryColor;
+        this.shading = stateModel.shapeShadingType;
+        this.mode = stateModel.startAndEndPointMode;
     }
 
     public Shape getShapeFromBuffer(Point point) {
@@ -31,42 +50,11 @@ public class PaintCanvas extends JPanel {
         return _shape;
     }
 
-    public boolean pointContainsShape(Point point) {
-        for (Shape s: shapes)
-        {
-            if (s.contains(point))
-            {
-                return true;
-            }
-        }
-        return false;
+    private void addShape(Shape _shape) {
+        shapes.add(_shape);
     }
 
-    private void addShape(Shape shape) {
-        shapes.add(shape);
-    }
-
-    public void setShape(Shape shape) {
-        this.shape = shape;
-    }
-
-    public void setColor(Color color) {
-        this.primaryColor = color;
-    }
-
-    public void setSecondaryColor(Color color) {
-        this.secondaryColor = color;
-    }
-
-    public void setShading(ShapeShadingType shading) {
-        this.shading = shading;
-    }
-
-    public void setMode(StartAndEndPointMode mode) {
-        this.mode = mode;
-    }
-
-    public Graphics2D getGraphics2D() {
+    private Graphics2D getGraphics2D() {
         return (Graphics2D)getGraphics();
     }
     

@@ -20,7 +20,6 @@ public class JPaintController implements IJPaintController {
     public JPaintController(IUiModule uiModule, IApplicationState applicationState) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
-        this.uiModule.addMouseListeners(new MouseEventListener(uiModule, applicationState));
     }
 
     @Override

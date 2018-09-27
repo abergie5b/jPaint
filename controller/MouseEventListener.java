@@ -1,5 +1,6 @@
 package controller;
 
+import view.gui.PaintCanvas;
 import model.*;
 import model.interfaces.IApplicationState;
 
@@ -25,6 +26,7 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         this.mouseX = 0;
         this.mouseY = 0;
     } 
+
     @Override
     public void mousePressed(MouseEvent evt) {
         int startX = evt.getX();
@@ -33,26 +35,29 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         mouseY = startY;
         Shape s = uiModule.getCanvas().getShapeFromBuffer(evt.getPoint());
     }
+
     @Override
     public void mouseDragged(MouseEvent evt) {
         int endX = evt.getX();
         int endY = evt.getY();
     }
+
     @Override
     public void mouseReleased(MouseEvent evt) {
         int endX = evt.getX();
         int endY = evt.getY();
-        StateModel stateModel = new StateModel(applicationState.getActiveShapeType(),
-                                               applicationState.getActivePrimaryColor(),
-                                               applicationState.getActiveSecondaryColor(),
-                                               applicationState.getActiveShapeShadingType(),
-                                               applicationState.getActiveStartAndEndPointMode()
+        PaintCanvas canvas  = uiModule.getCanvas();
+        StateModelAdapter adapter = new StateModelAdapter(applicationState.getActiveShapeType(),
+                                                          applicationState.getActivePrimaryColor(),
+                                                          applicationState.getActiveSecondaryColor(),
+                                                          applicationState.getActiveShapeShadingType(),
+                                                          applicationState.getActiveStartAndEndPointMode()
         );
-        uiModule.setCanvasShape(stateModel.shapeToObject(mouseX, mouseY, endX, endY));
-        uiModule.updateCanvasSettings(stateModel);
+        canvas.updateShapeSettings(adapter);
+        canvas.setShape(adapter.createShape(mouseX, mouseY, endX, endY));
         mouseX = endX;
         mouseY = endY;
-        uiModule.getCanvas().repaint();
+        canvas.repaint();
     }
 }
 

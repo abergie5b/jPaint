@@ -1,5 +1,6 @@
 package main;
 
+import controller.MouseEventListener;
 import controller.IJPaintController;
 import controller.JPaintController;
 import model.dialogs.DialogProvider;
@@ -21,6 +22,8 @@ public class Main {
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
+        MouseEventListener mouseEventListener = new MouseEventListener(uiModule, appState);
+        paintCanvas.addMouseListeners(mouseEventListener);
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
 

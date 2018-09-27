@@ -1,13 +1,10 @@
 package view.gui;
 
-import model.StateModel;
 import model.*;
 
 import view.interfaces.IGuiWindow;
 import view.EventName;
 import view.gui.PaintCanvas;
-
-import controller.MouseEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,9 +19,9 @@ import java.awt.geom.*;
 import java.awt.*;
 
 public class GuiWindow extends JFrame implements IGuiWindow {
-    private final int defaultWidth = 1250;
-    private final int defaultHeight = 800;
-    private final String defaultTitle = "JPaint";
+    private final int defaultWidth = 1080;
+    private final int defaultHeight = 720;
+    private final String defaultTitle = "~JPaint~";
     private final Insets defaultButtonDimensions = new Insets(5, 8, 5, 8);
     private final Map<EventName, JButton> eventButtons = new HashMap<>();
     private JLabel label1 = new JLabel("");
@@ -33,7 +30,7 @@ public class GuiWindow extends JFrame implements IGuiWindow {
     private JLabel label4 = new JLabel("");
     private JLabel label5 = new JLabel("");
     private PaintCanvas canvas;
-    private StateModel stateModel;
+    private StateModelAdapter stateModel;
 
     public GuiWindow(PaintCanvas canvas){
         this.canvas = canvas;
@@ -55,7 +52,7 @@ public class GuiWindow extends JFrame implements IGuiWindow {
 	}
 
     @Override
-    public void setStateModel(StateModel stateModel) {
+    public void setStateModel(StateModelAdapter stateModel) {
         this.stateModel = stateModel;
     }
 
@@ -66,37 +63,11 @@ public class GuiWindow extends JFrame implements IGuiWindow {
 
     @Override
     public void setStatusMenu() {
-        label1.setText("(" + "SHAPE: " + stateModel.shapeType.name() + ")");
-        label2.setText("(" + "COLORS:  " + stateModel.primaryColor.name() + ",");
-        label3.setText(stateModel.secondaryColor.name() + ")");
+        label1.setText("(" + "SHAPE: " + stateModel.getShapeName() + ")");
+        label2.setText("(" + "COLORS:  " + stateModel.getPrimaryColorName() + ",");
+        label3.setText(stateModel.getSecondaryColorName() + ")");
         label4.setText("(" + "SHADING: " + stateModel.shapeShadingType.name() + ")");
         label5.setText("(" + "MODE: " + stateModel.startAndEndPointMode.name() + ")");
-    }
-
-    public void setCanvasShape(Shape shape) {
-        this.canvas.setShape(shape);
-    }
-
-    public void setShapeColor(Color color) {
-        this.canvas.setColor(color);
-    }
-
-    public void setShapeSecondaryColor(Color color) {
-        this.canvas.setSecondaryColor(color);
-    }
-
-    public void setShapeShading(ShapeShadingType shading) {
-        this.canvas.setShading(shading);
-    }
-
-    public void setStartAndEndPointMode(StartAndEndPointMode mode) {
-        this.canvas.setMode(mode);
-    }
-
-    @Override
-    public void addMouseListeners(MouseEventListener mouseListener) {
-        this.canvas.addMouseMotionListener(mouseListener);
-        this.canvas.addMouseListener(mouseListener);
     }
 
     private JPanel createStatusMenu() {

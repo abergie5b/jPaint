@@ -11,8 +11,6 @@ import view.interfaces.IEventCallback;
 import view.interfaces.IGuiWindow;
 import view.interfaces.IUiModule;
 
-import controller.MouseEventListener;
-
 import model.*;
 
 public class Gui implements IUiModule {
@@ -23,42 +21,9 @@ public class Gui implements IUiModule {
         this.gui = gui;
     }
 
-    @Override
-    public void setCanvasShape(Shape s) {
-        gui.setCanvasShape(s);
-    }
-
-    @Override
-    public void setShapeColor(Color c) {
-        gui.setShapeColor(c);
-    }
-
-    @Override
-    public void setShapeSecondaryColor(Color c) {
-        gui.setShapeSecondaryColor(c);
-    }
-
-    @Override
-    public void setShapeShading(ShapeShadingType shading) {
-        gui.setShapeShading(shading);
-    }
-
-    @Override
-    public void setStartAndEndPointMode(StartAndEndPointMode mode) {
-        gui.setStartAndEndPointMode(mode);
-    }
-
     @Override 
     public PaintCanvas getCanvas() {
         return gui.getCanvas();
-    }
-
-    @Override
-    public void updateCanvasSettings(StateModel stateModel) {
-        setShapeColor(stateModel.primaryColorToObject());
-        setShapeSecondaryColor(stateModel.secondaryColorToObject());
-        setShapeShading(stateModel.shapeShadingType);
-        setStartAndEndPointMode(stateModel.startAndEndPointMode);
     }
 
     @Override
@@ -67,12 +32,7 @@ public class Gui implements IUiModule {
     }
 
     @Override
-    public void addMouseListeners(MouseEventListener mouseListener) {
-        gui.addMouseListeners(mouseListener);
-    }
-
-    @Override
-    public void setStateModel(StateModel stateModel) {
+    public void setStateModel(StateModelAdapter stateModel) {
         gui.setStateModel(stateModel);
     }
     
