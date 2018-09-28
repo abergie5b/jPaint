@@ -8,18 +8,25 @@ import java.lang.reflect.Modifier;
 
 public class StateModelAdapter {
 
+    public int x;
+    public int y;
+    public int width;
+    public int height;
     public Shape shape;
     public ShapeType shapeType;
+    public ShapeColor primaryShapeColor;
     public Color primaryColor;
+    public ShapeColor secondaryShapeColor;
     public Color secondaryColor;
     public ShapeShadingType shapeShadingType;
     public StartAndEndPointMode startAndEndPointMode;
 
     public StateModelAdapter(ShapeType shapeType, ShapeColor primaryColor, ShapeColor secondaryColor, ShapeShadingType shapeShadingType, StartAndEndPointMode startAndEndPointMode) 
     {
-        this.shape = null;
         this.shapeType = shapeType;
+        this.primaryShapeColor = primaryColor;
         this.primaryColor = this.colorToObject(primaryColor);
+        this.secondaryShapeColor = secondaryColor;
         this.secondaryColor = this.colorToObject(secondaryColor);
         this.shapeShadingType = shapeShadingType;
         this.startAndEndPointMode = startAndEndPointMode;
@@ -62,21 +69,22 @@ public class StateModelAdapter {
     }
 
     private Shape shapeToObject(int mouseX, int mouseY, int endX, int endY) {
+        x = mouseX;
+        y = mouseY;
+        width = endX - mouseX;
+        height = endY - mouseY;
         Shape shape = null;
         switch (shapeType) {
             case RECTANGLE:
-                shape = new Rectangle(mouseX, mouseY, endX - mouseX, endY - mouseY);
-                break;
+                shape = new Rectangle(x, y, width, height);
             case ELLIPSE:
-                shape = new Ellipse2D.Double(mouseX, mouseY, endX - mouseX, endY - mouseY);
-                break;
+                shape = new Ellipse2D.Double(x, y, width, height);
             case TRIANGLE:
-                //return new Triangle(mouseX, mouseY, endX - mouseX, endY - mouseY);
+                //return new Triangle(x, y, endX - x, endY - y);
                 break;
             default:
                 // #TODO throw error
-                shape = new Rectangle(mouseX, mouseY, endX - mouseX, endY - mouseY);
-                break;
+                shape = new Rectangle(x, y, width, height);
         }
         return shape;
     }

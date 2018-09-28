@@ -56,13 +56,14 @@ public class PaintCanvas extends JPanel
         this.addMouseListener(mouseEventListener);
     }
 
-    public Shape getShapeFromBuffer(Point point) {
-        Shape _shape = null;
+    public StateModelAdapter getShapeFromBuffer(Point point) {
+        StateModelAdapter _shape = null;
         for (StateModelAdapter s: shapes)
         {
+            System.out.println("Looking for shape : " + s.shape + " " + s);
             if (s.shape.contains(point))
             {
-                _shape = s.shape;
+                _shape = s;
             }
         }
         return _shape;
@@ -92,6 +93,7 @@ public class PaintCanvas extends JPanel
         }
         for (StateModelAdapter s: allShapes)
         {
+            System.out.println("Drawing shape: " + s.shape + " " + s);
             if (s.shapeShadingType == ShapeShadingType.FILLED_IN)
             {
                 g2d.setPaint(s.primaryColor);
