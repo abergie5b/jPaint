@@ -60,7 +60,6 @@ public class PaintCanvas extends JPanel
         StateModelAdapter _shape = null;
         for (StateModelAdapter s: shapes)
         {
-            System.out.println("Looking for shape : " + s.shape + " " + s);
             if (s.shape.contains(point))
             {
                 _shape = s;
@@ -93,7 +92,7 @@ public class PaintCanvas extends JPanel
         }
         for (StateModelAdapter s: allShapes)
         {
-            System.out.println("Drawing shape: " + s.shape + " " + s);
+            System.out.println("Drawing shape: " + s.shape + " " + s.x + " " + s.y + " " + s.width + " " + s.height);
             if (s.shapeShadingType == ShapeShadingType.FILLED_IN)
             {
                 g2d.setPaint(s.primaryColor);

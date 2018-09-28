@@ -59,34 +59,46 @@ public class StateModelAdapter {
         this.secondaryColor = this.colorToObject(color);
     }
 
-    public void setShape(int mouseX, int mouseY, int endX, int endY) {
-        this.shape = shapeToObject(mouseX, mouseY, endX, endY);
+    public void setShape(int x, int y, int width, int height) {
+        this.shape = shapeToObject(x, y, width, height);
     }
 
-    public Shape createShape(int mouseX, int mouseY, int endX, int endY) {
-        Shape shape = shapeToObject(mouseX, mouseY, endX, endY);
+    public Shape createShape(int x, int y, int width, int height) {
+        Shape shape = shapeToObject(x, y, width, height);
         return shape;
     }
 
-    private Shape shapeToObject(int mouseX, int mouseY, int endX, int endY) {
-        x = mouseX;
-        y = mouseY;
-        width = endX - mouseX;
-        height = endY - mouseY;
-        Shape shape = null;
-        switch (shapeType) {
-            case RECTANGLE:
-                shape = new Rectangle(x, y, width, height);
+    private Shape shapeToObject(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = x;
+        this.width = width;
+        this.height = height;
+        Shape _shape = null;
+        switch (this.shapeType) 
+        {
             case ELLIPSE:
-                shape = new Ellipse2D.Double(x, y, width, height);
+            {
+                _shape = new Ellipse2D.Double(x, y, width, height);
+                break;
+            }
+            case RECTANGLE:
+            {
+                _shape = new Rectangle(x, y, width, height);
+                break;
+            }
             case TRIANGLE:
+            {
                 //return new Triangle(x, y, endX - x, endY - y);
                 break;
+            }
             default:
+            {
                 // #TODO throw error
-                shape = new Rectangle(x, y, width, height);
+                _shape = new Rectangle(x, y, width, height);
+                break;
+            }
         }
-        return shape;
+        return _shape;
     }
 
     private Color colorToObject(ShapeColor color) {
