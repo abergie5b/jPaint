@@ -2,8 +2,6 @@ package view.interfaces;
 
 import model.*;
 
-import controller.MouseEventListener;
-
 import view.gui.PaintCanvas;
 import view.EventName;
 

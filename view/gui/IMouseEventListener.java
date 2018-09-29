@@ -1,4 +1,4 @@
-package controller;
+package view.gui;
 
 import java.awt.event.*;
 

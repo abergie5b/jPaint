@@ -1,6 +1,6 @@
 package main;
 
-import controller.MouseEventListener;
+import view.gui.MouseEventListener;
 import controller.IJPaintController;
 import controller.JPaintController;
 import model.dialogs.DialogProvider;

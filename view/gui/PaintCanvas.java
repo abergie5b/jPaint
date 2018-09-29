@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import model.*;
-import controller.MouseEventListener;
+import view.gui.MouseEventListener;
 
 public class PaintCanvas extends JPanel 
 {
