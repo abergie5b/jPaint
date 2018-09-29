@@ -18,9 +18,12 @@ import java.lang.Math;
 public class MouseEventListener extends MouseInputAdapter implements IMouseEventListener {
     private int mouseX;
     private int mouseY;
+    private int moveX;
+    private int moveY;
     private final IApplicationState applicationState;
     private final IUiModule uiModule;
     private StateModelAdapter clickedShape;
+    private StateModelAdapter draggedShape;
 
     public MouseEventListener(IUiModule uiModule, IApplicationState applicationState) 
     { 
@@ -28,6 +31,8 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         this.applicationState = applicationState;
         this.mouseX = 0;
         this.mouseY = 0;
+        this.moveX = 0;
+        this.moveY = 0;
     } 
 
     @Override
@@ -36,6 +41,8 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         int startY = evt.getY();
         mouseX = startX;
         mouseY = startY;
+        moveX = startX;
+        moveY = startY;
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
         PaintCanvas canvas = uiModule.getCanvas();
         switch (mode)
@@ -95,7 +102,6 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
             {
                 if (clickedShape != null)
                 {
-                    System.out.println("Mouse dragged with shape: " + clickedShape.shape + " " + clickedShape.x + " " + clickedShape.y + " " + clickedShape.width + " " + clickedShape.height);
                     PaintCanvas canvas  = uiModule.getCanvas();
                     StateModelAdapter adapter = new StateModelAdapter(clickedShape.shapeType,
                                                                       clickedShape.primaryShapeColor,
@@ -103,7 +109,12 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
                                                                       clickedShape.shapeShadingType,
                                                                       mode
                     );
-                    adapter.setShape(Math.abs(endX - clickedShape.x) + clickedShape.x, Math.abs(endY - clickedShape.y) + clickedShape.y, clickedShape.width, clickedShape.height);
+                    adapter.setShape(clickedShape.x - (mouseX-moveX), 
+                                     clickedShape.y - (mouseY-moveY), 
+                                     clickedShape.width, 
+                                     clickedShape.height
+                    );
+                    draggedShape = adapter;
                     canvas.setTempShape(adapter);
                     canvas.repaint();
                 }
@@ -112,8 +123,8 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
             case SELECT:
                 break;
         }
-        //mouseX = endX;
-        //mouseY = endY;
+        moveX = endX;
+        moveY = endY;
     }
 
     @Override
@@ -154,12 +165,15 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
                 break;
             }
             case MOVE:
-                if (clickedShape != null)
+            {
+                if (draggedShape != null)
                 {
-                    canvas.addShapeAttribute(clickedShape);
+                    canvas.addShapeAttribute(draggedShape);
+                    canvas.removeShapeFromBuffer(clickedShape);
                 }
                 canvas.repaint();
                 break;
+            }
             case SELECT:
                 break;
         }

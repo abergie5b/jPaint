@@ -56,6 +56,17 @@ public class PaintCanvas extends JPanel
         this.addMouseListener(mouseEventListener);
     }
 
+    public void removeShapeFromBuffer(StateModelAdapter shape) {
+        for (int x=0; x<shapes.size(); x++)
+        {
+            StateModelAdapter s = shapes.get(x);
+            if (shape == s)
+            {
+                shapes.remove(x);
+            }
+        }
+    }
+
     public StateModelAdapter getShapeFromBuffer(Point point) {
         StateModelAdapter _shape = null;
         for (StateModelAdapter s: shapes)
