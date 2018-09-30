@@ -41,6 +41,7 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         int startX = evt.getX();
         int startY = evt.getY();
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
+        mouseEventController.printEvent("Pressed");
         switch (mode)
         {
             case DRAW:
@@ -60,6 +61,7 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         int endX = evt.getX();
         int endY = evt.getY();
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
+        mouseEventController.printEvent("Dragged");
         switch (mode) 
         {
             case DRAW:  
@@ -79,6 +81,7 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         int endX = evt.getX();
         int endY = evt.getY();
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
+        mouseEventController.printEvent("Release");
         switch (mode)
         {
             case DRAW:
