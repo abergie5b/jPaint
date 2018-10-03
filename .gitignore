@@ -1,6 +1,6 @@
-.class
-.swp
-.swo
+*.class
+*.swp
+*.swo
 .idea
 .iml
 tags

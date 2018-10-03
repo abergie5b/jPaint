@@ -45,13 +45,13 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         switch (mode)
         {
             case DRAW:
-                mouseEventController.mousePressedDraw(startX, startY);
+                mouseEventController.mousePressedDraw(evt);
                 break;
             case MOVE:
-                mouseEventController.mousePressedMove(evt.getPoint());
+                mouseEventController.mousePressedMove(evt);
                 break;
             case SELECT:
-                mouseEventController.mousePressedSelect(startX, startY);
+                mouseEventController.mousePressedSelect(evt);
                 break;
         }
     }
@@ -65,13 +65,13 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         switch (mode) 
         {
             case DRAW:  
-                mouseEventController.mouseDraggedDraw(endX, endY);
+                mouseEventController.mouseDraggedDraw(evt);
                 break;
             case MOVE:
-                mouseEventController.mouseDraggedMove(endX, endY);
+                mouseEventController.mouseDraggedMove(evt);
                 break;
             case SELECT:
-                mouseEventController.mouseDraggedSelect(endX, endY);
+                mouseEventController.mouseDraggedSelect(evt);
                 break;
         }
     }
@@ -85,13 +85,13 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
         switch (mode)
         {
             case DRAW:
-                mouseEventController.mouseReleasedDraw(endX, endY);
+                mouseEventController.mouseReleasedDraw(evt);
                 break;
             case MOVE:
-                mouseEventController.mouseReleasedMove(endX, endY);
+                mouseEventController.mouseReleasedMove(evt);
                 break;
             case SELECT:
-                mouseEventController.mouseReleasedSelect(endX, endY);
+                mouseEventController.mouseReleasedSelect(evt);
                 break;
         }
     }

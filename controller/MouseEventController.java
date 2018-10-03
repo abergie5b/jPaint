@@ -1,19 +1,17 @@
 package controller;
 
-import view.gui.PaintCanvas;
 import model.*;
 import model.interfaces.IApplicationState;
-
 import view.interfaces.IUiModule;
+import view.gui.PaintCanvas;
 
+import java.lang.Math;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.*;
-
-import javax.swing.*;
 import javax.swing.event.*;
-
-import java.lang.Math;
+import javax.swing.*;
+import java.util.ArrayList;
 
 public class MouseEventController implements IMouseEventController
 {
@@ -23,6 +21,7 @@ public class MouseEventController implements IMouseEventController
     private int moveY;
     private StateModelAdapter clickedShape;
     private StateModelAdapter draggedShape;
+    private ArrayList<StateModelAdapter> selectedShapes;
     private final IApplicationState applicationState;
     private final IUiModule uiModule;
     private final PaintCanvas canvas;
@@ -43,16 +42,28 @@ public class MouseEventController implements IMouseEventController
     }
 
     @Override
-    public void mousePressedDraw(int startX, int startY) {
+    public void mousePressedDraw(MouseEvent e) {
+        int startX = e.getX();
+        int startY = e.getY();
         mouseX = startX;
         mouseY = startY;
+        clickedShape = canvas.getShapeFromBuffer(e.getPoint());
     }
 
     @Override
-    public void mouseDraggedDraw(int endX, int endY) {
+    public void mouseDraggedDraw(MouseEvent e) {
+        int endX = e.getX();
+        int endY = e.getY();
+        ShapeColor primaryColor = applicationState.getActivePrimaryColor();
+        ShapeColor secondaryColor = applicationState.getActiveSecondaryColor();
+        if (SwingUtilities.isRightMouseButton(e))
+        {
+            secondaryColor = primaryColor;
+            primaryColor = applicationState.getActiveSecondaryColor();
+        }
         StateModelAdapter adapter = new StateModelAdapter(applicationState.getActiveShapeType(),
-                                                          applicationState.getActivePrimaryColor(),
-                                                          applicationState.getActiveSecondaryColor(),
+                                                          primaryColor,
+                                                          secondaryColor,
                                                           applicationState.getActiveShapeShadingType(),
                                                           StartAndEndPointMode.DRAW
         );
@@ -72,41 +83,24 @@ public class MouseEventController implements IMouseEventController
         }
         adapter.setShape(x, y, width, height);
         canvas.setTempShape(adapter);
+        this.draggedShape = adapter;
         canvas.repaint();
     }
 
     @Override
-    public void mouseReleasedDraw(int endX, int endY) {
-        StateModelAdapter adapter = new StateModelAdapter(applicationState.getActiveShapeType(),
-                                                          applicationState.getActivePrimaryColor(),
-                                                          applicationState.getActiveSecondaryColor(),
-                                                          applicationState.getActiveShapeShadingType(),
-                                                          StartAndEndPointMode.DRAW
-        );
-        int x = mouseX;
-        int y = mouseY;
-        int width = endX - mouseX;
-        int height = endY - mouseY;
-        if (width < 0)
-        {
-            x = endX;
-            width = Math.abs(width);
-        }
-        if (height < 0)
-        {
-            y = endY;
-            height = Math.abs(height);
-        }
-        adapter.setShape(x, y, width, height);
-        adapter.setShape(x, y, width, height);
-        canvas.addShapeAttribute(adapter);
+    public void mouseReleasedDraw(MouseEvent e) {
+        int endX = e.getX();
+        int endY = e.getY();
+        canvas.addShapeAttribute(this.draggedShape);
         canvas.repaint();
         mouseX = endX;
         mouseY = endY;
+        this.draggedShape = null;
     }
 
     @Override
-    public void mousePressedMove(Point point) {
+    public void mousePressedMove(MouseEvent e) {
+        Point point = e.getPoint();
         mouseX = point.x;
         mouseY = point.y;
         moveX = mouseX;
@@ -119,7 +113,9 @@ public class MouseEventController implements IMouseEventController
     }
 
     @Override
-    public void mouseDraggedMove(int endX, int endY) {
+    public void mouseDraggedMove(MouseEvent e) {
+        int endX = e.getX();
+        int endY = e.getY();
         if (clickedShape != null)
         {
             StateModelAdapter adapter = new StateModelAdapter(clickedShape.shapeType,
@@ -142,7 +138,9 @@ public class MouseEventController implements IMouseEventController
     }
 
     @Override
-    public void mouseReleasedMove(int endX, int endY) {
+    public void mouseReleasedMove(MouseEvent e) {
+        int endX = e.getX();
+        int endY = e.getY();
         if (draggedShape != null)
         {
             canvas.removeShapeFromBuffer(clickedShape);
@@ -156,23 +154,61 @@ public class MouseEventController implements IMouseEventController
 
 
     @Override
-    public void mousePressedSelect(int startX, int startY) {
+    public void mousePressedSelect(MouseEvent e) {
+        int startX = e.getX();
+        int startY = e.getY();
         mouseX = startX;
         mouseY = startY;
         moveX = startX;
         moveY = startY;
+        clickedShape = canvas.getShapeFromBuffer(e.getPoint());
+        if (clickedShape != null)
+        {
+            System.out.println("Found shape from buffer: " + clickedShape.shape + " " + clickedShape.x + " " + clickedShape.y + " " + clickedShape.width + " " + clickedShape.height);
+        }
+        canvas.repaint();
     }
 
     @Override
-    public void mouseDraggedSelect(int endX, int endY) {
+    public void mouseDraggedSelect(MouseEvent e) {
+        int endX = e.getX();
+        int endY = e.getY();
+        int x = mouseX;
+        int y = mouseY;
+        int width = endX - x;
+        int height = endY - y;
+        if (width < 0)
+        {
+            x = endX;
+            width = Math.abs(width);
+        }
+        if (height < 0)
+        {
+            y = endY;
+            height = Math.abs(height);
+        }
+        Rectangle selectionRectangle = new Rectangle(x, y, width, height);
+        selectedShapes = canvas.getShapesinSelection(selectionRectangle);
+        StateModelAdapter adapter = new StateModelAdapter(ShapeType.RECTANGLE,
+                                                          ShapeColor.BLACK,
+                                                          ShapeColor.BLACK,
+                                                          ShapeShadingType.OUTLINE,
+                                                          StartAndEndPointMode.SELECT);
+        adapter.setShape(x, y, width, height);
+        canvas.setTempShape(adapter);
+        canvas.repaint();
         moveX = endX;
         moveY = endY;
     }
 
     @Override
-    public void mouseReleasedSelect(int endX, int endY) {
+    public void mouseReleasedSelect(MouseEvent e) {
+        int endX = e.getX();
+        int endY = e.getY();
         mouseX = endX;
         mouseY = endY;
+        applicationState.setSelectedShapes(selectedShapes);
+        canvas.repaint();
     }
 }
 

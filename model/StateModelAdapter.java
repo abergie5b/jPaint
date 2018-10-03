@@ -32,6 +32,14 @@ public class StateModelAdapter {
         this.startAndEndPointMode = startAndEndPointMode;
     }
 
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
     public String getShapeName() {
         String name = this.shapeType.name();
         return name;
@@ -88,7 +96,12 @@ public class StateModelAdapter {
             }
             case TRIANGLE:
             {
-                //return new Triangle(x, y, endX - x, endY - y);
+                //_shape = new Polygon(new int[] {x, x+width, x-width}, 
+                //                     new int[] {y, y+height, y+height}, 
+                //                     3);
+                _shape = new Polygon(new int[] {x+width/2, x, x+width}, 
+                                     new int[] {y+height, y-height, y-height}, 
+                                     3);
                 break;
             }
             default:

@@ -27,11 +27,6 @@ public class Main {
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
 
-        //Graphics2D graphics2d = paintCanvas.getGraphics2D();
-        //graphics2d.setColor(Color.GREEN);
-        //graphics2d.fillRect(12, 13, 200, 400);
-        //graphics2d.setStroke(new BasicStroke(5));
-        //graphics2d.setColor(Color.BLUE);
-        //graphics2d.drawRect(12, 13, 200, 400);
+
     }
 }

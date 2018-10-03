@@ -10,14 +10,14 @@ import javax.swing.event.*;
 
 public interface IMouseEventController 
 {
-    void mousePressedDraw(int startX, int startY);
-    void mousePressedMove(Point point);
-    void mousePressedSelect(int startX, int startY);
-    void mouseDraggedDraw(int endX, int endY);
-    void mouseDraggedMove(int endX, int endY);
-    void mouseDraggedSelect(int endX, int endY);
-    void mouseReleasedDraw(int endX, int endY);
-    void mouseReleasedMove(int endX, int endY);
-    void mouseReleasedSelect(int endX, int endY);
+    void mousePressedDraw(MouseEvent evt);
+    void mousePressedMove(MouseEvent evt);
+    void mousePressedSelect(MouseEvent evt);
+    void mouseDraggedDraw(MouseEvent evt);
+    void mouseDraggedMove(MouseEvent evt);
+    void mouseDraggedSelect(MouseEvent evt);
+    void mouseReleasedDraw(MouseEvent evt);
+    void mouseReleasedMove(MouseEvent evt);
+    void mouseReleasedSelect(MouseEvent evt);
 }
 

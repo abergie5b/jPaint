@@ -1,14 +1,20 @@
 package model.interfaces;
 
-import model.ShapeColor;
-import model.ShapeShadingType;
-import model.ShapeType;
-import model.StartAndEndPointMode;
+import model.*;
+import java.util.ArrayList;
 
 public interface IApplicationState {
     void undo();
 
     void redo();
+
+    void delete();
+
+    void copy();
+
+    void paste();
+
+    void setSelectedShapes(ArrayList<StateModelAdapter> shapes);
 
     void setActiveShape();
 

@@ -1,15 +1,13 @@
 package model.persistence;
 
-import model.StateModelAdapter;
-import model.ShapeColor;
-import model.ShapeShadingType;
-import model.ShapeType;
-import model.StartAndEndPointMode;
+import model.*;
 import model.dialogs.DialogProvider;
 import model.interfaces.IApplicationState;
 import model.interfaces.IDialogProvider;
 import view.interfaces.IUiModule;
+import view.gui.PaintCanvas;
 
+import java.util.ArrayList;
 import java.io.Serializable;
 
 public class ApplicationState implements IApplicationState, Serializable 
@@ -24,11 +22,13 @@ public class ApplicationState implements IApplicationState, Serializable
     private ShapeShadingType activeShapeShadingType;
     private StartAndEndPointMode activeStartAndEndPointMode;
     private StateModelAdapter stateModel;
+    private ArrayList<StateModelAdapter> selectedShapes;
 
     public ApplicationState(IUiModule uiModule) 
     {
         this.uiModule = uiModule;
         this.dialogProvider = new DialogProvider(this);
+        this.selectedShapes = new ArrayList<StateModelAdapter>();
         setDefaults();
         stateModel = new StateModelAdapter(activeShapeType, 
                                            activePrimaryColor,
@@ -48,6 +48,37 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void redo() {
         uiModule.getCanvas().redo();
+    }
+
+    @Override
+    public void delete() {
+        uiModule.getCanvas().deleteShapes(selectedShapes);
+    }
+
+    @Override
+    public void copy() {
+    }
+
+    @Override
+    public void paste() {
+        PaintCanvas canvas = uiModule.getCanvas();
+        for (StateModelAdapter s: selectedShapes)
+        {
+            StateModelAdapter newShape = new StateModelAdapter(s.shapeType,
+                                                               s.primaryShapeColor,
+                                                               s.secondaryShapeColor,
+                                                               s.shapeShadingType,
+                                                               s.startAndEndPointMode
+                                                               );
+            newShape.setShape(0, 0, s.getWidth(), s.getHeight());
+            canvas.addShapeAttribute(newShape);
+        }
+        canvas.repaint();
+    }
+
+    @Override 
+    public void setSelectedShapes(ArrayList<StateModelAdapter> selection) {
+        this.selectedShapes = selection;
     }
 
     @Override
@@ -116,10 +147,10 @@ public class ApplicationState implements IApplicationState, Serializable
     }
 
     private void setDefaults() {
-        activeShapeType = ShapeType.ELLIPSE;
-        activePrimaryColor = ShapeColor.BLUE;
+        activeShapeType = ShapeType.TRIANGLE;
+        activePrimaryColor = ShapeColor.LIGHT_GRAY;
         activeSecondaryColor = ShapeColor.GREEN;
-        activeShapeShadingType = ShapeShadingType.FILLED_IN;
+        activeShapeShadingType = ShapeShadingType.OUTLINE_AND_FILLED_IN;
         activeStartAndEndPointMode = StartAndEndPointMode.DRAW;
     }
 }

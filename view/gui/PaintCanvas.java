@@ -25,16 +25,20 @@ public class PaintCanvas extends JPanel
         shapeHistory = new ArrayList<StateModelAdapter>();
     }
 
-    private int getNumberOfShapes() {
+    private int getNumberOfShapes() 
+    {
         return shapes.size();
     }
 
-    private int getNumberOfShapeHistory() {
+    private int getNumberOfShapeHistory() 
+    {
         return shapeHistory.size();
     }
 
-    public void redo() {
-        if (getNumberOfShapeHistory() > 0) {
+    public void redo() 
+    {
+        if (getNumberOfShapeHistory() > 0) 
+        {
             StateModelAdapter s = shapeHistory.get(getNumberOfShapeHistory() - 1);
             shapeHistory.remove(getNumberOfShapeHistory() - 1);
             shapes.add(s);
@@ -42,8 +46,10 @@ public class PaintCanvas extends JPanel
         repaint();
     }
 
-    public void undo() {
-        if (getNumberOfShapes() > 0) {
+    public void undo() 
+    {
+        if (getNumberOfShapes() > 0) 
+        {
             StateModelAdapter s = shapes.get(getNumberOfShapes() - 1);
             shapes.remove(getNumberOfShapes() - 1);
             shapeHistory.add(s);
@@ -51,23 +57,50 @@ public class PaintCanvas extends JPanel
         repaint();
     }
 
-    public void addMouseListeners(MouseEventListener mouseEventListener) {
+    public void addMouseListeners(MouseEventListener mouseEventListener) 
+    {
         this.addMouseMotionListener(mouseEventListener);
         this.addMouseListener(mouseEventListener);
     }
 
-    public void removeShapeFromBuffer(StateModelAdapter shape) {
+    public ArrayList<StateModelAdapter> getShapesinSelection(Rectangle selection)
+    {
+        ArrayList<StateModelAdapter> selectedShapes = new ArrayList<StateModelAdapter>();
+        for (StateModelAdapter s: shapes) 
+        {
+            if (s.shape.intersects(selection))
+            {
+                selectedShapes.add(s);
+                System.out.println("Selected " + s.shape);
+            }
+        }
+        return selectedShapes;
+    }
+
+    public void removeShapeFromBuffer(StateModelAdapter shape) 
+    {
         for (int x=0; x<shapes.size(); x++)
         {
             StateModelAdapter s = shapes.get(x);
             if (shape.equals(s))
             {
+                System.out.println("Removing shape: " + s);
                 shapes.remove(x);
             }
         }
     }
 
-    public StateModelAdapter getShapeFromBuffer(Point point) {
+    public void deleteShapes(ArrayList<StateModelAdapter> selectedShapes)
+    {
+        for (StateModelAdapter ss: selectedShapes)
+        {
+            this.removeShapeFromBuffer(ss);
+        }
+        this.repaint();
+    }
+
+    public StateModelAdapter getShapeFromBuffer(Point point) 
+    {
         StateModelAdapter _shape = null;
         for (StateModelAdapter s: shapes)
         {
@@ -79,22 +112,26 @@ public class PaintCanvas extends JPanel
         return _shape;
     }
 
-    public void addShapeAttribute(StateModelAdapter _shape) {
+    public void addShapeAttribute(StateModelAdapter _shape) 
+    {
         shapes.add(_shape);
     }
 
-    public void setTempShape(StateModelAdapter _shape) {
+    public void setTempShape(StateModelAdapter _shape) 
+    {
         this.mouseDraggedShape = _shape;
     }
 
-    private Graphics2D getGraphics2D() {
+    private Graphics2D getGraphics2D() 
+    {
         return (Graphics2D)getGraphics();
     }
     
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) 
+    {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setStroke(new BasicStroke(3));
+        g2d.setStroke(new BasicStroke(2));
 
         ArrayList<StateModelAdapter> allShapes = new ArrayList<StateModelAdapter> (shapes);
         if (this.mouseDraggedShape != null)
