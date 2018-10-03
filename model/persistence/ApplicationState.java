@@ -21,22 +21,22 @@ public class ApplicationState implements IApplicationState, Serializable
     private ShapeColor activeSecondaryColor;
     private ShapeShadingType activeShapeShadingType;
     private StartAndEndPointMode activeStartAndEndPointMode;
-    private StateModelAdapter stateModel;
-    private ArrayList<StateModelAdapter> selectedShapes;
+    private ShapeAdapter stateModel;
+    private ArrayList<ShapeAdapter> selectedShapes;
 
     public ApplicationState(IUiModule uiModule) 
     {
         this.uiModule = uiModule;
         this.dialogProvider = new DialogProvider(this);
-        this.selectedShapes = new ArrayList<StateModelAdapter>();
+        this.selectedShapes = new ArrayList<ShapeAdapter>();
         setDefaults();
-        stateModel = new StateModelAdapter(activeShapeType, 
+        stateModel = new ShapeAdapter(activeShapeType, 
                                            activePrimaryColor,
                                            activeSecondaryColor, 
                                            activeShapeShadingType,
                                            activeStartAndEndPointMode
                                            );
-        uiModule.setStateModel(stateModel);
+        uiModule.setShape(stateModel);
         uiModule.setStatusMenu();
     }
 
@@ -62,9 +62,9 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void paste() {
         PaintCanvas canvas = uiModule.getCanvas();
-        for (StateModelAdapter s: selectedShapes)
+        for (ShapeAdapter s: selectedShapes)
         {
-            StateModelAdapter newShape = new StateModelAdapter(s.shapeType,
+            ShapeAdapter newShape = new ShapeAdapter(s.shapeType,
                                                                s.primaryShapeColor,
                                                                s.secondaryShapeColor,
                                                                s.shapeShadingType,
@@ -77,7 +77,7 @@ public class ApplicationState implements IApplicationState, Serializable
     }
 
     @Override 
-    public void setSelectedShapes(ArrayList<StateModelAdapter> selection) {
+    public void setSelectedShapes(ArrayList<ShapeAdapter> selection) {
         this.selectedShapes = selection;
     }
 
@@ -85,7 +85,7 @@ public class ApplicationState implements IApplicationState, Serializable
     public void setActiveShape() {
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
         stateModel.setShapeType(activeShapeType);
-        uiModule.setStateModel(stateModel);
+        uiModule.setShape(stateModel);
         uiModule.setStatusMenu();
     }
 
@@ -93,7 +93,7 @@ public class ApplicationState implements IApplicationState, Serializable
     public void setActivePrimaryColor() {
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
         stateModel.updatePrimaryColor(activePrimaryColor);
-        uiModule.setStateModel(stateModel);
+        uiModule.setShape(stateModel);
         uiModule.setStatusMenu();
     }
 
@@ -101,7 +101,7 @@ public class ApplicationState implements IApplicationState, Serializable
     public void setActiveSecondaryColor() {
         activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
         stateModel.updateSecondaryColor(activeSecondaryColor);
-        uiModule.setStateModel(stateModel);
+        uiModule.setShape(stateModel);
         uiModule.setStatusMenu();
     }
 
@@ -109,7 +109,7 @@ public class ApplicationState implements IApplicationState, Serializable
     public void setActiveShadingType() {
         activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
         stateModel.shapeShadingType = activeShapeShadingType;
-        uiModule.setStateModel(stateModel);
+        uiModule.setShape(stateModel);
         uiModule.setStatusMenu();
     }
 
@@ -117,7 +117,7 @@ public class ApplicationState implements IApplicationState, Serializable
     public void setActiveStartAndEndPointMode() {
         activeStartAndEndPointMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog());
         stateModel.startAndEndPointMode = activeStartAndEndPointMode;
-        uiModule.setStateModel(stateModel);
+        uiModule.setShape(stateModel);
         uiModule.setStatusMenu();
     }
 

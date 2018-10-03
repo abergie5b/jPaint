@@ -21,8 +21,8 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
     private int moveY;
     private final IApplicationState applicationState;
     private final IUiModule uiModule;
-    private StateModelAdapter clickedShape;
-    private StateModelAdapter draggedShape;
+    private ShapeAdapter clickedShape;
+    private ShapeAdapter draggedShape;
     private MouseEventController mouseEventController;
 
     public MouseEventListener(IUiModule uiModule, IApplicationState applicationState) 

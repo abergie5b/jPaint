@@ -6,7 +6,7 @@ import java.awt.geom.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-public class StateModelAdapter {
+public class ShapeAdapter {
 
     public int x;
     public int y;
@@ -21,7 +21,7 @@ public class StateModelAdapter {
     public ShapeShadingType shapeShadingType;
     public StartAndEndPointMode startAndEndPointMode;
 
-    public StateModelAdapter(ShapeType shapeType, ShapeColor primaryColor, ShapeColor secondaryColor, ShapeShadingType shapeShadingType, StartAndEndPointMode startAndEndPointMode) 
+    public ShapeAdapter(ShapeType shapeType, ShapeColor primaryColor, ShapeColor secondaryColor, ShapeShadingType shapeShadingType, StartAndEndPointMode startAndEndPointMode) 
     {
         this.shapeType = shapeType;
         this.primaryShapeColor = primaryColor;

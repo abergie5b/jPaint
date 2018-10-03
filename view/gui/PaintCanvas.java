@@ -11,18 +11,18 @@ import view.gui.MouseEventListener;
 public class PaintCanvas extends JPanel 
 {
     private Shape shape;    
-    private StateModelAdapter mouseDraggedShape;    
+    private ShapeAdapter mouseDraggedShape;    
     private Color primaryColor;    
     private Color secondaryColor;    
     private ShapeShadingType shading;    
     private StartAndEndPointMode mode;    
-    private ArrayList<StateModelAdapter> shapes;
-    private ArrayList<StateModelAdapter> shapeHistory;
+    private ArrayList<ShapeAdapter> shapes;
+    private ArrayList<ShapeAdapter> shapeHistory;
 
     public PaintCanvas() 
     {
-        shapes = new ArrayList<StateModelAdapter>();
-        shapeHistory = new ArrayList<StateModelAdapter>();
+        shapes = new ArrayList<ShapeAdapter>();
+        shapeHistory = new ArrayList<ShapeAdapter>();
     }
 
     private int getNumberOfShapes() 
@@ -39,7 +39,7 @@ public class PaintCanvas extends JPanel
     {
         if (getNumberOfShapeHistory() > 0) 
         {
-            StateModelAdapter s = shapeHistory.get(getNumberOfShapeHistory() - 1);
+            ShapeAdapter s = shapeHistory.get(getNumberOfShapeHistory() - 1);
             shapeHistory.remove(getNumberOfShapeHistory() - 1);
             shapes.add(s);
         }
@@ -50,7 +50,7 @@ public class PaintCanvas extends JPanel
     {
         if (getNumberOfShapes() > 0) 
         {
-            StateModelAdapter s = shapes.get(getNumberOfShapes() - 1);
+            ShapeAdapter s = shapes.get(getNumberOfShapes() - 1);
             shapes.remove(getNumberOfShapes() - 1);
             shapeHistory.add(s);
         }
@@ -63,10 +63,10 @@ public class PaintCanvas extends JPanel
         this.addMouseListener(mouseEventListener);
     }
 
-    public ArrayList<StateModelAdapter> getShapesinSelection(Rectangle selection)
+    public ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection)
     {
-        ArrayList<StateModelAdapter> selectedShapes = new ArrayList<StateModelAdapter>();
-        for (StateModelAdapter s: shapes) 
+        ArrayList<ShapeAdapter> selectedShapes = new ArrayList<ShapeAdapter>();
+        for (ShapeAdapter s: shapes) 
         {
             if (s.shape.intersects(selection))
             {
@@ -77,11 +77,11 @@ public class PaintCanvas extends JPanel
         return selectedShapes;
     }
 
-    public void removeShapeFromBuffer(StateModelAdapter shape) 
+    public void removeShapeFromBuffer(ShapeAdapter shape) 
     {
         for (int x=0; x<shapes.size(); x++)
         {
-            StateModelAdapter s = shapes.get(x);
+            ShapeAdapter s = shapes.get(x);
             if (shape.equals(s))
             {
                 System.out.println("Removing shape: " + s);
@@ -90,19 +90,19 @@ public class PaintCanvas extends JPanel
         }
     }
 
-    public void deleteShapes(ArrayList<StateModelAdapter> selectedShapes)
+    public void deleteShapes(ArrayList<ShapeAdapter> selectedShapes)
     {
-        for (StateModelAdapter ss: selectedShapes)
+        for (ShapeAdapter ss: selectedShapes)
         {
             this.removeShapeFromBuffer(ss);
         }
         this.repaint();
     }
 
-    public StateModelAdapter getShapeFromBuffer(Point point) 
+    public ShapeAdapter getShapeFromBuffer(Point point) 
     {
-        StateModelAdapter _shape = null;
-        for (StateModelAdapter s: shapes)
+        ShapeAdapter _shape = null;
+        for (ShapeAdapter s: shapes)
         {
             if (s.shape.contains(point))
             {
@@ -112,12 +112,12 @@ public class PaintCanvas extends JPanel
         return _shape;
     }
 
-    public void addShapeAttribute(StateModelAdapter _shape) 
+    public void addShapeAttribute(ShapeAdapter _shape) 
     {
         shapes.add(_shape);
     }
 
-    public void setTempShape(StateModelAdapter _shape) 
+    public void setTempShape(ShapeAdapter _shape) 
     {
         this.mouseDraggedShape = _shape;
     }
@@ -133,12 +133,12 @@ public class PaintCanvas extends JPanel
         Graphics2D g2d = (Graphics2D)g;
         g2d.setStroke(new BasicStroke(2));
 
-        ArrayList<StateModelAdapter> allShapes = new ArrayList<StateModelAdapter> (shapes);
+        ArrayList<ShapeAdapter> allShapes = new ArrayList<ShapeAdapter> (shapes);
         if (this.mouseDraggedShape != null)
         {
             allShapes.add(this.mouseDraggedShape);
         }
-        for (StateModelAdapter s: allShapes)
+        for (ShapeAdapter s: allShapes)
         {
             System.out.println(allShapes.size() + " Drawing shape: " + s.shape + " X: " + s.x + " y: " + s.y + " w: " + s.width + " h: " + s.height);
             if (s.shapeShadingType == ShapeShadingType.FILLED_IN)

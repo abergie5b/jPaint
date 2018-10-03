@@ -31,7 +31,7 @@ public class GuiWindow extends JFrame implements IGuiWindow
     private JLabel label4 = new JLabel("");
     private JLabel label5 = new JLabel("");
     private PaintCanvas canvas;
-    private StateModelAdapter stateModel;
+    private ShapeAdapter stateModel;
 
     public GuiWindow(PaintCanvas canvas)
     {
@@ -54,7 +54,7 @@ public class GuiWindow extends JFrame implements IGuiWindow
 	}
 
     @Override
-    public void setStateModel(StateModelAdapter stateModel) {
+    public void setShape(ShapeAdapter stateModel) {
         this.stateModel = stateModel;
     }
 

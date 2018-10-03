@@ -34,8 +34,8 @@ public class Gui implements IUiModule
     }
 
     @Override
-    public void setStateModel(StateModelAdapter stateModel) {
-        gui.setStateModel(stateModel);
+    public void setShape(ShapeAdapter stateModel) {
+        gui.setShape(stateModel);
     }
     
 	@Override

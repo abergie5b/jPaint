@@ -12,6 +12,6 @@ import java.awt.*;
 public interface IGuiWindow {
     JButton getButton(EventName eventName);
     void setStatusMenu();
-    void setStateModel(StateModelAdapter shapeType);
+    void setShape(ShapeAdapter shapeType);
     PaintCanvas getCanvas();
 }

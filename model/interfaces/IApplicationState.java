@@ -14,7 +14,7 @@ public interface IApplicationState {
 
     void paste();
 
-    void setSelectedShapes(ArrayList<StateModelAdapter> shapes);
+    void setSelectedShapes(ArrayList<ShapeAdapter> shapes);
 
     void setActiveShape();
 

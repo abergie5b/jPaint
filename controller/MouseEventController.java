@@ -19,9 +19,9 @@ public class MouseEventController implements IMouseEventController
     private int mouseY;
     private int moveX;
     private int moveY;
-    private StateModelAdapter clickedShape;
-    private StateModelAdapter draggedShape;
-    private ArrayList<StateModelAdapter> selectedShapes;
+    private ShapeAdapter clickedShape;
+    private ShapeAdapter draggedShape;
+    private ArrayList<ShapeAdapter> selectedShapes;
     private final IApplicationState applicationState;
     private final IUiModule uiModule;
     private final PaintCanvas canvas;
@@ -61,7 +61,7 @@ public class MouseEventController implements IMouseEventController
             secondaryColor = primaryColor;
             primaryColor = applicationState.getActiveSecondaryColor();
         }
-        StateModelAdapter adapter = new StateModelAdapter(applicationState.getActiveShapeType(),
+        ShapeAdapter adapter = new ShapeAdapter(applicationState.getActiveShapeType(),
                                                           primaryColor,
                                                           secondaryColor,
                                                           applicationState.getActiveShapeShadingType(),
@@ -118,7 +118,7 @@ public class MouseEventController implements IMouseEventController
         int endY = e.getY();
         if (clickedShape != null)
         {
-            StateModelAdapter adapter = new StateModelAdapter(clickedShape.shapeType,
+            ShapeAdapter adapter = new ShapeAdapter(clickedShape.shapeType,
                                                               clickedShape.primaryShapeColor,
                                                               clickedShape.secondaryShapeColor,
                                                               clickedShape.shapeShadingType,
@@ -189,7 +189,7 @@ public class MouseEventController implements IMouseEventController
         }
         Rectangle selectionRectangle = new Rectangle(x, y, width, height);
         selectedShapes = canvas.getShapesinSelection(selectionRectangle);
-        StateModelAdapter adapter = new StateModelAdapter(ShapeType.RECTANGLE,
+        ShapeAdapter adapter = new ShapeAdapter(ShapeType.RECTANGLE,
                                                           ShapeColor.BLACK,
                                                           ShapeColor.BLACK,
                                                           ShapeShadingType.OUTLINE,
