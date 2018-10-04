@@ -10,18 +10,20 @@ import view.gui.PaintCanvas;
 import java.util.ArrayList;
 import java.io.Serializable;
 
+import java.awt.Point;
+
 public class ApplicationState implements IApplicationState, Serializable 
 {
     private static final long serialVersionUID = -5545483996576839007L;
     private final IUiModule uiModule;
     private final IDialogProvider dialogProvider;
 
+    private ShapeAdapter shapeAdapter;
     private ShapeType activeShapeType;
     private ShapeColor activePrimaryColor;
     private ShapeColor activeSecondaryColor;
     private ShapeShadingType activeShapeShadingType;
     private StartAndEndPointMode activeStartAndEndPointMode;
-    private ShapeAdapter stateModel;
     private ArrayList<ShapeAdapter> selectedShapes;
 
     public ApplicationState(IUiModule uiModule) 
@@ -30,13 +32,13 @@ public class ApplicationState implements IApplicationState, Serializable
         this.dialogProvider = new DialogProvider(this);
         this.selectedShapes = new ArrayList<ShapeAdapter>();
         setDefaults();
-        stateModel = new ShapeAdapter(activeShapeType, 
-                                           activePrimaryColor,
-                                           activeSecondaryColor, 
-                                           activeShapeShadingType,
-                                           activeStartAndEndPointMode
-                                           );
-        uiModule.setShape(stateModel);
+        shapeAdapter = new ShapeAdapter(activeShapeType, 
+                                        activePrimaryColor,
+                                        activeSecondaryColor, 
+                                        activeShapeShadingType,
+                                        activeStartAndEndPointMode
+        );
+        uiModule.setShape(shapeAdapter);
         uiModule.setStatusMenu();
     }
 
@@ -65,12 +67,12 @@ public class ApplicationState implements IApplicationState, Serializable
         for (ShapeAdapter s: selectedShapes)
         {
             ShapeAdapter newShape = new ShapeAdapter(s.shapeType,
-                                                               s.primaryShapeColor,
-                                                               s.secondaryShapeColor,
-                                                               s.shapeShadingType,
-                                                               s.startAndEndPointMode
-                                                               );
-            newShape.setShape(0, 0, s.getWidth(), s.getHeight());
+                                                     s.primaryShapeColor,
+                                                     s.secondaryShapeColor,
+                                                     s.shapeShadingType,
+                                                     s.startAndEndPointMode
+            );
+            newShape.setShape(new Dimensions(new Point(0, 0), new Point(s.getWidth(), s.getHeight())));
             canvas.addShapeAttribute(newShape);
         }
         canvas.repaint();
@@ -84,40 +86,40 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void setActiveShape() {
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
-        stateModel.setShapeType(activeShapeType);
-        uiModule.setShape(stateModel);
+        shapeAdapter.setShapeType(activeShapeType);
+        uiModule.setShape(shapeAdapter);
         uiModule.setStatusMenu();
     }
 
     @Override
     public void setActivePrimaryColor() {
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
-        stateModel.updatePrimaryColor(activePrimaryColor);
-        uiModule.setShape(stateModel);
+        shapeAdapter.updatePrimaryColor(activePrimaryColor);
+        uiModule.setShape(shapeAdapter);
         uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveSecondaryColor() {
         activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
-        stateModel.updateSecondaryColor(activeSecondaryColor);
-        uiModule.setShape(stateModel);
+        shapeAdapter.updateSecondaryColor(activeSecondaryColor);
+        uiModule.setShape(shapeAdapter);
         uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveShadingType() {
         activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
-        stateModel.shapeShadingType = activeShapeShadingType;
-        uiModule.setShape(stateModel);
+        shapeAdapter.shapeShadingType = activeShapeShadingType;
+        uiModule.setShape(shapeAdapter);
         uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveStartAndEndPointMode() {
         activeStartAndEndPointMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog());
-        stateModel.startAndEndPointMode = activeStartAndEndPointMode;
-        uiModule.setShape(stateModel);
+        shapeAdapter.startAndEndPointMode = activeStartAndEndPointMode;
+        uiModule.setShape(shapeAdapter);
         uiModule.setStatusMenu();
     }
 

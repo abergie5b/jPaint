@@ -2,44 +2,27 @@ package view.gui;
 
 import model.*;
 import model.interfaces.IApplicationState;
-
-import view.interfaces.IUiModule;
-
 import controller.MouseEventController;
 
-import java.awt.event.*;
-import java.awt.geom.*;
 import java.awt.*;
-
 import javax.swing.*;
+import java.awt.geom.*;
+import java.awt.event.*;
 import javax.swing.event.*;
 
 public class MouseEventListener extends MouseInputAdapter implements IMouseEventListener {
-    private int mouseX;
-    private int mouseY;
-    private int moveX;
-    private int moveY;
     private final IApplicationState applicationState;
-    private final IUiModule uiModule;
-    private ShapeAdapter clickedShape;
-    private ShapeAdapter draggedShape;
     private MouseEventController mouseEventController;
 
-    public MouseEventListener(IUiModule uiModule, IApplicationState applicationState) 
+    public MouseEventListener(PaintCanvas canvas, IApplicationState applicationState)
     { 
-        this.uiModule = uiModule;
+        this.mouseEventController = new MouseEventController(canvas, applicationState);
         this.applicationState = applicationState;
-        this.mouseEventController = new MouseEventController(uiModule, applicationState);
-        this.mouseX = 0;
-        this.mouseY = 0;
-        this.moveX = 0;
-        this.moveY = 0;
+        canvas.addMouseListeners(this);
     } 
 
     @Override
     public void mousePressed(MouseEvent evt) {
-        int startX = evt.getX();
-        int startY = evt.getY();
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
         mouseEventController.printEvent("Pressed");
         switch (mode)
@@ -58,8 +41,6 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
 
     @Override
     public void mouseDragged(MouseEvent evt) {
-        int endX = evt.getX();
-        int endY = evt.getY();
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
         mouseEventController.printEvent("Dragged");
         switch (mode) 
@@ -78,8 +59,6 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
 
     @Override
     public void mouseReleased(MouseEvent evt) {
-        int endX = evt.getX();
-        int endY = evt.getY();
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
         mouseEventController.printEvent("Release");
         switch (mode)

@@ -1,18 +1,15 @@
 package controller;
 
-import java.awt.event.*;
-import java.awt.geom.*;
-import java.awt.*;
-
-
-import javax.swing.event.*;
-import javax.swing.*;
-
-import model.interfaces.IApplicationState;
 import model.*;
-
+import model.interfaces.IApplicationState;
 import view.EventName;
 import view.interfaces.IUiModule;
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.geom.*;
+import java.awt.event.*;
+import javax.swing.event.*;
 
 public class JPaintController implements IJPaintController {
     private final IUiModule uiModule;

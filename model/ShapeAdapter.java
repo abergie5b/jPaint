@@ -67,20 +67,17 @@ public class ShapeAdapter {
         this.secondaryColor = this.colorToObject(color);
     }
 
-    public void setShape(int x, int y, int width, int height) {
-        this.shape = shapeToObject(x, y, width, height);
+    public void setShape(Dimensions dims)
+    {
+        this.shape = shapeToObject(dims);
     }
 
-    public Shape createShape(int x, int y, int width, int height) {
-        Shape shape = shapeToObject(x, y, width, height);
-        return shape;
-    }
-
-    private Shape shapeToObject(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    private Shape shapeToObject(Dimensions dims)
+    {
+        this.x = dims.xy.x;
+        this.y = dims.xy.y;
+        this.width = dims.wh.x;
+        this.height = dims.wh.y;
         Shape _shape = null;
         switch (this.shapeType) 
         {

@@ -2,213 +2,192 @@ package controller;
 
 import model.*;
 import model.interfaces.IApplicationState;
-import view.interfaces.IUiModule;
 import view.gui.PaintCanvas;
 
-import java.lang.Math;
-import java.awt.event.*;
-import java.awt.geom.*;
 import java.awt.*;
-import javax.swing.event.*;
 import javax.swing.*;
+import java.lang.Math;
+import java.awt.geom.*;
+import java.awt.event.*;
+import javax.swing.event.*;
 import java.util.ArrayList;
 
 public class MouseEventController implements IMouseEventController
 {
-    private int mouseX;
-    private int mouseY;
-    private int moveX;
-    private int moveY;
+    private final PaintCanvas canvas;
+    private final IApplicationState applicationState;
+    private Point mousePoint;
+    private Point mouseDragPoint;
+    
+    // TODO move these to ApplicationState
     private ShapeAdapter clickedShape;
     private ShapeAdapter draggedShape;
     private ArrayList<ShapeAdapter> selectedShapes;
-    private final IApplicationState applicationState;
-    private final IUiModule uiModule;
-    private final PaintCanvas canvas;
 
-    public MouseEventController(IUiModule uiModule, IApplicationState applicationState) 
+    public MouseEventController(PaintCanvas canvas, IApplicationState applicationState) 
     { 
-        this.uiModule = uiModule;
+        this.canvas = canvas;
         this.applicationState = applicationState;
-        this.canvas = uiModule.getCanvas();
-        this.mouseX = 0;
-        this.mouseY = 0;
-        this.moveX = 0;
-        this.moveY = 0;
+        this.mousePoint = new Point(0, 0);
+        this.mouseDragPoint = new Point(0, 0);
     } 
 
     public void printEvent(String event) {
-        System.out.println("MouseEvent(" + event + "):" + " mouseX " + mouseX +  " mouseY: " + mouseY + " moveX: " + moveX + " moveY: " + moveY);
+        System.out.println("MouseEvent(" + event + "):" + " mouseX " + mousePoint.x +  " mouseY: " + mousePoint.y + " mouseDragX: " + mouseDragPoint.x + " mouseDragY: " + mouseDragPoint.y);
+    }
+
+    private void setMousePosition(Point point)
+    {
+        this.mousePoint = point;
+    }
+
+    private void setMouseDraggedPosition(Point point)
+    {
+        this.mouseDragPoint = point;
+    }
+
+    private void setDraggedShape(ShapeAdapter shape)
+    {
+        // TODO move this to ApplicationState
+        this.draggedShape = shape;
+    }
+
+    private void resetDraggedShape()
+    {
+        // TODO move this to ApplicationState
+        this.draggedShape = null;
+    }
+
+    private void setClickedShape(Point point)
+    {
+        // TODO move this to ApplicationState
+        this.clickedShape = this.canvas.getShapeFromBuffer(point);
+        if (this.clickedShape != null)
+        {
+            System.out.println("Found shape from buffer: " + this.clickedShape.shape + " " + this.clickedShape.x + " " + this.clickedShape.y + " " + this.clickedShape.width + " " + this.clickedShape.height);
+        }
     }
 
     @Override
     public void mousePressedDraw(MouseEvent e) {
-        int startX = e.getX();
-        int startY = e.getY();
-        mouseX = startX;
-        mouseY = startY;
-        clickedShape = canvas.getShapeFromBuffer(e.getPoint());
+        this.setMousePosition(e.getPoint());
+        this.setMouseDraggedPosition(e.getPoint());
+        this.setClickedShape(e.getPoint());
     }
 
     @Override
     public void mouseDraggedDraw(MouseEvent e) {
-        int endX = e.getX();
-        int endY = e.getY();
-        ShapeColor primaryColor = applicationState.getActivePrimaryColor();
-        ShapeColor secondaryColor = applicationState.getActiveSecondaryColor();
+        ShapeColor primaryColor = this.applicationState.getActivePrimaryColor();
+        ShapeColor secondaryColor = this.applicationState.getActiveSecondaryColor();
         if (SwingUtilities.isRightMouseButton(e))
         {
             secondaryColor = primaryColor;
-            primaryColor = applicationState.getActiveSecondaryColor();
+            primaryColor = this.applicationState.getActiveSecondaryColor();
         }
-        ShapeAdapter adapter = new ShapeAdapter(applicationState.getActiveShapeType(),
-                                                          primaryColor,
-                                                          secondaryColor,
-                                                          applicationState.getActiveShapeShadingType(),
-                                                          StartAndEndPointMode.DRAW
+        ShapeAdapter adapter = new ShapeAdapter(this.applicationState.getActiveShapeType(),
+                                                primaryColor,
+                                                secondaryColor,
+                                                this.applicationState.getActiveShapeShadingType(),
+                                                StartAndEndPointMode.DRAW
         );
-        int x = mouseX;
-        int y = mouseY;
-        int width = endX - x;
-        int height = endY - y;
-        if (width < 0)
-        {
-            x = endX;
-            width = Math.abs(width);
-        }
-        if (height < 0)
-        {
-            y = endY;
-            height = Math.abs(height);
-        }
-        adapter.setShape(x, y, width, height);
-        canvas.setTempShape(adapter);
-        this.draggedShape = adapter;
-        canvas.repaint();
+        this.setMouseDraggedPosition(e.getPoint());
+        adapter.setShape(Geometry.getDimensionsWithInvert(this.mousePoint, this.mouseDragPoint));
+        this.canvas.setTempShape(adapter);
+        this.setDraggedShape(adapter);
+        this.canvas.repaint();
     }
 
     @Override
     public void mouseReleasedDraw(MouseEvent e) {
-        int endX = e.getX();
-        int endY = e.getY();
-        canvas.addShapeAttribute(this.draggedShape);
-        canvas.repaint();
-        mouseX = endX;
-        mouseY = endY;
-        this.draggedShape = null;
+        if (this.draggedShape != null)
+        {
+            this.canvas.addShapeAttribute(this.draggedShape);
+        }
+        this.canvas.repaint();
+        this.setMousePosition(e.getPoint());
+        
+        // TODO move this to ApplicationState
+        this.resetDraggedShape();
     }
 
     @Override
     public void mousePressedMove(MouseEvent e) {
         Point point = e.getPoint();
-        mouseX = point.x;
-        mouseY = point.y;
-        moveX = mouseX;
-        moveY = mouseY;
-        clickedShape = canvas.getShapeFromBuffer(point);
-        if (clickedShape != null)
-        {
-            System.out.println("Found shape from buffer: " + clickedShape.shape + " " + clickedShape.x + " " + clickedShape.y + " " + clickedShape.width + " " + clickedShape.height);
-        }
+        this.setMousePosition(e.getPoint());
+        this.setMouseDraggedPosition(e.getPoint());
+        
+        // TODO move this to ApplicationState
+        this.setClickedShape(point);
     }
 
     @Override
     public void mouseDraggedMove(MouseEvent e) {
-        int endX = e.getX();
-        int endY = e.getY();
-        if (clickedShape != null)
+        if (this.clickedShape != null)
         {
-            ShapeAdapter adapter = new ShapeAdapter(clickedShape.shapeType,
-                                                              clickedShape.primaryShapeColor,
-                                                              clickedShape.secondaryShapeColor,
-                                                              clickedShape.shapeShadingType,
-                                                              StartAndEndPointMode.MOVE);
-            int deltaX = mouseX - moveX;
-            int deltaY = mouseY - moveY;
-            adapter.setShape(clickedShape.x - deltaX,
-                             clickedShape.y - deltaY,
-                             clickedShape.width, 
-                             clickedShape.height);
-            draggedShape = adapter;
-            canvas.setTempShape(adapter);
-            canvas.repaint();
+            ShapeAdapter adapter = new ShapeAdapter(this.clickedShape.shapeType,
+                                                    this.clickedShape.primaryShapeColor,
+                                                    this.clickedShape.secondaryShapeColor,
+                                                    this.clickedShape.shapeShadingType,
+                                                    StartAndEndPointMode.MOVE);
+            int deltaX = this.mousePoint.x - this.mouseDragPoint.x;
+            int deltaY = this.mousePoint.y - this.mouseDragPoint.y;
+            adapter.setShape(new Dimensions(new Point(this.clickedShape.x - deltaX, this.clickedShape.y - deltaY),
+                                            new Point(this.clickedShape.width, this.clickedShape.height))
+            );
+            this.setDraggedShape(adapter);
+            this.canvas.setTempShape(adapter);
+            this.canvas.repaint();
         }
-        moveX = endX;
-        moveY = endY;
+        this.setMouseDraggedPosition(e.getPoint());
     }
 
     @Override
     public void mouseReleasedMove(MouseEvent e) {
-        int endX = e.getX();
-        int endY = e.getY();
-        if (draggedShape != null)
+        if (this.draggedShape != null && this.clickedShape != null)
         {
-            canvas.removeShapeFromBuffer(clickedShape);
-            canvas.addShapeAttribute(draggedShape);
+            this.canvas.removeShapeFromBuffer(this.clickedShape);
+            this.canvas.addShapeAttribute(this.draggedShape);
         }
-        canvas.repaint();
-        mouseX = endX;
-        mouseY = endY;
-        draggedShape = null;
+        this.canvas.repaint();
+        this.setMousePosition(e.getPoint());
+        
+        // TODO move this to ApplicationState
+        this.resetDraggedShape();
     }
-
 
     @Override
     public void mousePressedSelect(MouseEvent e) {
-        int startX = e.getX();
-        int startY = e.getY();
-        mouseX = startX;
-        mouseY = startY;
-        moveX = startX;
-        moveY = startY;
-        clickedShape = canvas.getShapeFromBuffer(e.getPoint());
-        if (clickedShape != null)
-        {
-            System.out.println("Found shape from buffer: " + clickedShape.shape + " " + clickedShape.x + " " + clickedShape.y + " " + clickedShape.width + " " + clickedShape.height);
-        }
-        canvas.repaint();
+        this.setMousePosition(e.getPoint());
+        this.setMouseDraggedPosition(e.getPoint());
+        
+        // TODO move this to ApplicationState
+        this.setClickedShape(e.getPoint());
+        this.canvas.repaint();
     }
 
     @Override
     public void mouseDraggedSelect(MouseEvent e) {
-        int endX = e.getX();
-        int endY = e.getY();
-        int x = mouseX;
-        int y = mouseY;
-        int width = endX - x;
-        int height = endY - y;
-        if (width < 0)
-        {
-            x = endX;
-            width = Math.abs(width);
-        }
-        if (height < 0)
-        {
-            y = endY;
-            height = Math.abs(height);
-        }
-        Rectangle selectionRectangle = new Rectangle(x, y, width, height);
-        selectedShapes = canvas.getShapesinSelection(selectionRectangle);
+        Dimensions dims = Geometry.getDimensionsWithInvert(this.mousePoint, this.mouseDragPoint);
+        Rectangle selectionRectangle = new Rectangle(dims.xy.x, dims.xy.y, dims.wh.x, dims.wh.y);
+        this.selectedShapes = this.canvas.getShapesinSelection(selectionRectangle);
         ShapeAdapter adapter = new ShapeAdapter(ShapeType.RECTANGLE,
-                                                          ShapeColor.BLACK,
-                                                          ShapeColor.BLACK,
-                                                          ShapeShadingType.OUTLINE,
-                                                          StartAndEndPointMode.SELECT);
-        adapter.setShape(x, y, width, height);
-        canvas.setTempShape(adapter);
-        canvas.repaint();
-        moveX = endX;
-        moveY = endY;
+                                                ShapeColor.BLACK,
+                                                ShapeColor.BLACK,
+                                                ShapeShadingType.OUTLINE,
+                                                StartAndEndPointMode.SELECT);
+        adapter.setShape(dims);
+        this.setMouseDraggedPosition(e.getPoint());
+
+        // TODO move this to ApplicationState
+        this.canvas.setTempShape(adapter);
+        this.canvas.repaint();
     }
 
     @Override
     public void mouseReleasedSelect(MouseEvent e) {
-        int endX = e.getX();
-        int endY = e.getY();
-        mouseX = endX;
-        mouseY = endY;
-        applicationState.setSelectedShapes(selectedShapes);
-        canvas.repaint();
+        this.setMousePosition(e.getPoint());
+        this.applicationState.setSelectedShapes(this.selectedShapes);
+        this.canvas.repaint();
     }
 }
 

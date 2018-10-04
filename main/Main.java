@@ -1,6 +1,7 @@
 package main;
 
 import view.gui.MouseEventListener;
+import view.gui.IMouseEventListener;
 import controller.IJPaintController;
 import controller.JPaintController;
 import model.dialogs.DialogProvider;
@@ -12,21 +13,14 @@ import view.gui.PaintCanvas;
 import view.interfaces.IGuiWindow;
 import view.interfaces.IUiModule;
 
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 public class Main {
     public static void main(String[] args){
         PaintCanvas paintCanvas = new PaintCanvas();
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
-        MouseEventListener mouseEventListener = new MouseEventListener(uiModule, appState);
-        paintCanvas.addMouseListeners(mouseEventListener);
+        IMouseEventListener mouseEventListener = new MouseEventListener(paintCanvas, appState);
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
-
-
     }
 }
