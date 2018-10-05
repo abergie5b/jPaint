@@ -2,7 +2,7 @@ package view.gui;
 
 import model.*;
 import model.interfaces.IApplicationState;
-import controller.IMouseEventController;
+import controller.IMouseEventCanvasController;
 
 import java.awt.*;
 import javax.swing.*;
@@ -12,9 +12,9 @@ import javax.swing.event.*;
 
 public class MouseEventListener extends MouseInputAdapter implements IMouseEventListener {
     private final IApplicationState applicationState;
-    private final IMouseEventController mouseEventController;
+    private final IMouseEventCanvasController mouseEventController;
 
-    public MouseEventListener(IMouseEventController mouseEventController, IApplicationState applicationState)
+    public MouseEventListener(IMouseEventCanvasController mouseEventController, IApplicationState applicationState)
     { 
         this.mouseEventController = mouseEventController;
         this.applicationState = applicationState;

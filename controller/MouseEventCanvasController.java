@@ -11,13 +11,13 @@ import java.awt.event.*;
 import javax.swing.event.*;
 import java.util.ArrayList;
 
-public class MouseEventController implements IMouseEventController
+public class MouseEventCanvasController implements IMouseEventCanvasController
 {
     private final IApplicationState appState;
     private Point mousePoint;
     private Point mouseDragPoint;
     
-    public MouseEventController(IApplicationState appState) 
+    public MouseEventCanvasController(IApplicationState appState) 
     { 
         this.appState = appState;
         this.mousePoint = new Point(0, 0);

@@ -53,8 +53,8 @@ LIGHT_GRAY	../../model/ShapeColor.java	/^    LIGHT_GRAY,$/;"	e	enum:ShapeColor	f
 MAGENTA	../../model/ShapeColor.java	/^    MAGENTA,$/;"	e	enum:ShapeColor	file:
 MOVE	../../model/StartAndEndPointMode.java	/^    MOVE$/;"	e	enum:StartAndEndPointMode	file:
 Main	../../main/Main.java	/^public class Main {$/;"	c
-MouseEventController	../../controller/MouseEventController.java	/^    public MouseEventController(IUiModule uiModule, IApplicationState applicationState) $/;"	m	class:MouseEventController
-MouseEventController	../../controller/MouseEventController.java	/^public class MouseEventController $/;"	c
+MouseEventCanvasController	../../controller/MouseEventCanvasController.java	/^    public MouseEventCanvasController(IUiModule uiModule, IApplicationState applicationState) $/;"	m	class:MouseEventCanvasController
+MouseEventCanvasController	../../controller/MouseEventCanvasController.java	/^public class MouseEventCanvasController $/;"	c
 MouseEventListener	../../view/gui/MouseEventListener.java	/^    public MouseEventListener(IUiModule uiModule, IApplicationState applicationState) $/;"	m	class:MouseEventListener
 MouseEventListener	../../view/gui/MouseEventListener.java	/^public class MouseEventListener extends MouseInputAdapter implements IMouseEventListener {$/;"	c
 ORANGE	../../model/ShapeColor.java	/^    ORANGE,$/;"	e	enum:ShapeColor	file:
@@ -91,7 +91,7 @@ addMouseListeners	../../view/gui/PaintCanvas.java	/^    public void addMouseList
 addShapeAttribute	../../view/gui/PaintCanvas.java	/^    public void addShapeAttribute(ShapeAdapter _shape) {$/;"	m	class:PaintCanvas
 addShapeAttribute	../../view/gui/PaintCanvasTest.java	/^    void addShapeAttribute() {$/;"	m	class:PaintCanvasTest
 applicationState	../../controller/JPaintController.java	/^    private final IApplicationState applicationState;$/;"	f	class:JPaintController	file:
-applicationState	../../controller/MouseEventController.java	/^    private final IApplicationState applicationState;$/;"	f	class:MouseEventController	file:
+applicationState	../../controller/MouseEventCanvasController.java	/^    private final IApplicationState applicationState;$/;"	f	class:MouseEventCanvasController	file:
 applicationState	../../model/dialogs/ChoosePrimaryColorDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChoosePrimaryColorDialog	file:
 applicationState	../../model/dialogs/ChooseSecondaryColorDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseSecondaryColorDialog	file:
 applicationState	../../model/dialogs/ChooseShadingTypeDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseShadingTypeDialog	file:
@@ -99,19 +99,19 @@ applicationState	../../model/dialogs/ChooseShapeDialog.java	/^    private final 
 applicationState	../../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseStartAndEndPointModeDialog	file:
 applicationState	../../model/dialogs/DialogProvider.java	/^    private final IApplicationState applicationState;$/;"	f	class:DialogProvider	file:
 applicationState	../../view/gui/MouseEventListener.java	/^    private final IApplicationState applicationState;$/;"	f	class:MouseEventListener	file:
-canvas	../../controller/MouseEventController.java	/^    private final PaintCanvas canvas;$/;"	f	class:MouseEventController	file:
+canvas	../../controller/MouseEventCanvasController.java	/^    private final PaintCanvas canvas;$/;"	f	class:MouseEventCanvasController	file:
 canvas	../../view/gui/GuiWindow.java	/^    private PaintCanvas canvas;$/;"	f	class:GuiWindow	file:
 choosePrimaryColorDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeColor> choosePrimaryColorDialog;$/;"	f	class:DialogProvider	file:
 chooseSecondaryColorDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeColor> chooseSecondaryColorDialog;$/;"	f	class:DialogProvider	file:
 chooseShadingTypeDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeShadingType> chooseShadingTypeDialog;$/;"	f	class:DialogProvider	file:
 chooseShapeDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeType> chooseShapeDialog;$/;"	f	class:DialogProvider	file:
 chooseStartAndEndPointModeDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<StartAndEndPointMode> chooseStartAndEndPointModeDialog;$/;"	f	class:DialogProvider	file:
-clickedShape	../../controller/MouseEventController.java	/^    private ShapeAdapter clickedShape;$/;"	f	class:MouseEventController	file:
+clickedShape	../../controller/MouseEventCanvasController.java	/^    private ShapeAdapter clickedShape;$/;"	f	class:MouseEventCanvasController	file:
 clickedShape	../../view/gui/MouseEventListener.java	/^    private ShapeAdapter clickedShape;$/;"	f	class:MouseEventListener	file:
 colorToObject	../../model/ShapeAdapter.java	/^    private Color colorToObject(ShapeColor color) {$/;"	m	class:ShapeAdapter	file:
 controller	../../controller/IJPaintController.java	/^package controller;$/;"	p
 controller	../../controller/JPaintController.java	/^package controller;$/;"	p
-controller	../../controller/MouseEventController.java	/^package controller;$/;"	p
+controller	../../controller/MouseEventCanvasController.java	/^package controller;$/;"	p
 controller	../../view/gui/IMouseEventListener.java	/^package controller;$/;"	p
 createBackgroundPanel	../../view/gui/GuiWindow.java	/^    private JPanel createBackgroundPanel() {$/;"	m	class:GuiWindow	file:
 createButton	../../view/gui/GuiWindow.java	/^	private JButton createButton(EventName eventName) {$/;"	m	class:GuiWindow	file:
@@ -127,7 +127,7 @@ defaultHeight	../../view/gui/GuiWindow.java	/^    private final int defaultHeigh
 defaultTitle	../../view/gui/GuiWindow.java	/^    private final String defaultTitle = "~JPaint~";$/;"	f	class:GuiWindow	file:
 defaultWidth	../../view/gui/GuiWindow.java	/^    private final int defaultWidth = 1080;$/;"	f	class:GuiWindow	file:
 dialogProvider	../../model/persistence/ApplicationState.java	/^    private final IDialogProvider dialogProvider;$/;"	f	class:ApplicationState	file:
-draggedShape	../../controller/MouseEventController.java	/^    private ShapeAdapter draggedShape;$/;"	f	class:MouseEventController	file:
+draggedShape	../../controller/MouseEventCanvasController.java	/^    private ShapeAdapter draggedShape;$/;"	f	class:MouseEventCanvasController	file:
 draggedShape	../../view/gui/MouseEventListener.java	/^    private ShapeAdapter draggedShape;$/;"	f	class:MouseEventListener	file:
 eventButtons	../../view/gui/GuiWindow.java	/^    private final Map<EventName, JButton> eventButtons = new HashMap<>();$/;"	f	class:GuiWindow	file:
 getActivePrimaryColor	../../model/interfaces/IApplicationState.java	/^    ShapeColor getActivePrimaryColor();$/;"	m	interface:IApplicationState
@@ -215,28 +215,28 @@ model.interfaces	../../model/interfaces/IDialogProvider.java	/^package model.int
 model.persistence	../../model/persistence/ApplicationState.java	/^package model.persistence;$/;"	p
 mouseDragged	../../view/gui/IMouseEventListener.java	/^    void mouseDragged(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mouseDragged	../../view/gui/MouseEventListener.java	/^    public void mouseDragged(MouseEvent evt) {$/;"	m	class:MouseEventListener
-mouseDraggedDraw	../../controller/MouseEventController.java	/^    public void mouseDraggedDraw(int endX, int endY) {$/;"	m	class:MouseEventController
-mouseDraggedMove	../../controller/MouseEventController.java	/^    public void mouseDraggedMove(int endX, int endY) {$/;"	m	class:MouseEventController
-mouseDraggedSelect	../../controller/MouseEventController.java	/^    public void mouseDraggedSelect(int endX, int endY) {$/;"	m	class:MouseEventController
+mouseDraggedDraw	../../controller/MouseEventCanvasController.java	/^    public void mouseDraggedDraw(int endX, int endY) {$/;"	m	class:MouseEventCanvasController
+mouseDraggedMove	../../controller/MouseEventCanvasController.java	/^    public void mouseDraggedMove(int endX, int endY) {$/;"	m	class:MouseEventCanvasController
+mouseDraggedSelect	../../controller/MouseEventCanvasController.java	/^    public void mouseDraggedSelect(int endX, int endY) {$/;"	m	class:MouseEventCanvasController
 mouseDraggedShape	../../view/gui/PaintCanvas.java	/^    private ShapeAdapter mouseDraggedShape;    $/;"	f	class:PaintCanvas	file:
-mouseEventController	../../view/gui/MouseEventListener.java	/^    private MouseEventController mouseEventController;$/;"	f	class:MouseEventListener	file:
+mouseEventController	../../view/gui/MouseEventListener.java	/^    private MouseEventCanvasController mouseEventController;$/;"	f	class:MouseEventListener	file:
 mousePressed	../../view/gui/IMouseEventListener.java	/^    void mousePressed(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mousePressed	../../view/gui/MouseEventListener.java	/^    public void mousePressed(MouseEvent evt) {$/;"	m	class:MouseEventListener
-mousePressedDraw	../../controller/MouseEventController.java	/^    public void mousePressedDraw(int startX, int startY) {$/;"	m	class:MouseEventController
-mousePressedMove	../../controller/MouseEventController.java	/^    public void mousePressedMove(Point point) {$/;"	m	class:MouseEventController
-mousePressedSelect	../../controller/MouseEventController.java	/^    public void mousePressedSelect(int startX, int startY) {$/;"	m	class:MouseEventController
+mousePressedDraw	../../controller/MouseEventCanvasController.java	/^    public void mousePressedDraw(int startX, int startY) {$/;"	m	class:MouseEventCanvasController
+mousePressedMove	../../controller/MouseEventCanvasController.java	/^    public void mousePressedMove(Point point) {$/;"	m	class:MouseEventCanvasController
+mousePressedSelect	../../controller/MouseEventCanvasController.java	/^    public void mousePressedSelect(int startX, int startY) {$/;"	m	class:MouseEventCanvasController
 mouseReleased	../../view/gui/IMouseEventListener.java	/^    void mouseReleased(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mouseReleased	../../view/gui/MouseEventListener.java	/^    public void mouseReleased(MouseEvent evt) {$/;"	m	class:MouseEventListener
-mouseReleasedDraw	../../controller/MouseEventController.java	/^    public void mouseReleasedDraw(int endX, int endY) {$/;"	m	class:MouseEventController
-mouseReleasedMove	../../controller/MouseEventController.java	/^    public void mouseReleasedMove(int endX, int endY) {$/;"	m	class:MouseEventController
-mouseReleasedSelect	../../controller/MouseEventController.java	/^    public void mouseReleasedSelect(int endX, int endY) {$/;"	m	class:MouseEventController
-mouseX	../../controller/MouseEventController.java	/^    private int mouseX;$/;"	f	class:MouseEventController	file:
+mouseReleasedDraw	../../controller/MouseEventCanvasController.java	/^    public void mouseReleasedDraw(int endX, int endY) {$/;"	m	class:MouseEventCanvasController
+mouseReleasedMove	../../controller/MouseEventCanvasController.java	/^    public void mouseReleasedMove(int endX, int endY) {$/;"	m	class:MouseEventCanvasController
+mouseReleasedSelect	../../controller/MouseEventCanvasController.java	/^    public void mouseReleasedSelect(int endX, int endY) {$/;"	m	class:MouseEventCanvasController
+mouseX	../../controller/MouseEventCanvasController.java	/^    private int mouseX;$/;"	f	class:MouseEventCanvasController	file:
 mouseX	../../view/gui/MouseEventListener.java	/^    private int mouseX;$/;"	f	class:MouseEventListener	file:
-mouseY	../../controller/MouseEventController.java	/^    private int mouseY;$/;"	f	class:MouseEventController	file:
+mouseY	../../controller/MouseEventCanvasController.java	/^    private int mouseY;$/;"	f	class:MouseEventCanvasController	file:
 mouseY	../../view/gui/MouseEventListener.java	/^    private int mouseY;$/;"	f	class:MouseEventListener	file:
-moveX	../../controller/MouseEventController.java	/^    private int moveX;$/;"	f	class:MouseEventController	file:
+moveX	../../controller/MouseEventCanvasController.java	/^    private int moveX;$/;"	f	class:MouseEventCanvasController	file:
 moveX	../../view/gui/MouseEventListener.java	/^    private int moveX;$/;"	f	class:MouseEventListener	file:
-moveY	../../controller/MouseEventController.java	/^    private int moveY;$/;"	f	class:MouseEventController	file:
+moveY	../../controller/MouseEventCanvasController.java	/^    private int moveY;$/;"	f	class:MouseEventCanvasController	file:
 moveY	../../view/gui/MouseEventListener.java	/^    private int moveY;$/;"	f	class:MouseEventListener	file:
 paintComponent	../../view/gui/PaintCanvas.java	/^    public void paintComponent(Graphics g) {$/;"	m	class:PaintCanvas
 primaryColor	../../model/ShapeAdapter.java	/^    public Color primaryColor;$/;"	f	class:ShapeAdapter
@@ -291,7 +291,7 @@ startAndEndPointMode	../../model/ShapeAdapter.java	/^    public StartAndEndPoint
 stateModel	../../model/persistence/ApplicationState.java	/^    private ShapeAdapter stateModel;$/;"	f	class:ApplicationState	file:
 stateModel	../../view/gui/GuiWindow.java	/^    private ShapeAdapter stateModel;$/;"	f	class:GuiWindow	file:
 uiModule	../../controller/JPaintController.java	/^    private final IUiModule uiModule;$/;"	f	class:JPaintController	file:
-uiModule	../../controller/MouseEventController.java	/^    private final IUiModule uiModule;$/;"	f	class:MouseEventController	file:
+uiModule	../../controller/MouseEventCanvasController.java	/^    private final IUiModule uiModule;$/;"	f	class:MouseEventCanvasController	file:
 uiModule	../../model/persistence/ApplicationState.java	/^    private final IUiModule uiModule;$/;"	f	class:ApplicationState	file:
 uiModule	../../view/gui/MouseEventListener.java	/^    private final IUiModule uiModule;$/;"	f	class:MouseEventListener	file:
 undo	../../model/interfaces/IApplicationState.java	/^    void undo();$/;"	m	interface:IApplicationState

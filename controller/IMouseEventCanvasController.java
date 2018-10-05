@@ -2,7 +2,7 @@ package controller;
 
 import java.awt.event.*;
 
-public interface IMouseEventController 
+public interface IMouseEventCanvasController 
 {
     void printEvent(String eventName);
     void mousePressedDraw(MouseEvent evt);
