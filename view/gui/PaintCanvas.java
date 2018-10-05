@@ -1,12 +1,11 @@
 package view.gui;
 
-import javax.swing.JPanel;
-import java.awt.*;
-
-import java.util.ArrayList;
-
 import model.*;
 import view.gui.MouseEventListener;
+
+import java.awt.*;
+import javax.swing.JPanel;
+import java.util.ArrayList;
 
 public class PaintCanvas extends JPanel 
 {
@@ -16,7 +15,7 @@ public class PaintCanvas extends JPanel
     private Color secondaryColor;    
     private ShapeShadingType shading;    
     private StartAndEndPointMode mode;    
-    public ArrayList<ShapeAdapter> shapes;
+    public ArrayList<ShapeAdapter> shapes; // TODO this shouldt be public
     private ArrayList<ShapeAdapter> shapeHistory;
 
     public PaintCanvas() 
@@ -37,6 +36,7 @@ public class PaintCanvas extends JPanel
 
     public void redo() 
     {
+        // TODO implement Command Pattern
         if (getNumberOfShapeHistory() > 0) 
         {
             ShapeAdapter s = shapeHistory.get(getNumberOfShapeHistory() - 1);
@@ -45,9 +45,9 @@ public class PaintCanvas extends JPanel
         }
         repaint();
     }
-
     public void undo() 
     {
+        // TODO implement Command Pattern
         if (getNumberOfShapes() > 0) 
         {
             ShapeAdapter s = shapes.get(getNumberOfShapes() - 1);
@@ -55,12 +55,6 @@ public class PaintCanvas extends JPanel
             shapeHistory.add(s);
         }
         repaint();
-    }
-
-    public void addMouseListeners(MouseEventListener mouseEventListener) 
-    {
-        this.addMouseMotionListener(mouseEventListener);
-        this.addMouseListener(mouseEventListener);
     }
 
     public ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection)
@@ -117,7 +111,7 @@ public class PaintCanvas extends JPanel
         shapes.add(_shape);
     }
 
-    public void setTempShape(ShapeAdapter _shape) 
+    public void setMouseDraggedShape(ShapeAdapter _shape) 
     {
         this.mouseDraggedShape = _shape;
     }
@@ -141,22 +135,23 @@ public class PaintCanvas extends JPanel
         for (ShapeAdapter s: allShapes)
         {
             System.out.println(allShapes.size() + " Drawing shape: " + s.shape + " X: " + s.x + " y: " + s.y + " w: " + s.width + " h: " + s.height);
-            if (s.shapeShadingType == ShapeShadingType.FILLED_IN)
+            IPaintStrategy strategy = null;
+            switch (s.shapeShadingType)
             {
-                g2d.setPaint(s.primaryColor);
-                g2d.fill(s.shape);
+                case FILLED_IN:
+                    strategy = new FilledInPaintStrategy(g2d, s);
+                    break;
+                case OUTLINE:
+                    strategy = new OutlinePaintStrategy(g2d, s);
+                    break;
+                case OUTLINE_AND_FILLED_IN:
+                    strategy = new OutlineAndFilledInPaintStrategy(g2d, s);
+                    break;
             }
-            else if (s.shapeShadingType == ShapeShadingType.OUTLINE)
+            if (strategy != null)
             {
-                g2d.setPaint(s.secondaryColor);
+                strategy.execute();
             }
-            else if (s.shapeShadingType == ShapeShadingType.OUTLINE_AND_FILLED_IN)
-            {
-                g2d.setPaint(s.primaryColor);
-                g2d.fill(s.shape);
-                g2d.setPaint(s.secondaryColor);
-            }
-            g2d.draw(s.shape);
         }
         this.mouseDraggedShape = null;
     }

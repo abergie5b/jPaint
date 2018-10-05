@@ -51,40 +51,49 @@ public class ApplicationState implements IApplicationState, Serializable
         uiModule.setStatusMenu();
     }
 
+    @Override
     public ShapeAdapter getDraggedShape()
     {
         return this.draggedShape;
     }
+    
+    @Override
     public ShapeAdapter getClickedShape()
     {
         return this.clickedShape;
     }
+
+    @Override
     public ArrayList<ShapeAdapter> getSelectedShapes()
     {
         return this.selectedShapes;
     }
 
+    @Override
     public void setDraggedShape(ShapeAdapter shape)
     {
         this.draggedShape = shape;
     }
 
+    @Override
     public void resetDraggedShape()
     {
         this.draggedShape = null;
     }
 
+    @Override
     public void setClickedShape(Point point)
     {
-        // TODO move this to ApplicationState
         this.clickedShape = this.getShapeFromBuffer(point);
     }
     
+    @Override
     public void repaint() 
     {
         this.canvas.repaint();
     }
 
+    @Override
     public ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection)
     {
         ArrayList<ShapeAdapter> selectedShapes = new ArrayList<ShapeAdapter>();
@@ -99,6 +108,7 @@ public class ApplicationState implements IApplicationState, Serializable
         return selectedShapes;
     }
 
+    @Override
     public void removeShapeFromBuffer(ShapeAdapter shape) 
     {
         for (int x=0; x<this.canvas.shapes.size(); x++)
@@ -112,19 +122,20 @@ public class ApplicationState implements IApplicationState, Serializable
         }
     }
 
-
+    @Override
     public void addShapeAttribute(ShapeAdapter _shape) 
     {
         this.canvas.shapes.add(_shape);
     }
 
 
-    public void setTempShape(ShapeAdapter _shape) 
+    @Override
+    public void setMouseDraggedShape(ShapeAdapter _shape) 
     {
-        this.canvas.setTempShape(_shape);
+        this.canvas.setMouseDraggedShape(_shape);
     }
 
-
+    @Override
     public ShapeAdapter getShapeFromBuffer(Point point) 
     {
         ShapeAdapter _shape = null;
@@ -174,8 +185,8 @@ public class ApplicationState implements IApplicationState, Serializable
     }
 
     @Override 
-    public void setSelectedShapes(ArrayList<ShapeAdapter> selection) {
-        this.selectedShapes = selection;
+    public void setSelectedShapes(Rectangle selection) {
+        this.selectedShapes = this.getShapesinSelection(selection);
     }
 
     @Override

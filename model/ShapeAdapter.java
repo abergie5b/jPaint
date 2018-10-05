@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public class ShapeAdapter {
-
     public int x;
     public int y;
     public int width;
@@ -72,9 +71,11 @@ public class ShapeAdapter {
         this.shape = shapeToObject(dims);
     }
 
-    public Shape convert(Dimensions dims)
+    public ShapeAdapter convert(Dimensions dims)
     {
-        return shapeToObject(dims);
+        // TODO return a new class of object "JShape" or something ...
+        this.shape = shapeToObject(dims);
+        return this;
     }
 
     private Shape shapeToObject(Dimensions dims)
@@ -98,9 +99,6 @@ public class ShapeAdapter {
             }
             case TRIANGLE:
             {
-                //_shape = new Polygon(new int[] {x, x+width, x-width}, 
-                //                     new int[] {y, y+height, y+height}, 
-                //                     3);
                 _shape = new Polygon(new int[] {x+width/2, x, x+width}, 
                                      new int[] {y+height, y-height, y-height}, 
                                      3);
