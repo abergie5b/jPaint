@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-ApplicationState	../../model/persistence/ApplicationState.java	/^    public ApplicationState(IUiModule uiModule) $/;"	m	class:ApplicationState
+ApplicationState	../../model/persistence/ApplicationState.java	/^    public ApplicationState(IGuiWindow uiModule) $/;"	m	class:ApplicationState
 ApplicationState	../../model/persistence/ApplicationState.java	/^public class ApplicationState implements IApplicationState, Serializable $/;"	c
 BLACK	../../model/ShapeColor.java	/^    BLACK,$/;"	e	enum:ShapeColor	file:
 BLUE	../../model/ShapeColor.java	/^    BLUE,$/;"	e	enum:ShapeColor	file:
@@ -30,16 +30,19 @@ DELETE	../../view/EventName.java	/^	DELETE$/;"	e	enum:EventName	file:
 DRAW	../../model/StartAndEndPointMode.java	/^    DRAW,$/;"	e	enum:StartAndEndPointMode	file:
 DialogProvider	../../model/dialogs/DialogProvider.java	/^    public DialogProvider(IApplicationState applicationState) {$/;"	m	class:DialogProvider
 DialogProvider	../../model/dialogs/DialogProvider.java	/^public class DialogProvider implements IDialogProvider {$/;"	c
+Dimensions	../../model/Dimensions.java	/^    public Dimensions(Point xy, Point wh)$/;"	m	class:Dimensions
+Dimensions	../../model/Dimensions.java	/^public class Dimensions$/;"	c
 ELLIPSE	../../model/ShapeType.java	/^    ELLIPSE,$/;"	e	enum:ShapeType	file:
 EventName	../../view/EventName.java	/^public enum EventName {$/;"	g
 FILLED_IN	../../model/ShapeShadingType.java	/^    FILLED_IN,$/;"	e	enum:ShapeShadingType	file:
 GRAY	../../model/ShapeColor.java	/^    GRAY,$/;"	e	enum:ShapeColor	file:
 GREEN	../../model/ShapeColor.java	/^    GREEN,$/;"	e	enum:ShapeColor	file:
+Geometry	../../model/Geometry.java	/^public class Geometry$/;"	c
 Gui	../../view/gui/Gui.java	/^    public Gui(IGuiWindow gui) $/;"	m	class:Gui
 Gui	../../view/gui/Gui.java	/^public class Gui implements IUiModule $/;"	c
 GuiWindow	../../view/gui/GuiWindow.java	/^    public GuiWindow(PaintCanvas canvas)$/;"	m	class:GuiWindow
 GuiWindow	../../view/gui/GuiWindow.java	/^public class GuiWindow extends JFrame implements IGuiWindow $/;"	c
-IApplicationState	../../model/interfaces/IApplicationState.java	/^public interface IApplicationState {$/;"	i
+IApplicationState	../../model/interfaces/IApplicationState.java	/^public interface IApplicationState $/;"	i
 IDialogChoice	../../view/interfaces/IDialogChoice.java	/^public interface IDialogChoice<T> {$/;"	i
 IDialogProvider	../../model/interfaces/IDialogProvider.java	/^public interface IDialogProvider {$/;"	i
 IEventCallback	../../view/interfaces/IEventCallback.java	/^public interface IEventCallback {$/;"	i
@@ -48,15 +51,15 @@ IJPaintController	../../controller/IJPaintController.java	/^public interface IJP
 IMouseEventController	../../controller/IMouseEventController.java	/^public interface IMouseEventController $/;"	i
 IMouseEventListener	../../view/gui/IMouseEventListener.java	/^public interface IMouseEventListener {$/;"	i
 IUiModule	../../view/interfaces/IUiModule.java	/^public interface IUiModule {$/;"	i
-JPaintController	../../controller/JPaintController.java	/^    public JPaintController(IUiModule uiModule, IApplicationState applicationState) {$/;"	m	class:JPaintController
+JPaintController	../../controller/JPaintController.java	/^    public JPaintController(IGuiWindow uiModule, IApplicationState applicationState) {$/;"	m	class:JPaintController
 JPaintController	../../controller/JPaintController.java	/^public class JPaintController implements IJPaintController {$/;"	c
 LIGHT_GRAY	../../model/ShapeColor.java	/^    LIGHT_GRAY,$/;"	e	enum:ShapeColor	file:
 MAGENTA	../../model/ShapeColor.java	/^    MAGENTA,$/;"	e	enum:ShapeColor	file:
 MOVE	../../model/StartAndEndPointMode.java	/^    MOVE$/;"	e	enum:StartAndEndPointMode	file:
 Main	../../main/Main.java	/^public class Main {$/;"	c
-MouseEventController	../../controller/MouseEventController.java	/^    public MouseEventController(IUiModule uiModule, IApplicationState applicationState) $/;"	m	class:MouseEventController
+MouseEventController	../../controller/MouseEventController.java	/^    public MouseEventController(IApplicationState applicationState) $/;"	m	class:MouseEventController
 MouseEventController	../../controller/MouseEventController.java	/^public class MouseEventController implements IMouseEventController$/;"	c
-MouseEventListener	../../view/gui/MouseEventListener.java	/^    public MouseEventListener(IUiModule uiModule, IApplicationState applicationState) $/;"	m	class:MouseEventListener
+MouseEventListener	../../view/gui/MouseEventListener.java	/^    public MouseEventListener(IApplicationState applicationState)$/;"	m	class:MouseEventListener
 MouseEventListener	../../view/gui/MouseEventListener.java	/^public class MouseEventListener extends MouseInputAdapter implements IMouseEventListener {$/;"	c
 ORANGE	../../model/ShapeColor.java	/^    ORANGE,$/;"	e	enum:ShapeColor	file:
 OUTLINE	../../model/ShapeShadingType.java	/^    OUTLINE,$/;"	e	enum:ShapeShadingType	file:
@@ -70,14 +73,18 @@ RECTANGLE	../../model/ShapeType.java	/^    RECTANGLE,$/;"	e	enum:ShapeType	file:
 RED	../../model/ShapeColor.java	/^    RED,$/;"	e	enum:ShapeColor	file:
 REDO	../../view/EventName.java	/^	REDO,$/;"	e	enum:EventName	file:
 SELECT	../../model/StartAndEndPointMode.java	/^    SELECT,$/;"	e	enum:StartAndEndPointMode	file:
+ShapeAdapter	../../model/ShapeAdapter.java	/^    public ShapeAdapter(ShapeType shapeType, ShapeColor primaryColor, ShapeColor secondaryColor, ShapeShadingType shapeShadingType, StartAndEndPointMode startAndEndPointMode) $/;"	m	class:ShapeAdapter
+ShapeAdapter	../../model/ShapeAdapter.java	/^public class ShapeAdapter {$/;"	c
+ShapeAdapter	../../model/StateModelAdapter.java	/^    public ShapeAdapter(ShapeType shapeType, ShapeColor primaryColor, ShapeColor secondaryColor, ShapeShadingType shapeShadingType, StartAndEndPointMode startAndEndPointMode) $/;"	m	class:ShapeAdapter
+ShapeAdapter	../../model/StateModelAdapter.java	/^public class ShapeAdapter {$/;"	c
 ShapeColor	../../model/ShapeColor.java	/^public enum ShapeColor {$/;"	g
 ShapeShadingType	../../model/ShapeShadingType.java	/^public enum ShapeShadingType {$/;"	g
 ShapeType	../../model/ShapeType.java	/^public enum ShapeType {$/;"	g
 StartAndEndPointMode	../../model/StartAndEndPointMode.java	/^public enum StartAndEndPointMode {$/;"	g
-ShapeAdapter	../../model/ShapeAdapter.java	/^    public ShapeAdapter(ShapeType shapeType, ShapeColor primaryColor, ShapeColor secondaryColor, ShapeShadingType shapeShadingType, StartAndEndPointMode startAndEndPointMode) $/;"	m	class:ShapeAdapter
-ShapeAdapter	../../model/ShapeAdapter.java	/^public class ShapeAdapter {$/;"	c
 TRIANGLE	../../model/ShapeType.java	/^    TRIANGLE$/;"	e	enum:ShapeType	file:
 UNDO	../../view/EventName.java	/^	UNDO,$/;"	e	enum:EventName	file:
+UserActionEventController	../../controller/UserActionEventController.java	/^    public UserActionEventController(PaintCanvas canvas, IApplicationState applicationState) $/;"	m	class:UserActionEventController
+UserActionEventController	../../controller/UserActionEventController.java	/^public class UserActionEventController$/;"	c
 WHITE	../../model/ShapeColor.java	/^    WHITE,$/;"	e	enum:ShapeColor	file:
 YELLOW	../../model/ShapeColor.java	/^    YELLOW$/;"	e	enum:ShapeColor	file:
 activePrimaryColor	../../model/persistence/ApplicationState.java	/^    private ShapeColor activePrimaryColor;$/;"	f	class:ApplicationState	file:
@@ -86,9 +93,11 @@ activeShapeShadingType	../../model/persistence/ApplicationState.java	/^    priva
 activeShapeType	../../model/persistence/ApplicationState.java	/^    private ShapeType activeShapeType;$/;"	f	class:ApplicationState	file:
 activeStartAndEndPointMode	../../model/persistence/ApplicationState.java	/^    private StartAndEndPointMode activeStartAndEndPointMode;$/;"	f	class:ApplicationState	file:
 addButtonToPanel	../../view/gui/GuiWindow.java	/^	private void addButtonToPanel(EventName eventName, JPanel panel) {$/;"	m	class:GuiWindow	file:
-addEvent	../../view/gui/Gui.java	/^	public void addEvent(EventName eventName, IEventCallback callback) {$/;"	m	class:Gui
-addEvent	../../view/interfaces/IUiModule.java	/^    void addEvent(EventName eventName, IEventCallback command);$/;"	m	interface:IUiModule
+addEvent	../../view/gui/GuiWindow.java	/^	public void addEvent(EventName eventName, IEventCallback callback) {$/;"	m	class:GuiWindow
+addEvent	../../view/interfaces/IGuiWindow.java	/^	public void addEvent(EventName eventName, IEventCallback callback);$/;"	m	interface:IGuiWindow
 addMouseListeners	../../view/gui/PaintCanvas.java	/^    public void addMouseListeners(MouseEventListener mouseEventListener) $/;"	m	class:PaintCanvas
+addShapeAttribute	../../model/interfaces/IApplicationState.java	/^    public void addShapeAttribute(ShapeAdapter _shape);$/;"	m	interface:IApplicationState
+addShapeAttribute	../../model/persistence/ApplicationState.java	/^    public void addShapeAttribute(ShapeAdapter _shape) $/;"	m	class:ApplicationState
 addShapeAttribute	../../view/gui/PaintCanvas.java	/^    public void addShapeAttribute(ShapeAdapter _shape) $/;"	m	class:PaintCanvas
 addShapeAttribute	../../view/gui/PaintCanvasTest.java	/^    void addShapeAttribute() {$/;"	m	class:PaintCanvasTest
 applicationState	../../controller/JPaintController.java	/^    private final IApplicationState applicationState;$/;"	f	class:JPaintController	file:
@@ -100,26 +109,31 @@ applicationState	../../model/dialogs/ChooseShapeDialog.java	/^    private final 
 applicationState	../../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    private final IApplicationState applicationState;$/;"	f	class:ChooseStartAndEndPointModeDialog	file:
 applicationState	../../model/dialogs/DialogProvider.java	/^    private final IApplicationState applicationState;$/;"	f	class:DialogProvider	file:
 applicationState	../../view/gui/MouseEventListener.java	/^    private final IApplicationState applicationState;$/;"	f	class:MouseEventListener	file:
-canvas	../../controller/MouseEventController.java	/^    private final PaintCanvas canvas;$/;"	f	class:MouseEventController	file:
+canvas	../../model/persistence/ApplicationState.java	/^    private PaintCanvas canvas;$/;"	f	class:ApplicationState	file:
 canvas	../../view/gui/GuiWindow.java	/^    private PaintCanvas canvas;$/;"	f	class:GuiWindow	file:
 choosePrimaryColorDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeColor> choosePrimaryColorDialog;$/;"	f	class:DialogProvider	file:
 chooseSecondaryColorDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeColor> chooseSecondaryColorDialog;$/;"	f	class:DialogProvider	file:
 chooseShadingTypeDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeShadingType> chooseShadingTypeDialog;$/;"	f	class:DialogProvider	file:
 chooseShapeDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<ShapeType> chooseShapeDialog;$/;"	f	class:DialogProvider	file:
 chooseStartAndEndPointModeDialog	../../model/dialogs/DialogProvider.java	/^    private final IDialogChoice<StartAndEndPointMode> chooseStartAndEndPointModeDialog;$/;"	f	class:DialogProvider	file:
-clickedShape	../../controller/MouseEventController.java	/^    private ShapeAdapter clickedShape;$/;"	f	class:MouseEventController	file:
-clickedShape	../../view/gui/MouseEventListener.java	/^    private ShapeAdapter clickedShape;$/;"	f	class:MouseEventListener	file:
+clickedShape	../../model/persistence/ApplicationState.java	/^    public ShapeAdapter clickedShape;$/;"	f	class:ApplicationState
 colorToObject	../../model/ShapeAdapter.java	/^    private Color colorToObject(ShapeColor color) {$/;"	m	class:ShapeAdapter	file:
+colorToObject	../../model/StateModelAdapter.java	/^    private Color colorToObject(ShapeColor color) {$/;"	m	class:ShapeAdapter	file:
 controller	../../controller/IJPaintController.java	/^package controller;$/;"	p
 controller	../../controller/IMouseEventController.java	/^package controller;$/;"	p
 controller	../../controller/JPaintController.java	/^package controller;$/;"	p
 controller	../../controller/MouseEventController.java	/^package controller;$/;"	p
+controller	../../controller/UserActionEventController.java	/^package controller;$/;"	p
+convert	../../model/ShapeAdapter.java	/^    public Shape convert(Dimensions dims)$/;"	m	class:ShapeAdapter
+copy	../../controller/UserActionEventController.java	/^    public void copy() {$/;"	m	class:UserActionEventController
+copy	../../model/interfaces/IApplicationState.java	/^    void copy();$/;"	m	interface:IApplicationState
+copy	../../model/persistence/ApplicationState.java	/^    public void copy() {$/;"	m	class:ApplicationState
 createBackgroundPanel	../../view/gui/GuiWindow.java	/^    private JPanel createBackgroundPanel() {$/;"	m	class:GuiWindow	file:
 createButton	../../view/gui/GuiWindow.java	/^	private JButton createButton(EventName eventName) {$/;"	m	class:GuiWindow	file:
 createButtonBorder	../../view/gui/GuiWindow.java	/^	private Border createButtonBorder() {$/;"	m	class:GuiWindow	file:
 createButtonPanel	../../view/gui/GuiWindow.java	/^	private JPanel createButtonPanel() {$/;"	m	class:GuiWindow	file:
 createOptionsMenu	../../view/gui/GuiWindow.java	/^    private JPanel createOptionsMenu() {$/;"	m	class:GuiWindow	file:
-createShape	../../model/ShapeAdapter.java	/^    public Shape createShape(int x, int y, int width, int height) {$/;"	m	class:ShapeAdapter
+createShape	../../model/StateModelAdapter.java	/^    public Shape createShape(int x, int y, int width, int height) {$/;"	m	class:ShapeAdapter
 createStatusMenu	../../view/gui/GuiWindow.java	/^    private JPanel createStatusMenu() {$/;"	m	class:GuiWindow	file:
 createStatusPanel	../../view/gui/GuiWindow.java	/^	private JPanel createStatusPanel() {$/;"	m	class:GuiWindow	file:
 createWindow	../../view/gui/GuiWindow.java	/^	private JPanel createWindow() {$/;"	m	class:GuiWindow	file:
@@ -127,10 +141,12 @@ defaultButtonDimensions	../../view/gui/GuiWindow.java	/^    private final Insets
 defaultHeight	../../view/gui/GuiWindow.java	/^    private final int defaultHeight = 720;$/;"	f	class:GuiWindow	file:
 defaultTitle	../../view/gui/GuiWindow.java	/^    private final String defaultTitle = "~JPaint~";$/;"	f	class:GuiWindow	file:
 defaultWidth	../../view/gui/GuiWindow.java	/^    private final int defaultWidth = 1080;$/;"	f	class:GuiWindow	file:
+delete	../../controller/UserActionEventController.java	/^    public void delete() {$/;"	m	class:UserActionEventController
+delete	../../model/interfaces/IApplicationState.java	/^    void delete();$/;"	m	interface:IApplicationState
+delete	../../model/persistence/ApplicationState.java	/^    public void delete() {$/;"	m	class:ApplicationState
 deleteShapes	../../view/gui/PaintCanvas.java	/^    public void deleteShapes(ArrayList<ShapeAdapter> selectedShapes)$/;"	m	class:PaintCanvas
 dialogProvider	../../model/persistence/ApplicationState.java	/^    private final IDialogProvider dialogProvider;$/;"	f	class:ApplicationState	file:
-draggedShape	../../controller/MouseEventController.java	/^    private ShapeAdapter draggedShape;$/;"	f	class:MouseEventController	file:
-draggedShape	../../view/gui/MouseEventListener.java	/^    private ShapeAdapter draggedShape;$/;"	f	class:MouseEventListener	file:
+draggedShape	../../model/persistence/ApplicationState.java	/^    public ShapeAdapter draggedShape;$/;"	f	class:ApplicationState
 eventButtons	../../view/gui/GuiWindow.java	/^    private final Map<EventName, JButton> eventButtons = new HashMap<>();$/;"	f	class:GuiWindow	file:
 getActivePrimaryColor	../../model/interfaces/IApplicationState.java	/^    ShapeColor getActivePrimaryColor();$/;"	m	interface:IApplicationState
 getActivePrimaryColor	../../model/persistence/ApplicationState.java	/^    public ShapeColor getActivePrimaryColor() {$/;"	m	class:ApplicationState
@@ -144,10 +160,8 @@ getActiveStartAndEndPointMode	../../model/interfaces/IApplicationState.java	/^  
 getActiveStartAndEndPointMode	../../model/persistence/ApplicationState.java	/^    public StartAndEndPointMode getActiveStartAndEndPointMode() {$/;"	m	class:ApplicationState
 getButton	../../view/gui/GuiWindow.java	/^	public JButton getButton(EventName eventName) {$/;"	m	class:GuiWindow
 getButton	../../view/interfaces/IGuiWindow.java	/^    JButton getButton(EventName eventName);$/;"	m	interface:IGuiWindow
-getCanvas	../../view/gui/Gui.java	/^    public PaintCanvas getCanvas() {$/;"	m	class:Gui
 getCanvas	../../view/gui/GuiWindow.java	/^    public PaintCanvas getCanvas() {$/;"	m	class:GuiWindow
 getCanvas	../../view/interfaces/IGuiWindow.java	/^    PaintCanvas getCanvas();$/;"	m	interface:IGuiWindow
-getCanvas	../../view/interfaces/IUiModule.java	/^    PaintCanvas getCanvas();$/;"	m	interface:IUiModule
 getChoosePrimaryColorDialog	../../model/dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeColor> getChoosePrimaryColorDialog() {$/;"	m	class:DialogProvider
 getChoosePrimaryColorDialog	../../model/interfaces/IDialogProvider.java	/^    IDialogChoice<ShapeColor> getChoosePrimaryColorDialog();$/;"	m	interface:IDialogProvider
 getChooseSecondaryColorDialog	../../model/dialogs/DialogProvider.java	/^    public IDialogChoice<ShapeColor> getChooseSecondaryColorDialog() {$/;"	m	class:DialogProvider
@@ -170,8 +184,8 @@ getDialogOptions	../../model/dialogs/ChooseShadingTypeDialog.java	/^    public S
 getDialogOptions	../../model/dialogs/ChooseShapeDialog.java	/^    public ShapeType[] getDialogOptions() {$/;"	m	class:ChooseShapeDialog
 getDialogOptions	../../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    public StartAndEndPointMode[] getDialogOptions() {$/;"	m	class:ChooseStartAndEndPointModeDialog
 getDialogOptions	../../view/interfaces/IDialogChoice.java	/^    T[] getDialogOptions();$/;"	m	interface:IDialogChoice
-getDialogResponse	../../view/gui/Gui.java	/^    public <T> T getDialogResponse(IDialogChoice dialogSettings) $/;"	m	class:Gui
-getDialogResponse	../../view/interfaces/IUiModule.java	/^    <T> T getDialogResponse(IDialogChoice dialogChoice);$/;"	m	interface:IUiModule
+getDialogResponse	../../view/gui/GuiWindow.java	/^    public <T> T getDialogResponse(IDialogChoice dialogSettings) $/;"	m	class:GuiWindow
+getDialogResponse	../../view/interfaces/IGuiWindow.java	/^    public <T> T getDialogResponse(IDialogChoice dialogSettings);$/;"	m	interface:IGuiWindow
 getDialogText	../../model/dialogs/ChoosePrimaryColorDialog.java	/^    public String getDialogText() {$/;"	m	class:ChoosePrimaryColorDialog
 getDialogText	../../model/dialogs/ChooseSecondaryColorDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseSecondaryColorDialog
 getDialogText	../../model/dialogs/ChooseShadingTypeDialog.java	/^    public String getDialogText() {$/;"	m	class:ChooseShadingTypeDialog
@@ -184,16 +198,29 @@ getDialogTitle	../../model/dialogs/ChooseShadingTypeDialog.java	/^    public Str
 getDialogTitle	../../model/dialogs/ChooseShapeDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseShapeDialog
 getDialogTitle	../../model/dialogs/ChooseStartAndEndPointModeDialog.java	/^    public String getDialogTitle() {$/;"	m	class:ChooseStartAndEndPointModeDialog
 getDialogTitle	../../view/interfaces/IDialogChoice.java	/^    String getDialogTitle();$/;"	m	interface:IDialogChoice
+getDimensionsWithInvert	../../model/Geometry.java	/^    public static Dimensions getDimensionsWithInvert(Point startXY, Point endXY) $/;"	m	class:Geometry
 getGraphics2D	../../view/gui/PaintCanvas.java	/^    private Graphics2D getGraphics2D() $/;"	m	class:PaintCanvas	file:
+getHeight	../../model/ShapeAdapter.java	/^    public int getHeight() {$/;"	m	class:ShapeAdapter
+getHeight	../../model/StateModelAdapter.java	/^    public int getHeight() {$/;"	m	class:ShapeAdapter
 getNumberOfShapeHistory	../../view/gui/PaintCanvas.java	/^    private int getNumberOfShapeHistory() $/;"	m	class:PaintCanvas	file:
 getNumberOfShapes	../../view/gui/PaintCanvas.java	/^    private int getNumberOfShapes() $/;"	m	class:PaintCanvas	file:
 getPrimaryColorName	../../model/ShapeAdapter.java	/^    public String getPrimaryColorName() {$/;"	m	class:ShapeAdapter
+getPrimaryColorName	../../model/StateModelAdapter.java	/^    public String getPrimaryColorName() {$/;"	m	class:ShapeAdapter
 getSecondaryColorName	../../model/ShapeAdapter.java	/^    public String getSecondaryColorName() {$/;"	m	class:ShapeAdapter
+getSecondaryColorName	../../model/StateModelAdapter.java	/^    public String getSecondaryColorName() {$/;"	m	class:ShapeAdapter
+getShapeFromBuffer	../../model/interfaces/IApplicationState.java	/^    public ShapeAdapter getShapeFromBuffer(Point point);$/;"	m	interface:IApplicationState
+getShapeFromBuffer	../../model/persistence/ApplicationState.java	/^    public ShapeAdapter getShapeFromBuffer(Point point) $/;"	m	class:ApplicationState
 getShapeFromBuffer	../../view/gui/PaintCanvas.java	/^    public ShapeAdapter getShapeFromBuffer(Point point) $/;"	m	class:PaintCanvas
 getShapeName	../../model/ShapeAdapter.java	/^    public String getShapeName() {$/;"	m	class:ShapeAdapter
+getShapeName	../../model/StateModelAdapter.java	/^    public String getShapeName() {$/;"	m	class:ShapeAdapter
+getShapesinSelection	../../model/interfaces/IApplicationState.java	/^    public ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection);$/;"	m	interface:IApplicationState
+getShapesinSelection	../../model/persistence/ApplicationState.java	/^    public ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection)$/;"	m	class:ApplicationState
 getShapesinSelection	../../view/gui/PaintCanvas.java	/^    public ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection)$/;"	m	class:PaintCanvas
+getWidth	../../model/ShapeAdapter.java	/^    public int getWidth() {$/;"	m	class:ShapeAdapter
+getWidth	../../model/StateModelAdapter.java	/^    public int getWidth() {$/;"	m	class:ShapeAdapter
 gui	../../view/gui/Gui.java	/^    private final IGuiWindow gui;$/;"	f	class:Gui	file:
 height	../../model/ShapeAdapter.java	/^    public int height;$/;"	f	class:ShapeAdapter
+height	../../model/StateModelAdapter.java	/^    public int height;$/;"	f	class:ShapeAdapter
 label1	../../view/gui/GuiWindow.java	/^    private JLabel label1 = new JLabel("");$/;"	f	class:GuiWindow	file:
 label2	../../view/gui/GuiWindow.java	/^    private JLabel label2 = new JLabel("");$/;"	f	class:GuiWindow	file:
 label3	../../view/gui/GuiWindow.java	/^    private JLabel label3 = new JLabel("");$/;"	f	class:GuiWindow	file:
@@ -202,11 +229,14 @@ label5	../../view/gui/GuiWindow.java	/^    private JLabel label5 = new JLabel(""
 main	../../main/Main.java	/^    public static void main(String[] args){$/;"	m	class:Main
 main	../../main/Main.java	/^package main;$/;"	p
 mode	../../view/gui/PaintCanvas.java	/^    private StartAndEndPointMode mode;    $/;"	f	class:PaintCanvas	file:
+model	../../model/Dimensions.java	/^package model;$/;"	p
+model	../../model/Geometry.java	/^package model;$/;"	p
+model	../../model/ShapeAdapter.java	/^package model;$/;"	p
 model	../../model/ShapeColor.java	/^package model;$/;"	p
 model	../../model/ShapeShadingType.java	/^package model;$/;"	p
 model	../../model/ShapeType.java	/^package model;$/;"	p
 model	../../model/StartAndEndPointMode.java	/^package model;$/;"	p
-model	../../model/ShapeAdapter.java	/^package model;$/;"	p
+model	../../model/StateModelAdapter.java	/^package model;$/;"	p
 model.dialogs	../../model/dialogs/ChoosePrimaryColorDialog.java	/^package model.dialogs;$/;"	p
 model.dialogs	../../model/dialogs/ChooseSecondaryColorDialog.java	/^package model.dialogs;$/;"	p
 model.dialogs	../../model/dialogs/ChooseShadingTypeDialog.java	/^package model.dialogs;$/;"	p
@@ -216,6 +246,7 @@ model.dialogs	../../model/dialogs/DialogProvider.java	/^package model.dialogs;$/
 model.interfaces	../../model/interfaces/IApplicationState.java	/^package model.interfaces;$/;"	p
 model.interfaces	../../model/interfaces/IDialogProvider.java	/^package model.interfaces;$/;"	p
 model.persistence	../../model/persistence/ApplicationState.java	/^package model.persistence;$/;"	p
+mouseDragPoint	../../controller/MouseEventController.java	/^    private Point mouseDragPoint;$/;"	f	class:MouseEventController	file:
 mouseDragged	../../view/gui/IMouseEventListener.java	/^    void mouseDragged(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mouseDragged	../../view/gui/MouseEventListener.java	/^    public void mouseDragged(MouseEvent evt) {$/;"	m	class:MouseEventListener
 mouseDraggedDraw	../../controller/IMouseEventController.java	/^    void mouseDraggedDraw(MouseEvent evt);$/;"	m	interface:IMouseEventController
@@ -226,6 +257,7 @@ mouseDraggedSelect	../../controller/IMouseEventController.java	/^    void mouseD
 mouseDraggedSelect	../../controller/MouseEventController.java	/^    public void mouseDraggedSelect(MouseEvent e) {$/;"	m	class:MouseEventController
 mouseDraggedShape	../../view/gui/PaintCanvas.java	/^    private ShapeAdapter mouseDraggedShape;    $/;"	f	class:PaintCanvas	file:
 mouseEventController	../../view/gui/MouseEventListener.java	/^    private MouseEventController mouseEventController;$/;"	f	class:MouseEventListener	file:
+mousePoint	../../controller/MouseEventController.java	/^    private Point mousePoint;$/;"	f	class:MouseEventController	file:
 mousePressed	../../view/gui/IMouseEventListener.java	/^    void mousePressed(MouseEvent evt);$/;"	m	interface:IMouseEventListener
 mousePressed	../../view/gui/MouseEventListener.java	/^    public void mousePressed(MouseEvent evt) {$/;"	m	class:MouseEventListener
 mousePressedDraw	../../controller/IMouseEventController.java	/^    void mousePressedDraw(MouseEvent evt);$/;"	m	interface:IMouseEventController
@@ -242,30 +274,37 @@ mouseReleasedMove	../../controller/IMouseEventController.java	/^    void mouseRe
 mouseReleasedMove	../../controller/MouseEventController.java	/^    public void mouseReleasedMove(MouseEvent e) {$/;"	m	class:MouseEventController
 mouseReleasedSelect	../../controller/IMouseEventController.java	/^    void mouseReleasedSelect(MouseEvent evt);$/;"	m	interface:IMouseEventController
 mouseReleasedSelect	../../controller/MouseEventController.java	/^    public void mouseReleasedSelect(MouseEvent e) {$/;"	m	class:MouseEventController
-mouseX	../../controller/MouseEventController.java	/^    private int mouseX;$/;"	f	class:MouseEventController	file:
-mouseX	../../view/gui/MouseEventListener.java	/^    private int mouseX;$/;"	f	class:MouseEventListener	file:
-mouseY	../../controller/MouseEventController.java	/^    private int mouseY;$/;"	f	class:MouseEventController	file:
-mouseY	../../view/gui/MouseEventListener.java	/^    private int mouseY;$/;"	f	class:MouseEventListener	file:
-moveX	../../controller/MouseEventController.java	/^    private int moveX;$/;"	f	class:MouseEventController	file:
-moveX	../../view/gui/MouseEventListener.java	/^    private int moveX;$/;"	f	class:MouseEventListener	file:
-moveY	../../controller/MouseEventController.java	/^    private int moveY;$/;"	f	class:MouseEventController	file:
-moveY	../../view/gui/MouseEventListener.java	/^    private int moveY;$/;"	f	class:MouseEventListener	file:
+move	../../model/Dimensions.java	/^    public void move(Point xy)$/;"	m	class:Dimensions
 paintComponent	../../view/gui/PaintCanvas.java	/^    public void paintComponent(Graphics g) $/;"	m	class:PaintCanvas
+paste	../../controller/UserActionEventController.java	/^    public void paste() {$/;"	m	class:UserActionEventController
+paste	../../model/interfaces/IApplicationState.java	/^    void paste();$/;"	m	interface:IApplicationState
+paste	../../model/persistence/ApplicationState.java	/^    public void paste() {$/;"	m	class:ApplicationState
 primaryColor	../../model/ShapeAdapter.java	/^    public Color primaryColor;$/;"	f	class:ShapeAdapter
+primaryColor	../../model/StateModelAdapter.java	/^    public Color primaryColor;$/;"	f	class:ShapeAdapter
 primaryColor	../../view/gui/PaintCanvas.java	/^    private Color primaryColor;    $/;"	f	class:PaintCanvas	file:
 primaryShapeColor	../../model/ShapeAdapter.java	/^    public ShapeColor primaryShapeColor;$/;"	f	class:ShapeAdapter
+primaryShapeColor	../../model/StateModelAdapter.java	/^    public ShapeColor primaryShapeColor;$/;"	f	class:ShapeAdapter
 printEvent	../../controller/MouseEventController.java	/^    public void printEvent(String event) {$/;"	m	class:MouseEventController
+redo	../../controller/UserActionEventController.java	/^    public void redo() {$/;"	m	class:UserActionEventController
 redo	../../model/interfaces/IApplicationState.java	/^    void redo();$/;"	m	interface:IApplicationState
 redo	../../model/persistence/ApplicationState.java	/^    public void redo() {$/;"	m	class:ApplicationState
 redo	../../view/gui/PaintCanvas.java	/^    public void redo() $/;"	m	class:PaintCanvas
 redo	../../view/gui/PaintCanvasTest.java	/^    void redo() {$/;"	m	class:PaintCanvasTest
+removeShapeFromBuffer	../../model/interfaces/IApplicationState.java	/^    public void removeShapeFromBuffer(ShapeAdapter shape);$/;"	m	interface:IApplicationState
+removeShapeFromBuffer	../../model/persistence/ApplicationState.java	/^    public void removeShapeFromBuffer(ShapeAdapter shape) $/;"	m	class:ApplicationState
 removeShapeFromBuffer	../../view/gui/PaintCanvas.java	/^    public void removeShapeFromBuffer(ShapeAdapter shape) $/;"	m	class:PaintCanvas
 removeShapeFromBuffer	../../view/gui/PaintCanvasTest.java	/^    void removeShapeFromBuffer() {$/;"	m	class:PaintCanvasTest
+repaint	../../model/interfaces/IApplicationState.java	/^    public void repaint();$/;"	m	interface:IApplicationState
+repaint	../../model/persistence/ApplicationState.java	/^    public void repaint() $/;"	m	class:ApplicationState
+resetDraggedShape	../../model/interfaces/IApplicationState.java	/^    public void resetDraggedShape();$/;"	m	interface:IApplicationState
+resetDraggedShape	../../model/persistence/ApplicationState.java	/^    public void resetDraggedShape()$/;"	m	class:ApplicationState
 run	../../view/interfaces/IEventCallback.java	/^	void run();$/;"	m	interface:IEventCallback
 secondaryColor	../../model/ShapeAdapter.java	/^    public Color secondaryColor;$/;"	f	class:ShapeAdapter
+secondaryColor	../../model/StateModelAdapter.java	/^    public Color secondaryColor;$/;"	f	class:ShapeAdapter
 secondaryColor	../../view/gui/PaintCanvas.java	/^    private Color secondaryColor;    $/;"	f	class:PaintCanvas	file:
 secondaryShapeColor	../../model/ShapeAdapter.java	/^    public ShapeColor secondaryShapeColor;$/;"	f	class:ShapeAdapter
-selectedShapes	../../controller/MouseEventController.java	/^    private ArrayList<ShapeAdapter> selectedShapes;$/;"	f	class:MouseEventController	file:
+secondaryShapeColor	../../model/StateModelAdapter.java	/^    public ShapeColor secondaryShapeColor;$/;"	f	class:ShapeAdapter
+selectedShapes	../../model/persistence/ApplicationState.java	/^    public ArrayList<ShapeAdapter> selectedShapes;$/;"	f	class:ApplicationState
 serialVersionUID	../../model/persistence/ApplicationState.java	/^    private static final long serialVersionUID = -5545483996576839007L;$/;"	f	class:ApplicationState	file:
 setActivePrimaryColor	../../model/interfaces/IApplicationState.java	/^    void setActivePrimaryColor();$/;"	m	interface:IApplicationState
 setActivePrimaryColor	../../model/persistence/ApplicationState.java	/^    public void setActivePrimaryColor() {$/;"	m	class:ApplicationState
@@ -277,17 +316,26 @@ setActiveShape	../../model/interfaces/IApplicationState.java	/^    void setActiv
 setActiveShape	../../model/persistence/ApplicationState.java	/^    public void setActiveShape() {$/;"	m	class:ApplicationState
 setActiveStartAndEndPointMode	../../model/interfaces/IApplicationState.java	/^    void setActiveStartAndEndPointMode();$/;"	m	interface:IApplicationState
 setActiveStartAndEndPointMode	../../model/persistence/ApplicationState.java	/^    public void setActiveStartAndEndPointMode() {$/;"	m	class:ApplicationState
+setClickedShape	../../model/interfaces/IApplicationState.java	/^    public void setClickedShape(Point point);$/;"	m	interface:IApplicationState
+setClickedShape	../../model/persistence/ApplicationState.java	/^    public void setClickedShape(Point point)$/;"	m	class:ApplicationState
 setDefaults	../../model/persistence/ApplicationState.java	/^    private void setDefaults() {$/;"	m	class:ApplicationState	file:
-setShape	../../model/ShapeAdapter.java	/^    public void setShape(int x, int y, int width, int height) {$/;"	m	class:ShapeAdapter
-setShapeType	../../model/ShapeAdapter.java	/^    public void setShapeType(ShapeType shapeType) {$/;"	m	class:ShapeAdapter
-setShape	../../view/gui/Gui.java	/^    public void setShape(ShapeAdapter stateModel) {$/;"	m	class:Gui
+setDraggedShape	../../model/interfaces/IApplicationState.java	/^    public void setDraggedShape(ShapeAdapter shape);$/;"	m	interface:IApplicationState
+setDraggedShape	../../model/persistence/ApplicationState.java	/^    public void setDraggedShape(ShapeAdapter shape)$/;"	m	class:ApplicationState
+setMouseDraggedPosition	../../controller/MouseEventController.java	/^    private void setMouseDraggedPosition(Point point)$/;"	m	class:MouseEventController	file:
+setMousePosition	../../controller/MouseEventController.java	/^    private void setMousePosition(Point point)$/;"	m	class:MouseEventController	file:
+setSelectedShapes	../../model/interfaces/IApplicationState.java	/^    void setSelectedShapes(ArrayList<ShapeAdapter> shapes);$/;"	m	interface:IApplicationState
+setSelectedShapes	../../model/persistence/ApplicationState.java	/^    public void setSelectedShapes(ArrayList<ShapeAdapter> selection) {$/;"	m	class:ApplicationState
+setShape	../../model/ShapeAdapter.java	/^    public void setShape(Dimensions dims)$/;"	m	class:ShapeAdapter
+setShape	../../model/StateModelAdapter.java	/^    public void setShape(int x, int y, int width, int height) {$/;"	m	class:ShapeAdapter
 setShape	../../view/gui/GuiWindow.java	/^    public void setShape(ShapeAdapter stateModel) {$/;"	m	class:GuiWindow
 setShape	../../view/interfaces/IGuiWindow.java	/^    void setShape(ShapeAdapter shapeType);$/;"	m	interface:IGuiWindow
-setShape	../../view/interfaces/IUiModule.java	/^    void setShape(ShapeAdapter shapeType);$/;"	m	interface:IUiModule
-setStatusMenu	../../view/gui/Gui.java	/^    public void setStatusMenu() {$/;"	m	class:Gui
+setShapeType	../../model/ShapeAdapter.java	/^    public void setShapeType(ShapeType shapeType) {$/;"	m	class:ShapeAdapter
+setShapeType	../../model/StateModelAdapter.java	/^    public void setShapeType(ShapeType shapeType) {$/;"	m	class:ShapeAdapter
+setSize	../../model/Dimensions.java	/^    public void setSize(Point wh)$/;"	m	class:Dimensions
 setStatusMenu	../../view/gui/GuiWindow.java	/^    public void setStatusMenu() {$/;"	m	class:GuiWindow
 setStatusMenu	../../view/interfaces/IGuiWindow.java	/^    void setStatusMenu();$/;"	m	interface:IGuiWindow
-setStatusMenu	../../view/interfaces/IUiModule.java	/^    void setStatusMenu();$/;"	m	interface:IUiModule
+setTempShape	../../model/interfaces/IApplicationState.java	/^    public void setTempShape(ShapeAdapter _shape);$/;"	m	interface:IApplicationState
+setTempShape	../../model/persistence/ApplicationState.java	/^    public void setTempShape(ShapeAdapter _shape) $/;"	m	class:ApplicationState
 setTempShape	../../view/gui/PaintCanvas.java	/^    public void setTempShape(ShapeAdapter _shape) $/;"	m	class:PaintCanvas
 setTempShape	../../view/gui/PaintCanvasTest.java	/^    void setTempShape() {$/;"	m	class:PaintCanvasTest
 setup	../../controller/IJPaintController.java	/^    void setup();$/;"	m	interface:IJPaintController
@@ -295,25 +343,31 @@ setup	../../controller/JPaintController.java	/^    public void setup() {$/;"	m	c
 setupEvents	../../controller/JPaintController.java	/^    private void setupEvents() {$/;"	m	class:JPaintController	file:
 shading	../../view/gui/PaintCanvas.java	/^    private ShapeShadingType shading;    $/;"	f	class:PaintCanvas	file:
 shape	../../model/ShapeAdapter.java	/^    public Shape shape;$/;"	f	class:ShapeAdapter
+shape	../../model/StateModelAdapter.java	/^    public Shape shape;$/;"	f	class:ShapeAdapter
 shape	../../view/gui/PaintCanvas.java	/^    private Shape shape;    $/;"	f	class:PaintCanvas	file:
+shapeAdapter	../../model/persistence/ApplicationState.java	/^    private ShapeAdapter shapeAdapter;$/;"	f	class:ApplicationState	file:
 shapeHistory	../../view/gui/PaintCanvas.java	/^    private ArrayList<ShapeAdapter> shapeHistory;$/;"	f	class:PaintCanvas	file:
 shapeShadingType	../../model/ShapeAdapter.java	/^    public ShapeShadingType shapeShadingType;$/;"	f	class:ShapeAdapter
-shapeToObject	../../model/ShapeAdapter.java	/^    private Shape shapeToObject(int x, int y, int width, int height) {$/;"	m	class:ShapeAdapter	file:
+shapeShadingType	../../model/StateModelAdapter.java	/^    public ShapeShadingType shapeShadingType;$/;"	f	class:ShapeAdapter
+shapeToObject	../../model/ShapeAdapter.java	/^    private Shape shapeToObject(Dimensions dims)$/;"	m	class:ShapeAdapter	file:
+shapeToObject	../../model/StateModelAdapter.java	/^    private Shape shapeToObject(int x, int y, int width, int height) {$/;"	m	class:ShapeAdapter	file:
 shapeType	../../model/ShapeAdapter.java	/^    public ShapeType shapeType;$/;"	f	class:ShapeAdapter
-shapes	../../view/gui/PaintCanvas.java	/^    private ArrayList<ShapeAdapter> shapes;$/;"	f	class:PaintCanvas	file:
+shapeType	../../model/StateModelAdapter.java	/^    public ShapeType shapeType;$/;"	f	class:ShapeAdapter
+shapes	../../view/gui/PaintCanvas.java	/^    public ArrayList<ShapeAdapter> shapes;$/;"	f	class:PaintCanvas
 startAndEndPointMode	../../model/ShapeAdapter.java	/^    public StartAndEndPointMode startAndEndPointMode;$/;"	f	class:ShapeAdapter
-stateModel	../../model/persistence/ApplicationState.java	/^    private ShapeAdapter stateModel;$/;"	f	class:ApplicationState	file:
+startAndEndPointMode	../../model/StateModelAdapter.java	/^    public StartAndEndPointMode startAndEndPointMode;$/;"	f	class:ShapeAdapter
 stateModel	../../view/gui/GuiWindow.java	/^    private ShapeAdapter stateModel;$/;"	f	class:GuiWindow	file:
-uiModule	../../controller/JPaintController.java	/^    private final IUiModule uiModule;$/;"	f	class:JPaintController	file:
-uiModule	../../controller/MouseEventController.java	/^    private final IUiModule uiModule;$/;"	f	class:MouseEventController	file:
-uiModule	../../model/persistence/ApplicationState.java	/^    private final IUiModule uiModule;$/;"	f	class:ApplicationState	file:
-uiModule	../../view/gui/MouseEventListener.java	/^    private final IUiModule uiModule;$/;"	f	class:MouseEventListener	file:
+uiModule	../../controller/JPaintController.java	/^    private final IGuiWindow uiModule;$/;"	f	class:JPaintController	file:
+uiModule	../../model/persistence/ApplicationState.java	/^    private final IGuiWindow uiModule;$/;"	f	class:ApplicationState	file:
+undo	../../controller/UserActionEventController.java	/^    public void undo() {$/;"	m	class:UserActionEventController
 undo	../../model/interfaces/IApplicationState.java	/^    void undo();$/;"	m	interface:IApplicationState
 undo	../../model/persistence/ApplicationState.java	/^    public void undo() {$/;"	m	class:ApplicationState
 undo	../../view/gui/PaintCanvas.java	/^    public void undo() $/;"	m	class:PaintCanvas
 undo	../../view/gui/PaintCanvasTest.java	/^    void undo() {$/;"	m	class:PaintCanvasTest
 updatePrimaryColor	../../model/ShapeAdapter.java	/^    public void updatePrimaryColor(ShapeColor color) {$/;"	m	class:ShapeAdapter
+updatePrimaryColor	../../model/StateModelAdapter.java	/^    public void updatePrimaryColor(ShapeColor color) {$/;"	m	class:ShapeAdapter
 updateSecondaryColor	../../model/ShapeAdapter.java	/^    public void updateSecondaryColor(ShapeColor color) {$/;"	m	class:ShapeAdapter
+updateSecondaryColor	../../model/StateModelAdapter.java	/^    public void updateSecondaryColor(ShapeColor color) {$/;"	m	class:ShapeAdapter
 view	../../view/EventName.java	/^package view;$/;"	p
 view.gui	../../view/gui/Gui.java	/^package view.gui;$/;"	p
 view.gui	../../view/gui/GuiWindow.java	/^package view.gui;$/;"	p
@@ -325,6 +379,11 @@ view.interfaces	../../view/interfaces/IDialogChoice.java	/^package view.interfac
 view.interfaces	../../view/interfaces/IEventCallback.java	/^package view.interfaces;$/;"	p
 view.interfaces	../../view/interfaces/IGuiWindow.java	/^package view.interfaces;$/;"	p
 view.interfaces	../../view/interfaces/IUiModule.java	/^package view.interfaces;$/;"	p
+wh	../../model/Dimensions.java	/^    public Point wh;$/;"	f	class:Dimensions
 width	../../model/ShapeAdapter.java	/^    public int width;$/;"	f	class:ShapeAdapter
+width	../../model/StateModelAdapter.java	/^    public int width;$/;"	f	class:ShapeAdapter
 x	../../model/ShapeAdapter.java	/^    public int x;$/;"	f	class:ShapeAdapter
+x	../../model/StateModelAdapter.java	/^    public int x;$/;"	f	class:ShapeAdapter
+xy	../../model/Dimensions.java	/^    public Point xy;$/;"	f	class:Dimensions
 y	../../model/ShapeAdapter.java	/^    public int y;$/;"	f	class:ShapeAdapter
+y	../../model/StateModelAdapter.java	/^    public int y;$/;"	f	class:ShapeAdapter

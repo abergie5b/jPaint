@@ -14,11 +14,10 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
     private final IApplicationState applicationState;
     private MouseEventController mouseEventController;
 
-    public MouseEventListener(PaintCanvas canvas, IApplicationState applicationState)
+    public MouseEventListener(IApplicationState applicationState)
     { 
-        this.mouseEventController = new MouseEventController(canvas, applicationState);
         this.applicationState = applicationState;
-        canvas.addMouseListeners(this);
+        this.mouseEventController = new MouseEventController(applicationState);
     } 
 
     @Override

@@ -3,6 +3,8 @@ package view.gui;
 import model.*;
 
 import view.interfaces.IGuiWindow;
+import view.interfaces.IDialogChoice;
+import view.interfaces.IEventCallback;
 import view.EventName;
 import view.gui.PaintCanvas;
 
@@ -43,6 +45,28 @@ public class GuiWindow extends JFrame implements IGuiWindow
         JPanel window = createWindow();
         window.add(canvas, BorderLayout.CENTER);
 		validate();
+    }
+
+	@Override
+	public void addEvent(EventName eventName, IEventCallback callback) {
+		JButton button = this.getButton(eventName);
+		button.addActionListener((ActionEvent) -> callback.run());
+	}
+
+    @Override
+    public <T> T getDialogResponse(IDialogChoice dialogSettings) 
+    {
+        Object selectedValue = JOptionPane.showInputDialog(null,
+                                                           dialogSettings.getDialogText(), 
+                                                           dialogSettings.getDialogTitle(),
+                                                           JOptionPane.PLAIN_MESSAGE,
+                                                           null,
+                                                           dialogSettings.getDialogOptions(),
+                                                           dialogSettings.getCurrentSelection()
+        );
+        return selectedValue == null
+                ? (T)dialogSettings.getCurrentSelection()
+                : (T)selectedValue;
     }
 
     @Override

@@ -13,9 +13,4 @@ import java.awt.event.*;
 import java.awt.geom.*;
 
 public interface IUiModule {
-    void addEvent(EventName eventName, IEventCallback command);
-    void setStatusMenu();
-    void setShape(ShapeAdapter shapeType);
-    PaintCanvas getCanvas();
-    <T> T getDialogResponse(IDialogChoice dialogChoice);
 }

@@ -16,7 +16,7 @@ public class PaintCanvas extends JPanel
     private Color secondaryColor;    
     private ShapeShadingType shading;    
     private StartAndEndPointMode mode;    
-    private ArrayList<ShapeAdapter> shapes;
+    public ArrayList<ShapeAdapter> shapes;
     private ArrayList<ShapeAdapter> shapeHistory;
 
     public PaintCanvas() 

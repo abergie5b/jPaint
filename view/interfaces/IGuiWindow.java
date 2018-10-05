@@ -10,6 +10,8 @@ import java.awt.event.*;
 import java.awt.*;
 
 public interface IGuiWindow {
+	public void addEvent(EventName eventName, IEventCallback callback);
+    public <T> T getDialogResponse(IDialogChoice dialogSettings);
     JButton getButton(EventName eventName);
     void setStatusMenu();
     void setShape(ShapeAdapter shapeType);

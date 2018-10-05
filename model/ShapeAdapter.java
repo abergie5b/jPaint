@@ -72,6 +72,11 @@ public class ShapeAdapter {
         this.shape = shapeToObject(dims);
     }
 
+    public Shape convert(Dimensions dims)
+    {
+        return shapeToObject(dims);
+    }
+
     private Shape shapeToObject(Dimensions dims)
     {
         this.x = dims.xy.x;

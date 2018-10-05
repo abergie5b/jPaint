@@ -3,7 +3,7 @@ package controller;
 import model.*;
 import model.interfaces.IApplicationState;
 import view.EventName;
-import view.interfaces.IUiModule;
+import view.interfaces.IGuiWindow;
 
 import java.awt.*;
 import javax.swing.*;
@@ -12,10 +12,10 @@ import java.awt.event.*;
 import javax.swing.event.*;
 
 public class JPaintController implements IJPaintController {
-    private final IUiModule uiModule;
+    private final IGuiWindow uiModule;
     private final IApplicationState applicationState;
 
-    public JPaintController(IUiModule uiModule, IApplicationState applicationState) {
+    public JPaintController(IGuiWindow uiModule, IApplicationState applicationState) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
     }
