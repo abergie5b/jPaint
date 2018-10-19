@@ -20,7 +20,7 @@ public class ApplicationState implements IApplicationState, Serializable
     private PaintCanvas canvas;
     private final IDialogProvider dialogProvider;
 
-    private ShapeAdapter shapeAdapter;
+    private ShapeAdapter displaySettingsShape;
     private ShapeType activeShapeType;
     private ShapeColor activePrimaryColor;
     private ShapeColor activeSecondaryColor;
@@ -43,15 +43,15 @@ public class ApplicationState implements IApplicationState, Serializable
         this.selectedShapes = new ArrayList<ShapeAdapter>();
         this.clickedShape = null;
         this.draggedShape = null;
-        this.selectedShapes = null;
+        /* Defaults */
         setDefaults();
-        shapeAdapter = new ShapeAdapter(activeShapeType, 
+        displaySettingsShape = new ShapeAdapter(activeShapeType, 
                                         activePrimaryColor,
                                         activeSecondaryColor, 
                                         activeShapeShadingType,
                                         activeStartAndEndPointMode
         );
-        uiModule.setShape(shapeAdapter);
+        uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
 
@@ -100,7 +100,7 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void repaint()
     {
-        this.canvas.repaintCanvas(shapes);
+        this.canvas.repaintCanvas(shapes, this.draggedShape);
     }
 
     @Override
@@ -180,13 +180,6 @@ public class ApplicationState implements IApplicationState, Serializable
         this.shapes.add(_shape);
     }
 
-
-    @Override
-    public void setMouseDraggedShape(ShapeAdapter _shape) 
-    {
-        this.canvas.setMouseDraggedShape(_shape);
-    }
-
     @Override
     public ShapeAdapter getShapeFromBuffer(Point point) 
     {
@@ -229,40 +222,40 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void setActiveShape() {
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
-        shapeAdapter.setShapeType(activeShapeType);
-        uiModule.setShape(shapeAdapter);
+        displaySettingsShape.setShapeType(activeShapeType);
+        uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
 
     @Override
     public void setActivePrimaryColor() {
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
-        shapeAdapter.updatePrimaryColor(activePrimaryColor);
-        uiModule.setShape(shapeAdapter);
+        displaySettingsShape.updatePrimaryColor(activePrimaryColor);
+        uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveSecondaryColor() {
         activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
-        shapeAdapter.updateSecondaryColor(activeSecondaryColor);
-        uiModule.setShape(shapeAdapter);
+        displaySettingsShape.updateSecondaryColor(activeSecondaryColor);
+        uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveShadingType() {
         activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
-        shapeAdapter.shapeShadingType = activeShapeShadingType;
-        uiModule.setShape(shapeAdapter);
+        displaySettingsShape.shapeShadingType = activeShapeShadingType;
+        uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
 
     @Override
     public void setActiveStartAndEndPointMode() {
         activeStartAndEndPointMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog());
-        shapeAdapter.startAndEndPointMode = activeStartAndEndPointMode;
-        uiModule.setShape(shapeAdapter);
+        displaySettingsShape.startAndEndPointMode = activeStartAndEndPointMode;
+        uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
 

@@ -62,7 +62,6 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
                                                 StartAndEndPointMode.DRAW
         );
         ShapeAdapter shape = adapter.convert(Geometry.getDimensionsWithInvert(this.mousePoint, this.mouseDragPoint));
-        this.appState.setMouseDraggedShape(shape);
         this.appState.setDraggedShape(shape);
         this.appState.repaint();
     }
@@ -104,7 +103,6 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
                                             )
             );
             this.appState.setDraggedShape(shape);
-            this.appState.setMouseDraggedShape(shape);
             this.appState.repaint();
         }
         this.setMouseDraggedPosition(e.getPoint());
@@ -142,13 +140,14 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
                                                 StartAndEndPointMode.SELECT);
         ShapeAdapter shape = adapter.convert(dims);
         this.setMouseDraggedPosition(e.getPoint());
-        this.appState.setMouseDraggedShape(shape);
+        this.appState.setDraggedShape(shape);
         this.appState.repaint();
     }
 
     @Override
     public void mouseReleasedSelect(MouseEvent e) {
         this.setMousePosition(e.getPoint());
+        this.appState.resetDraggedShape();
         this.appState.repaint();
     }
 }

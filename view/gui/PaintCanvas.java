@@ -9,24 +9,11 @@ import java.util.ArrayList;
 
 public class PaintCanvas extends JPanel 
 {
-    private Shape shape;    
-    private ShapeAdapter mouseDraggedShape;    
-    private Color primaryColor;    
-    private Color secondaryColor;    
-    private ShapeShadingType shading;    
-    private StartAndEndPointMode mode;    
-    public ArrayList<ShapeAdapter> shapes; // TODO this shouldt be public
-    private ArrayList<ShapeAdapter> shapeHistory;
+    private ArrayList<ShapeAdapter> shapes; // TODO this shouldt be public
 
     public PaintCanvas() 
     {
         shapes = new ArrayList<ShapeAdapter>();
-        shapeHistory = new ArrayList<ShapeAdapter>();
-    }
-
-    public void setMouseDraggedShape(ShapeAdapter _shape) 
-    {
-        this.mouseDraggedShape = _shape;
     }
 
     private Graphics2D getGraphics2D() 
@@ -39,9 +26,15 @@ public class PaintCanvas extends JPanel
         this.shapes = shapes;
     }
 
-    public void repaintCanvas(ArrayList<ShapeAdapter> shapes)
+    public void repaintCanvas(ArrayList<ShapeAdapter> shapes, ShapeAdapter mouseDraggedShape)
     {
-        this.setShapes(shapes);
+        ArrayList<ShapeAdapter> allShapes = new ArrayList<ShapeAdapter> (shapes);
+        if (mouseDraggedShape != null)
+        {
+            allShapes.add(mouseDraggedShape);
+        }
+
+        this.setShapes(allShapes);
         this.repaint();
     }
     
@@ -51,14 +44,9 @@ public class PaintCanvas extends JPanel
         Graphics2D g2d = (Graphics2D)g;
         g2d.setStroke(new BasicStroke(2));
 
-        ArrayList<ShapeAdapter> allShapes = new ArrayList<ShapeAdapter> (shapes);
-        if (this.mouseDraggedShape != null)
+        for (ShapeAdapter s: shapes)
         {
-            allShapes.add(this.mouseDraggedShape);
-        }
-        for (ShapeAdapter s: allShapes)
-        {
-            System.out.println(allShapes.size() + " Drawing shape: " + s.shape + " X: " + s.x + " y: " + s.y + " w: " + s.width + " h: " + s.height);
+            System.out.println(shapes.size() + " Drawing shape: " + s.shape + " X: " + s.x + " y: " + s.y + " w: " + s.width + " h: " + s.height);
             IPaintStrategy strategy = null;
             switch (s.shapeShadingType)
             {
@@ -77,6 +65,5 @@ public class PaintCanvas extends JPanel
                 strategy.execute();
             }
         }
-        this.mouseDraggedShape = null;
     }
 }

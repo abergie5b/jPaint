@@ -30,7 +30,6 @@ public interface IApplicationState
     void setActiveSecondaryColor();
     void setActiveShadingType();
     void setActiveStartAndEndPointMode();
-    void setMouseDraggedShape(ShapeAdapter shape);
     ShapeType getActiveShapeType();
     ShapeColor getActivePrimaryColor();
     ShapeColor getActiveSecondaryColor();
