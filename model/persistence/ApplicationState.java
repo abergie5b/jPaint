@@ -30,12 +30,16 @@ public class ApplicationState implements IApplicationState, Serializable
     public ShapeAdapter clickedShape;
     public ShapeAdapter draggedShape;
     public ArrayList<ShapeAdapter> selectedShapes;
+    private ArrayList<ShapeAdapter> shapes;
+    private ArrayList<ShapeAdapter> shapeHistory;
 
     public ApplicationState(IGuiWindow uiModule) 
     {
         this.uiModule = uiModule;
         this.canvas = uiModule.getCanvas();
         this.dialogProvider = new DialogProvider(this);
+        this.shapes = new ArrayList<ShapeAdapter>();
+        this.shapeHistory = new ArrayList<ShapeAdapter>();
         this.selectedShapes = new ArrayList<ShapeAdapter>();
         this.clickedShape = null;
         this.draggedShape = null;
@@ -49,6 +53,54 @@ public class ApplicationState implements IApplicationState, Serializable
         );
         uiModule.setShape(shapeAdapter);
         uiModule.setStatusMenu();
+    }
+
+    private int getNumberOfShapes() 
+    {
+        return this.shapes.size();
+    }
+
+    private int getNumberOfShapeHistory() 
+    {
+        return this.shapeHistory.size();
+    }
+
+    public void redo() 
+    {
+        // TODO implement Command Pattern
+        if (getNumberOfShapeHistory() > 0) 
+        {
+            ShapeAdapter s = this.shapeHistory.get(getNumberOfShapeHistory() - 1);
+            this.shapeHistory.remove(getNumberOfShapeHistory() - 1);
+            this.shapes.add(s);
+        }
+        this.repaint();
+    }
+    public void undo() 
+    {
+        // TODO implement Command Pattern
+        if (getNumberOfShapes() > 0) 
+        {
+            ShapeAdapter s = this.shapes.get(getNumberOfShapes() - 1);
+            this.shapes.remove(this.getNumberOfShapes() - 1);
+            this.shapeHistory.add(s);
+        }
+        this.repaint();
+    }
+
+    public void delete()
+    {
+        for (ShapeAdapter ss: this.selectedShapes)
+        {
+            this.removeShapeFromBuffer(ss);
+        }
+        this.repaint();
+    }
+
+    @Override
+    public void repaint()
+    {
+        this.canvas.repaintCanvas(shapes);
     }
 
     @Override
@@ -86,18 +138,18 @@ public class ApplicationState implements IApplicationState, Serializable
     {
         this.clickedShape = this.getShapeFromBuffer(point);
     }
-    
+
     @Override
-    public void repaint() 
+    public void setCanvasShapes()
     {
-        this.canvas.repaint();
+        this.canvas.setShapes(this.shapes);
     }
 
     @Override
     public ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection)
     {
         ArrayList<ShapeAdapter> selectedShapes = new ArrayList<ShapeAdapter>();
-        for (ShapeAdapter s: this.canvas.shapes) 
+        for (ShapeAdapter s: this.shapes) 
         {
             if (s.shape.intersects(selection))
             {
@@ -111,13 +163,13 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void removeShapeFromBuffer(ShapeAdapter shape) 
     {
-        for (int x=0; x<this.canvas.shapes.size(); x++)
+        for (int x=0; x<this.shapes.size(); x++)
         {
-            ShapeAdapter s = this.canvas.shapes.get(x);
+            ShapeAdapter s = this.shapes.get(x);
             if (shape.equals(s))
             {
                 System.out.println("Removing shape: " + s);
-                this.canvas.shapes.remove(x);
+                this.shapes.remove(x);
             }
         }
     }
@@ -125,7 +177,7 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void addShapeAttribute(ShapeAdapter _shape) 
     {
-        this.canvas.shapes.add(_shape);
+        this.shapes.add(_shape);
     }
 
 
@@ -139,7 +191,7 @@ public class ApplicationState implements IApplicationState, Serializable
     public ShapeAdapter getShapeFromBuffer(Point point) 
     {
         ShapeAdapter _shape = null;
-        for (ShapeAdapter s: this.canvas.shapes)
+        for (ShapeAdapter s: this.shapes)
         {
             if (s.shape.contains(point))
             {
@@ -147,21 +199,6 @@ public class ApplicationState implements IApplicationState, Serializable
             }
         }
         return _shape;
-    }
-
-    @Override
-    public void undo() {
-        this.canvas.undo();
-    }
-
-    @Override
-    public void redo() {
-        this.canvas.redo();
-    }
-
-    @Override
-    public void delete() {
-        this.canvas.deleteShapes(selectedShapes);
     }
 
     @Override
@@ -179,7 +216,7 @@ public class ApplicationState implements IApplicationState, Serializable
                                                      s.startAndEndPointMode
             );
             newShape.setShape(new Dimensions(new Point(0, 0), new Point(s.getWidth(), s.getHeight())));
-            this.canvas.addShapeAttribute(newShape);
+            this.addShapeAttribute(newShape);
         }
         repaint();
     }

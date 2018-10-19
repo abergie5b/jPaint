@@ -20,7 +20,11 @@ public class ShapeAdapter {
     public ShapeShadingType shapeShadingType;
     public StartAndEndPointMode startAndEndPointMode;
 
-    public ShapeAdapter(ShapeType shapeType, ShapeColor primaryColor, ShapeColor secondaryColor, ShapeShadingType shapeShadingType, StartAndEndPointMode startAndEndPointMode) 
+    public ShapeAdapter(ShapeType shapeType, 
+                        ShapeColor primaryColor, 
+                        ShapeColor secondaryColor, 
+                        ShapeShadingType shapeShadingType, 
+                        StartAndEndPointMode startAndEndPointMode) 
     {
         this.shapeType = shapeType;
         this.primaryShapeColor = primaryColor;
