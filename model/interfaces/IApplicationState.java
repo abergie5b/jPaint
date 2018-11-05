@@ -18,6 +18,7 @@ public interface IApplicationState
     void removeShapeFromBuffer(ShapeAdapter shape);
     void addShapeAttribute(ShapeAdapter _shape);
     ShapeAdapter getShapeFromBuffer(Point point);
+    void move(ShapeAdapter to, ShapeAdapter from);
     void undo();
     void redo();
     void delete();

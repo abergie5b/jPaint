@@ -78,6 +78,12 @@ public class ShapeAdapter {
     public ShapeAdapter convert(Dimensions dims)
     {
         // TODO return a new class of object "JShape" or something ...
+        //ShapeAdapter shape =  new ShapeAdapter(this.shapeType,
+        //                                       this.primaryShapeColor,
+        //                                       this.secondaryShapeColor,
+        //                                       this.shapeShadingType,
+        //                                       this.startAndEndPointMode
+        //                        );
         this.shape = shapeToObject(dims);
         return this;
     }
@@ -93,25 +99,25 @@ public class ShapeAdapter {
         {
             case ELLIPSE:
             {
-                _shape = new Ellipse2D.Double(x, y, width, height);
+                _shape = new Ellipse2D.Double(this.x, this.y, this.width, this.height);
                 break;
             }
             case RECTANGLE:
             {
-                _shape = new Rectangle(x, y, width, height);
+                _shape = new Rectangle(this.x, this.y, this.width, this.height);
                 break;
             }
             case TRIANGLE:
             {
-                _shape = new Polygon(new int[] {x+width/2, x, x+width}, 
-                                     new int[] {y+height, y-height, y-height}, 
+                _shape = new Polygon(new int[] {this.x+this.width/2, this.x, this.x+this.width}, 
+                                     new int[] {this.y+this.height, this.y-this.height, this.y-this.height}, 
                                      3);
                 break;
             }
             default:
             {
                 // #TODO throw error
-                _shape = new Rectangle(x, y, width, height);
+                _shape = new Rectangle(this.x, this.y, this.width, this.height);
                 break;
             }
         }

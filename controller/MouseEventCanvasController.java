@@ -63,61 +63,62 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
         );
         ShapeAdapter shape = adapter.convert(Geometry.getDimensionsWithInvert(this.mousePoint, this.mouseDragPoint));
         this.appState.setDraggedShape(shape);
-        this.appState.repaint();
     }
 
     @Override
     public void mouseReleasedDraw(MouseEvent e) {
-        if (this.appState.getDraggedShape() != null)
+        ShapeAdapter draggedShape = this.appState.getDraggedShape();
+        if (draggedShape != null)
         {
-            this.appState.addShapeAttribute(this.appState.getDraggedShape());
+            this.appState.addShapeAttribute(draggedShape);
         }
         this.setMousePosition(e.getPoint());
         this.appState.resetDraggedShape();
-        this.appState.repaint();
     }
 
     @Override
     public void mousePressedMove(MouseEvent e) {
         Point point = e.getPoint();
         this.setMousePosition(e.getPoint());
-        this.setMouseDraggedPosition(e.getPoint());
+        this.setMouseDraggedPosition(point);
         this.appState.setClickedShape(point);
     }
 
     @Override
     public void mouseDraggedMove(MouseEvent e) {
-        if (this.appState.getClickedShape() != null)
+        ShapeAdapter clickedShape = this.appState.getClickedShape();
+        if (clickedShape != null)
         {
-            ShapeAdapter adapter = new ShapeAdapter(this.appState.getClickedShape().shapeType,
-                                                    this.appState.getClickedShape().primaryShapeColor,
-                                                    this.appState.getClickedShape().secondaryShapeColor,
-                                                    this.appState.getClickedShape().shapeShadingType,
+            ShapeAdapter adapter = new ShapeAdapter(clickedShape.shapeType,
+                                                    clickedShape.primaryShapeColor,
+                                                    clickedShape.secondaryShapeColor,
+                                                    clickedShape.shapeShadingType,
                                                     StartAndEndPointMode.MOVE);
             int deltaX = this.mousePoint.x - this.mouseDragPoint.x;
             int deltaY = this.mousePoint.y - this.mouseDragPoint.y;
-            ShapeAdapter shape = adapter.convert(new Dimensions(new Point(this.appState.getClickedShape().x - deltaX, 
-                                                                          this.appState.getClickedShape().y - deltaY),
-                                                                new Point(this.appState.getClickedShape().width, 
-                                                                          this.appState.getClickedShape().height)
+            ShapeAdapter shape = adapter.convert(new Dimensions(
+                                                 new Point(clickedShape.x - deltaX, 
+                                                           clickedShape.y - deltaY),
+                                                 new Point(clickedShape.width, 
+                                                           clickedShape.height)
                                             )
             );
             this.appState.setDraggedShape(shape);
-            this.appState.repaint();
         }
         this.setMouseDraggedPosition(e.getPoint());
     }
 
     @Override
     public void mouseReleasedMove(MouseEvent e) {
-        if (this.appState.getDraggedShape() != null && this.appState.getClickedShape() != null)
+        ShapeAdapter draggedShape = this.appState.getDraggedShape();
+        if (draggedShape != null && this.appState.getClickedShape() != null)
         {
-            this.appState.removeShapeFromBuffer(this.appState.getClickedShape());
-            this.appState.addShapeAttribute(this.appState.getDraggedShape());
+            //this.appState.removeShapeFromBuffer(this.appState.getClickedShape());
+            //this.appState.addShapeAttribute(draggedShape);
+            this.appState.move(this.appState.getClickedShape(), draggedShape);
         }
         this.setMousePosition(e.getPoint());
         this.appState.resetDraggedShape();
-        this.appState.repaint();
     }
 
     @Override
@@ -141,14 +142,12 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
         ShapeAdapter shape = adapter.convert(dims);
         this.setMouseDraggedPosition(e.getPoint());
         this.appState.setDraggedShape(shape);
-        this.appState.repaint();
     }
 
     @Override
     public void mouseReleasedSelect(MouseEvent e) {
         this.setMousePosition(e.getPoint());
         this.appState.resetDraggedShape();
-        this.appState.repaint();
     }
 }
 

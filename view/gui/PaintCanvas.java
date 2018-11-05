@@ -33,7 +33,6 @@ public class PaintCanvas extends JPanel
         {
             allShapes.add(mouseDraggedShape);
         }
-
         this.setShapes(allShapes);
         this.repaint();
     }
