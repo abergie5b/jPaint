@@ -33,6 +33,7 @@ public class ApplicationState implements IApplicationState, Serializable
     private ArrayList<ShapeAdapter> shapes;
     private ArrayList<ShapeAdapter> shapeHistory;
     private CommandHistory commandHistory;
+    private ArrayList<ShapeAdapter> copiedShapes;
     private int commandHistoryPointer;
 
     public ApplicationState(IGuiWindow uiModule) 
@@ -46,6 +47,7 @@ public class ApplicationState implements IApplicationState, Serializable
         this.selectedShapes = new ArrayList<ShapeAdapter>();
         this.clickedShape = null;
         this.draggedShape = null;
+        this.copiedShapes = new ArrayList<ShapeAdapter>();
         this.commandHistoryPointer = 0;
         /* Defaults */
         setDefaults();
@@ -155,14 +157,12 @@ public class ApplicationState implements IApplicationState, Serializable
 
     @Override
     public void copy() {
-        //CopyCommand copy = new CopyCommand(shapes, selectedShapes);
-        //commandHistory.add(copy);
-        //repaint();
+        this.copiedShapes = this.selectedShapes;
     }
 
     @Override
     public void paste() {
-        PasteCommand paste = new PasteCommand(shapes, selectedShapes);
+        PasteCommand paste = new PasteCommand(shapes, copiedShapes);
         commandHistory.add(paste);
         paste.execute();
         repaint();
@@ -244,6 +244,12 @@ public class ApplicationState implements IApplicationState, Serializable
             }
         }
         return _shape;
+    }
+
+    public void setSelectedShape(ShapeAdapter _shape) {
+        ArrayList<ShapeAdapter>_shapes = new ArrayList<ShapeAdapter>();
+        _shapes.add(_shape);
+        this.selectedShapes = _shapes;
     }
 
     @Override 

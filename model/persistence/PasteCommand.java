@@ -10,10 +10,12 @@ public class PasteCommand implements ICommand
 {
     private ArrayList<ShapeAdapter> shapes;
     private ArrayList<ShapeAdapter> selectedShapes;
+    private ArrayList<ShapeAdapter> pastedShapes;
     public PasteCommand(ArrayList<ShapeAdapter> shapes, ArrayList<ShapeAdapter> selectedShapes)
     {
         this.shapes = shapes;
         this.selectedShapes = selectedShapes;
+        this.pastedShapes = new ArrayList<ShapeAdapter>();
     }
 
     public void execute()
@@ -27,6 +29,7 @@ public class PasteCommand implements ICommand
                                                      s.startAndEndPointMode
             );
             newShape.setShape(new Dimensions(new Point(0, 0), new Point(s.getWidth(), s.getHeight())));
+            pastedShapes.add(newShape);
             AddShapeCommand addShape = new AddShapeCommand(shapes, newShape);
             addShape.execute();
         }
@@ -36,9 +39,9 @@ public class PasteCommand implements ICommand
     {
         for (int x=0; x<this.shapes.size(); x++)
         {
-            for (int y=0; y<this.selectedShapes.size(); y++)
+            for (int y=0; y<this.pastedShapes.size(); y++)
             {
-                if (this.shapes.get(x) == this.selectedShapes.get(y))
+                if (this.shapes.get(x) == this.pastedShapes.get(y))
                 {
                     this.shapes.remove(x);
                 }

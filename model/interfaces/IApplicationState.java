@@ -25,6 +25,7 @@ public interface IApplicationState
     void copy();
     void paste();
     void setCanvasShapes();
+    void setSelectedShape(ShapeAdapter _shape);
     void setSelectedShapes(Rectangle selection);
     void setActiveShape();
     void setActivePrimaryColor();

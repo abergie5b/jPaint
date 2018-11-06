@@ -126,6 +126,7 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
         this.setMousePosition(e.getPoint());
         this.setMouseDraggedPosition(e.getPoint());
         this.appState.setClickedShape(e.getPoint());
+        this.appState.setSelectedShape(this.appState.getClickedShape());
         this.appState.repaint();
     }
 
