@@ -32,7 +32,7 @@ public class ApplicationState implements IApplicationState, Serializable
     public ArrayList<ShapeAdapter> selectedShapes;
     private ArrayList<ShapeAdapter> shapes;
     private ArrayList<ShapeAdapter> shapeHistory;
-    private ArrayList<ICommand> commandHistory;
+    private CommandHistory commandHistory;
     private int commandHistoryPointer;
 
     public ApplicationState(IGuiWindow uiModule) 
@@ -42,7 +42,7 @@ public class ApplicationState implements IApplicationState, Serializable
         this.dialogProvider = new DialogProvider(this);
         this.shapes = new ArrayList<ShapeAdapter>();
         this.shapeHistory = new ArrayList<ShapeAdapter>();
-        this.commandHistory = CommandHistory.getInstance();
+        this.commandHistory = new CommandHistory();
         this.selectedShapes = new ArrayList<ShapeAdapter>();
         this.clickedShape = null;
         this.draggedShape = null;
@@ -62,38 +62,35 @@ public class ApplicationState implements IApplicationState, Serializable
     private class CommandHistory 
     {
         public int pointer;
-        public ArrayList<Integer> nullifiedCommands;
         public ArrayList<ICommand> commands;
-        private CommandHistory singleton = new CommandHistory();
         private CommandHistory()
         {
             this.pointer = 0;
-            this.nullifiedCommands = new ArrayList<Integer>();
             this.commands = new ArrayList<ICommand>();
         }
-        public static CommandHistory getInstance()
-        {
-            return singleton;
-        }
-        public add(ICommand command)
+        public void add(ICommand command)
         {
             this.commands.add(command);
-            this.pointer = this.commands.size();
+            this.pointer = this.commands.size() - 1;
         }
         public ICommand getUndoCommand()
         {
-            ICommand command = this.commands.get(this.pointer);
-            this.nullifiedCommands.add(this.pointer);
-            this.pointer--;
+            ICommand command = null;
+            if (this.pointer >= 0)
+            {
+                command = this.commands.get(this.pointer);
+                this.pointer--;
+            }
             return command;
         }
         public ICommand getRedoCommand()
         {
-            while (!this.nullifiedCommands.contains(this.pointer) && this.pointer < this.commands.size())
+            ICommand command = null;
+            if (this.pointer < (this.commands.size() - 1))
             {
                 this.pointer++;
+                command = this.commands.get(this.pointer);
             }
-            ICommand command = this.commands.get(this.pointer);
             return command;
         }
     }
@@ -118,21 +115,15 @@ public class ApplicationState implements IApplicationState, Serializable
 
     public void redo() 
     {
-        if (commandHistory.commands.size() > 0)
-        {
-            ICommand lastCommand = commandHistory.getRedoCommand();
-            lastCommand.execute();
-        }
+        ICommand lastCommand = commandHistory.getRedoCommand();
+        lastCommand.execute();
         this.repaint();
     }
 
     public void undo() 
     {
-        if (commandHistory.commands.size() > 0)
-        {
-            ICommand lastCommand = commandHistory.getUndoCommand();
-            lastCommand.undo();
-        }
+        ICommand lastCommand = commandHistory.getUndoCommand();
+        lastCommand.undo();
         this.repaint();
     }
 
