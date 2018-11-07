@@ -31,10 +31,8 @@ public class ApplicationState implements IApplicationState, Serializable
     public ShapeAdapter draggedShape;
     public ArrayList<ShapeAdapter> selectedShapes;
     private ArrayList<ShapeAdapter> shapes;
-    private ArrayList<ShapeAdapter> shapeHistory;
     private CommandHistory commandHistory;
     private ArrayList<ShapeAdapter> copiedShapes;
-    private int commandHistoryPointer;
 
     public ApplicationState(IGuiWindow uiModule) 
     {
@@ -42,13 +40,11 @@ public class ApplicationState implements IApplicationState, Serializable
         this.canvas = uiModule.getCanvas();
         this.dialogProvider = new DialogProvider(this);
         this.shapes = new ArrayList<ShapeAdapter>();
-        this.shapeHistory = new ArrayList<ShapeAdapter>();
         this.commandHistory = new CommandHistory();
         this.selectedShapes = new ArrayList<ShapeAdapter>();
         this.clickedShape = null;
         this.draggedShape = null;
         this.copiedShapes = new ArrayList<ShapeAdapter>();
-        this.commandHistoryPointer = 0;
         /* Defaults */
         setDefaults();
         displaySettingsShape = new ShapeAdapter(activeShapeType, 
@@ -65,10 +61,12 @@ public class ApplicationState implements IApplicationState, Serializable
     {
         public int pointer;
         public ArrayList<ICommand> commands;
+        private ArrayList<Integer> nullifiedCommands;
         private CommandHistory()
         {
             this.pointer = 0;
             this.commands = new ArrayList<ICommand>();
+            this.nullifiedCommands = new ArrayList<Integer>();
         }
         public void add(ICommand command)
         {
@@ -81,6 +79,7 @@ public class ApplicationState implements IApplicationState, Serializable
             if (this.pointer >= 0)
             {
                 command = this.commands.get(this.pointer);
+                nullifiedCommands.add(this.pointer);
                 this.pointer--;
             }
             return command;
@@ -95,16 +94,6 @@ public class ApplicationState implements IApplicationState, Serializable
             }
             return command;
         }
-    }
-
-    private int getNumberOfShapes() 
-    {
-        return this.shapes.size();
-    }
-
-    private int getNumberOfShapeHistory() 
-    {
-        return this.shapeHistory.size();
     }
 
     @Override
@@ -142,17 +131,6 @@ public class ApplicationState implements IApplicationState, Serializable
         MoveCommand move = new MoveCommand(this.shapes, to, from);
         commandHistory.add(move);
         move.execute();
-    }
-
-    @Override
-    public void removeShapeFromBuffer(ShapeAdapter shape) 
-    {
-        ArrayList<ShapeAdapter> selectedShapes = new ArrayList<ShapeAdapter>();
-        selectedShapes.add(shape);
-        DeleteCommand delete = new DeleteCommand(shapes, selectedShapes);
-        delete.execute();
-        commandHistory.add(delete);
-        repaint();
     }
 
     @Override
@@ -213,12 +191,6 @@ public class ApplicationState implements IApplicationState, Serializable
     }
 
     @Override
-    public void setCanvasShapes()
-    {
-        this.canvas.setShapes(this.shapes);
-    }
-
-    @Override
     public ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection)
     {
         ArrayList<ShapeAdapter> selectedShapes = new ArrayList<ShapeAdapter>();
@@ -265,10 +237,39 @@ public class ApplicationState implements IApplicationState, Serializable
         uiModule.setStatusMenu();
     }
 
+    private void updatePrimaryColorInSelectMode(ShapeColor color)
+    {
+        for (ShapeAdapter s: this.getSelectedShapes())
+        {
+            s.updatePrimaryColor(color);
+        }
+    }
+
+    private void updateSecondaryColorInSelectMode(ShapeColor color)
+    {
+        for (ShapeAdapter s: this.getSelectedShapes())
+        {
+            s.updateSecondaryColor(color);
+        }
+    }
+
+    private void updateShadingTypeInSelectMode(ShapeShadingType shading)
+    {
+        for (ShapeAdapter s: this.getSelectedShapes())
+        {
+            s.updateShadingType(shading);
+        }
+    }
+
     @Override
     public void setActivePrimaryColor() {
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
         displaySettingsShape.updatePrimaryColor(activePrimaryColor);
+        if (this.activeStartAndEndPointMode == StartAndEndPointMode.SELECT)
+        {
+            updatePrimaryColorInSelectMode(activePrimaryColor);
+            this.repaint();
+        }
         uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
@@ -277,6 +278,11 @@ public class ApplicationState implements IApplicationState, Serializable
     public void setActiveSecondaryColor() {
         activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
         displaySettingsShape.updateSecondaryColor(activeSecondaryColor);
+        if (this.activeStartAndEndPointMode == StartAndEndPointMode.SELECT)
+        {
+            updateSecondaryColorInSelectMode(activeSecondaryColor);
+            this.repaint();
+        }
         uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
@@ -285,6 +291,11 @@ public class ApplicationState implements IApplicationState, Serializable
     public void setActiveShadingType() {
         activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
         displaySettingsShape.shapeShadingType = activeShapeShadingType;
+        if (this.activeStartAndEndPointMode == StartAndEndPointMode.SELECT)
+        {
+            updateShadingTypeInSelectMode(activeShapeShadingType);
+            this.repaint();
+        }
         uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }

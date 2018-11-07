@@ -113,8 +113,6 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
         ShapeAdapter draggedShape = this.appState.getDraggedShape();
         if (draggedShape != null && this.appState.getClickedShape() != null)
         {
-            //this.appState.removeShapeFromBuffer(this.appState.getClickedShape());
-            //this.appState.addShapeAttribute(draggedShape);
             this.appState.move(this.appState.getClickedShape(), draggedShape);
         }
         this.setMousePosition(e.getPoint());

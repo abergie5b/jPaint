@@ -1,5 +1,9 @@
 package model.interfaces;
 
+import model.*;
+import java.awt.Color;
+import java.awt.Shape;
+
 public interface IShapeAdapter
 {
     int getWidth();

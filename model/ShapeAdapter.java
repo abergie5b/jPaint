@@ -70,6 +70,10 @@ public class ShapeAdapter {
         this.secondaryColor = this.colorToObject(color);
     }
 
+    public void updateShadingType(ShapeShadingType shading) {
+        this.shapeShadingType = shading;
+    }
+
     public void setShape(Dimensions dims)
     {
         this.shape = shapeToObject(dims);

@@ -15,7 +15,6 @@ public interface IApplicationState
     void setClickedShape(Point point);
     void repaint();
     ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection);
-    void removeShapeFromBuffer(ShapeAdapter shape);
     void addShapeAttribute(ShapeAdapter _shape);
     ShapeAdapter getShapeFromBuffer(Point point);
     void move(ShapeAdapter to, ShapeAdapter from);
@@ -24,7 +23,6 @@ public interface IApplicationState
     void delete();
     void copy();
     void paste();
-    void setCanvasShapes();
     void setSelectedShape(ShapeAdapter _shape);
     void setSelectedShapes(Rectangle selection);
     void setActiveShape();
