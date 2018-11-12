@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class DeleteCommand implements ICommand
 {
-    private ArrayList<ShapeAdapter> shapes;
-    private ArrayList<ShapeAdapter> selectedShapes;
-    public DeleteCommand(ArrayList<ShapeAdapter> shapes, ArrayList<ShapeAdapter> selectedShapes)
+    private ArrayList<JPaintShapeAdapter> shapes;
+    private ArrayList<JPaintShapeAdapter> selectedShapes;
+    public DeleteCommand(ArrayList<JPaintShapeAdapter> shapes, ArrayList<JPaintShapeAdapter> selectedShapes)
     {
         this.shapes = shapes;
         this.selectedShapes = selectedShapes;
@@ -28,7 +28,7 @@ public class DeleteCommand implements ICommand
 
     public void undo()
     {
-        for (ShapeAdapter s: selectedShapes)
+        for (JPaintShapeAdapter s: selectedShapes)
         {
             this.shapes.add(s);
         }

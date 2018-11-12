@@ -5,28 +5,16 @@ import java.util.ArrayList;
 
 public class MoveCommand implements ICommand
 {
-    private ShapeAdapter to;
-    private ShapeAdapter from;
-    private ArrayList<ShapeAdapter> shapes;
-    public MoveCommand(ArrayList<ShapeAdapter> shapes, ShapeAdapter to, ShapeAdapter from)
+    private JPaintShapeAdapter to;
+    private JPaintShapeAdapter from;
+    private ArrayList<JPaintShapeAdapter> shapes;
+    public MoveCommand(ArrayList<JPaintShapeAdapter> shapes, JPaintShapeAdapter from, JPaintShapeAdapter to)
     {
         this.shapes = shapes;
-        this.to = to;
         this.from = from;
+        this.to = to;
     }
     public void execute()
-    {
-        for (int x=0; x<shapes.size(); x++)
-        {
-            if (shapes.get(x) == to)
-            {
-                shapes.remove(x);
-            }
-        }
-        shapes.add(from);
-    }
-
-    public void undo()
     {
         for (int x=0; x<shapes.size(); x++)
         {
@@ -36,5 +24,17 @@ public class MoveCommand implements ICommand
             }
         }
         shapes.add(to);
+    }
+
+    public void undo()
+    {
+        for (int x=0; x<shapes.size(); x++)
+        {
+            if (shapes.get(x) == to)
+            {
+                shapes.remove(x);
+            }
+        }
+        shapes.add(from);
     }
 }

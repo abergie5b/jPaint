@@ -3,32 +3,31 @@ package model.persistence;
 import model.*;
 import java.util.ArrayList;
 
-import java.awt.geom.*;
 import java.awt.*;
 
 public class PasteCommand implements ICommand
 {
-    private ArrayList<ShapeAdapter> shapes;
-    private ArrayList<ShapeAdapter> selectedShapes;
-    private ArrayList<ShapeAdapter> pastedShapes;
-    public PasteCommand(ArrayList<ShapeAdapter> shapes, ArrayList<ShapeAdapter> selectedShapes)
+    private ArrayList<JPaintShapeAdapter> shapes;
+    private ArrayList<JPaintShapeAdapter> selectedShapes;
+    private ArrayList<JPaintShapeAdapter> pastedShapes;
+    public PasteCommand(ArrayList<JPaintShapeAdapter> shapes, ArrayList<JPaintShapeAdapter> selectedShapes)
     {
         this.shapes = shapes;
         this.selectedShapes = selectedShapes;
-        this.pastedShapes = new ArrayList<ShapeAdapter>();
+        this.pastedShapes = new ArrayList<>();
     }
 
     public void execute()
     {
-        for (ShapeAdapter s: selectedShapes)
+        for (JPaintShapeAdapter s: selectedShapes)
         {
-            ShapeAdapter newShape = new ShapeAdapter(s.shapeType,
-                                                     s.primaryShapeColor,
-                                                     s.secondaryShapeColor,
-                                                     s.shapeShadingType,
-                                                     s.startAndEndPointMode
+            JPaintShape shape = new JPaintShape(s.getJPaintShape().getShapeType(),
+                                                s.getJPaintShape().getPrimaryShapeColor(),
+                                                s.getJPaintShape().getSecondaryShapeColor(),
+                                                s.getJPaintShape().getShapeShadingType(),
+                                                s.getJPaintShape().getStartAndEndPointMode()
             );
-            newShape.setShape(new Dimensions(new Point(0, 0), new Point(s.getWidth(), s.getHeight())));
+            JPaintShapeAdapter newShape = new JPaintShapeAdapter(shape, new Dimensions(new Point(0, 0), new Point(s.getWidth(), s.getHeight())));
             pastedShapes.add(newShape);
             AddShapeCommand addShape = new AddShapeCommand(shapes, newShape);
             addShape.execute();

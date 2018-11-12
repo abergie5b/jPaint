@@ -4,7 +4,6 @@ import java.awt.event.*;
 
 public interface IMouseEventCanvasController 
 {
-    void printEvent(String eventName);
     void mousePressedDraw(MouseEvent evt);
     void mousePressedMove(MouseEvent evt);
     void mousePressedSelect(MouseEvent evt);

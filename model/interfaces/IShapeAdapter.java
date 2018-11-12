@@ -14,7 +14,7 @@ public interface IShapeAdapter
     void updatePrimaryColor(ShapeColor color);
     void updateSecondaryColor(ShapeColor color);
     void setShape(Dimensions dims);
-    ShapeAdapter convert(Dimensions dims);
+    JPaintShape convert(Dimensions dims);
     Shape shapeToObject(Dimensions dims);
     Color colorToObject(ShapeColor color);
 }

@@ -5,13 +5,14 @@ import java.util.ArrayList;
 
 public class AddShapeCommand implements ICommand
 {
-    private ShapeAdapter shape;
-    private ArrayList<ShapeAdapter> shapes;
-    public AddShapeCommand(ArrayList<ShapeAdapter> shapes, ShapeAdapter shape)
+    private JPaintShapeAdapter shape;
+    private ArrayList<JPaintShapeAdapter> shapes;
+    public AddShapeCommand(ArrayList<JPaintShapeAdapter> shapes, JPaintShapeAdapter shape)
     {
         this.shape = shape;
         this.shapes = shapes;
     }
+
     public void execute()
     {
         this.shapes.add(this.shape);

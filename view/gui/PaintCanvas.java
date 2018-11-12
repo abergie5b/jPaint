@@ -1,7 +1,6 @@
 package view.gui;
 
 import model.*;
-import view.gui.MouseEventListener;
 
 import java.awt.*;
 import javax.swing.JPanel;
@@ -9,26 +8,21 @@ import java.util.ArrayList;
 
 public class PaintCanvas extends JPanel 
 {
-    private ArrayList<ShapeAdapter> shapes; // TODO this shouldt be public
+    private ArrayList<JPaintShapeAdapter> shapes; // TODO this shouldt be public
 
     public PaintCanvas() 
     {
-        shapes = new ArrayList<ShapeAdapter>();
+        shapes = new ArrayList<>();
     }
 
-    private Graphics2D getGraphics2D() 
-    {
-        return (Graphics2D)getGraphics();
-    }
-
-    public void setShapes(ArrayList<ShapeAdapter> shapes)
+    public void setShapes(ArrayList<JPaintShapeAdapter> shapes)
     {
         this.shapes = shapes;
     }
 
-    public void repaintCanvas(ArrayList<ShapeAdapter> shapes, ShapeAdapter mouseDraggedShape)
+    public void repaintCanvas(ArrayList<JPaintShapeAdapter> shapes, JPaintShapeAdapter mouseDraggedShape)
     {
-        ArrayList<ShapeAdapter> allShapes = new ArrayList<ShapeAdapter> (shapes);
+        ArrayList<JPaintShapeAdapter> allShapes = new ArrayList<> (shapes);
         if (mouseDraggedShape != null)
         {
             allShapes.add(mouseDraggedShape);
@@ -43,11 +37,11 @@ public class PaintCanvas extends JPanel
         Graphics2D g2d = (Graphics2D)g;
         g2d.setStroke(new BasicStroke(2));
 
-        for (ShapeAdapter s: shapes)
+        for (JPaintShapeAdapter s: shapes)
         {
-            System.out.println(shapes.size() + " Drawing shape: " + s.shape + " X: " + s.x + " y: " + s.y + " w: " + s.width + " h: " + s.height);
-            IPaintStrategy strategy = null;
-            switch (s.shapeShadingType)
+            //System.out.println(shapes.size() + " Drawing shape: " + s.getShape() + " X: " + s.getX() + " y: " + s.getY() + " w: " + s.getWidth() + " h: " + s.getHeight());
+            IPaintStrategy strategy;
+            switch (s.getJPaintShape().getShapeShadingType())
             {
                 case FILLED_IN:
                     strategy = new FilledInPaintStrategy(g2d, s);
@@ -58,11 +52,10 @@ public class PaintCanvas extends JPanel
                 case OUTLINE_AND_FILLED_IN:
                     strategy = new OutlineAndFilledInPaintStrategy(g2d, s);
                     break;
+                default:
+                    throw new IllegalArgumentException("Invalid ShapeShadingType found when painting");
             }
-            if (strategy != null)
-            {
-                strategy.execute();
-            }
+            strategy.execute();
         }
     }
 }

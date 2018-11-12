@@ -14,11 +14,6 @@ public class Dimensions
         this.wh = wh;
     }
 
-    public void setSize(Point wh)
-    {
-        this.wh = wh;
-    }
-
     public void move(Point xy)
     {
         this.xy = xy;

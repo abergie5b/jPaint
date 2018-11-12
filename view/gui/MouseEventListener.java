@@ -23,7 +23,6 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
     @Override
     public void mousePressed(MouseEvent evt) {
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
-        mouseEventController.printEvent("Pressed");
         switch (mode)
         {
             case DRAW:
@@ -41,8 +40,7 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
     @Override
     public void mouseDragged(MouseEvent evt) {
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
-        mouseEventController.printEvent("Dragged");
-        switch (mode) 
+        switch (mode)
         {
             case DRAW:  
                 mouseEventController.mouseDraggedDraw(evt);
@@ -59,7 +57,6 @@ public class MouseEventListener extends MouseInputAdapter implements IMouseEvent
     @Override
     public void mouseReleased(MouseEvent evt) {
         StartAndEndPointMode mode = applicationState.getActiveStartAndEndPointMode();
-        mouseEventController.printEvent("Release");
         switch (mode)
         {
             case DRAW:

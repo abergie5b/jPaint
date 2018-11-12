@@ -6,18 +6,14 @@ import view.interfaces.IGuiWindow;
 import view.interfaces.IDialogChoice;
 import view.interfaces.IEventCallback;
 import view.EventName;
-import view.gui.PaintCanvas;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.*;
 
-import java.awt.geom.*;
 import java.awt.*;
 
 public class GuiWindow extends JFrame implements IGuiWindow 
@@ -33,7 +29,7 @@ public class GuiWindow extends JFrame implements IGuiWindow
     private JLabel label4 = new JLabel("");
     private JLabel label5 = new JLabel("");
     private PaintCanvas canvas;
-    private ShapeAdapter stateModel;
+    private JPaintShape stateModel;
 
     public GuiWindow(PaintCanvas canvas)
     {
@@ -78,7 +74,7 @@ public class GuiWindow extends JFrame implements IGuiWindow
 	}
 
     @Override
-    public void setShape(ShapeAdapter stateModel) {
+    public void setShape(JPaintShape stateModel) {
         this.stateModel = stateModel;
     }
 
@@ -92,8 +88,8 @@ public class GuiWindow extends JFrame implements IGuiWindow
         label1.setText("(" + "SHAPE: " + stateModel.getShapeName() + ")");
         label2.setText("(" + "COLORS:  " + stateModel.getPrimaryColorName() + ",");
         label3.setText(stateModel.getSecondaryColorName() + ")");
-        label4.setText("(" + "SHADING: " + stateModel.shapeShadingType.name() + ")");
-        label5.setText("(" + "MODE: " + stateModel.startAndEndPointMode.name() + ")");
+        label4.setText("(" + "SHADING: " + stateModel.getShapeShadingType().name() + ")");
+        label5.setText("(" + "MODE: " + stateModel.getStartAndEndPointMode().name() + ")");
     }
 
     private JPanel createStatusMenu() {

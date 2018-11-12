@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.io.Serializable;
 
 import java.awt.*;
-import java.awt.geom.*;
 
 public class ApplicationState implements IApplicationState, Serializable 
 {
@@ -20,60 +19,61 @@ public class ApplicationState implements IApplicationState, Serializable
     private PaintCanvas canvas;
     private final IDialogProvider dialogProvider;
 
-    private ShapeAdapter displaySettingsShape;
+    private ArrayList<JPaintShapeAdapter> shapes;
+    private CommandHistory commandHistory;
+    private ArrayList<JPaintShapeAdapter> selectedShapes;
+    private ArrayList<JPaintShapeAdapter> copiedShapes;
+    private JPaintShapeAdapter clickedShape;
+    private JPaintShapeAdapter draggedShape;
+
+    private JPaintShape displaySettingsShape;
     private ShapeType activeShapeType;
     private ShapeColor activePrimaryColor;
     private ShapeColor activeSecondaryColor;
     private ShapeShadingType activeShapeShadingType;
     private StartAndEndPointMode activeStartAndEndPointMode;
 
-    public ShapeAdapter clickedShape;
-    public ShapeAdapter draggedShape;
-    public ArrayList<ShapeAdapter> selectedShapes;
-    private ArrayList<ShapeAdapter> shapes;
-    private CommandHistory commandHistory;
-    private ArrayList<ShapeAdapter> copiedShapes;
-
-    public ApplicationState(IGuiWindow uiModule) 
+    public ApplicationState(IGuiWindow uiModule)
     {
+        /* GUI Objects */
         this.uiModule = uiModule;
         this.canvas = uiModule.getCanvas();
         this.dialogProvider = new DialogProvider(this);
-        this.shapes = new ArrayList<ShapeAdapter>();
+        /* State Variables */
+        this.shapes = new ArrayList<>();
         this.commandHistory = new CommandHistory();
-        this.selectedShapes = new ArrayList<ShapeAdapter>();
+        this.selectedShapes = new ArrayList<>();
+        this.copiedShapes = new ArrayList<>();
         this.clickedShape = null;
         this.draggedShape = null;
-        this.copiedShapes = new ArrayList<ShapeAdapter>();
         /* Defaults */
         setDefaults();
-        displaySettingsShape = new ShapeAdapter(activeShapeType, 
-                                                activePrimaryColor,
-                                                activeSecondaryColor, 
-                                                activeShapeShadingType,
-                                                activeStartAndEndPointMode
-        );
+        displaySettingsShape = new JPaintShape(activeShapeType,
+                                               activePrimaryColor,
+                                               activeSecondaryColor,
+                                               activeShapeShadingType,
+                                               activeStartAndEndPointMode);
         uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
 
     private class CommandHistory 
     {
-        public int pointer;
-        public ArrayList<ICommand> commands;
-        private ArrayList<Integer> nullifiedCommands;
+        int pointer;
+        ArrayList<ICommand> commands;
+        private ArrayList<Integer> nullifiedCommands; // TODO
         private CommandHistory()
         {
             this.pointer = 0;
-            this.commands = new ArrayList<ICommand>();
-            this.nullifiedCommands = new ArrayList<Integer>();
+            this.commands = new ArrayList<>();
+            this.nullifiedCommands = new ArrayList<>();
         }
-        public void add(ICommand command)
+        void add(ICommand command)
         {
             this.commands.add(command);
             this.pointer = this.commands.size() - 1;
         }
-        public ICommand getUndoCommand()
+        ICommand getUndoCommand()
         {
             ICommand command = null;
             if (this.pointer >= 0)
@@ -84,7 +84,7 @@ public class ApplicationState implements IApplicationState, Serializable
             }
             return command;
         }
-        public ICommand getRedoCommand()
+        ICommand getRedoCommand()
         {
             ICommand command = null;
             if (this.pointer < (this.commands.size() - 1))
@@ -97,13 +97,21 @@ public class ApplicationState implements IApplicationState, Serializable
     }
 
     @Override
-    public void addShapeAttribute(ShapeAdapter _shape) 
-    {
-        AddShapeCommand addShape = new AddShapeCommand(this.shapes, _shape);
-        commandHistory.add(addShape);
-        addShape.execute();
+    public ArrayList<JPaintShapeAdapter> getShapes() {
+        return this.shapes;
     }
 
+    @Override
+    public void addShapeAttribute(JPaintShapeAdapter _shape)
+    {
+        if (_shape != null) {
+            ICommand addShape = CommandFactory.Create(CommandType.AddShape, this.shapes, _shape);
+            commandHistory.add(addShape);
+            addShape.execute();
+        }
+    }
+
+    @Override
     public void redo() 
     {
         ICommand lastCommand = commandHistory.getRedoCommand();
@@ -111,26 +119,31 @@ public class ApplicationState implements IApplicationState, Serializable
         this.repaint();
     }
 
-    public void undo() 
+    @Override
+    public void undo()
     {
         ICommand lastCommand = commandHistory.getUndoCommand();
         lastCommand.undo();
         this.repaint();
     }
 
+    @Override
     public void delete()
     {
-        DeleteCommand delete = new DeleteCommand(this.shapes, this.selectedShapes);
+        ICommand delete = CommandFactory.Create(CommandType.Delete, this.shapes, this.selectedShapes);
         commandHistory.add(delete);
         delete.execute();
         this.repaint();
     }
 
-    public void move(ShapeAdapter to, ShapeAdapter from)
+    @Override
+    public void move(JPaintShapeAdapter from, JPaintShapeAdapter to)
     {
-        MoveCommand move = new MoveCommand(this.shapes, to, from);
-        commandHistory.add(move);
-        move.execute();
+        if (from != null && to != null) {
+            ICommand move = CommandFactory.Create(CommandType.Move, this.shapes, from, to);
+            commandHistory.add(move);
+            move.execute();
+        }
     }
 
     @Override
@@ -140,7 +153,7 @@ public class ApplicationState implements IApplicationState, Serializable
 
     @Override
     public void paste() {
-        PasteCommand paste = new PasteCommand(shapes, copiedShapes);
+        ICommand paste = CommandFactory.Create(CommandType.Paste, this.shapes, this.copiedShapes);
         commandHistory.add(paste);
         paste.execute();
         repaint();
@@ -149,39 +162,71 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void repaint()
     {
-        this.canvas.repaintCanvas(shapes, this.draggedShape); // refactor
+        this.canvas.repaintCanvas(this.shapes, this.draggedShape); // TODO
     }
 
     @Override
-    public ShapeAdapter getDraggedShape()
+    public JPaintShapeAdapter getDraggedShape()
     {
         return this.draggedShape;
     }
     
     @Override
-    public ShapeAdapter getClickedShape()
+    public JPaintShapeAdapter getClickedShape()
     {
         return this.clickedShape;
     }
 
     @Override
-    public ArrayList<ShapeAdapter> getSelectedShapes()
+    public ArrayList<JPaintShapeAdapter> getSelectedShapes()
     {
         return this.selectedShapes;
     }
 
     @Override
-    public void setDraggedShape(ShapeAdapter shape)
+    public void setDraggedShape(JPaintShapeAdapter shape)
     {
         this.draggedShape = shape;
-        this.repaint();
+    }
+
+    @Override
+    public JPaintShapeAdapter getMouseDraggedDrawShape(Point mousePoint, Point mouseDragPoint, boolean flippedColors)
+    {
+        ShapeColor primaryColor = this.activePrimaryColor;
+        ShapeColor secondaryColor = this.activeSecondaryColor;
+        if (flippedColors)
+        {
+            secondaryColor = primaryColor;
+            primaryColor = this.activeSecondaryColor;
+        }
+        JPaintShape shape = new JPaintShape(this.activeShapeType,
+                                            primaryColor,
+                                            secondaryColor,
+                                            this.activeShapeShadingType,
+                                            StartAndEndPointMode.DRAW);
+        JPaintShapeAdapter adapter = new JPaintShapeAdapter(shape, Geometry.getDimensionsWithInvert(mousePoint, mouseDragPoint));
+        return adapter;
+    }
+
+    @Override
+    public JPaintShapeAdapter getMouseDraggedMoveShape(Point mousePoint, Point mouseDragPoint) {
+        JPaintShape clickedShape = this.clickedShape.getJPaintShape();
+        JPaintShape shape = new JPaintShape(clickedShape.getShapeType(),
+                                            clickedShape.getPrimaryShapeColor(),
+                                            clickedShape.getSecondaryShapeColor(),
+                                            clickedShape.getShapeShadingType(),
+                                            StartAndEndPointMode.MOVE);
+        int deltaX = mousePoint.x - mouseDragPoint.x;
+        int deltaY = mousePoint.y - mouseDragPoint.y;
+        Dimensions dims = new Dimensions(new Point(this.clickedShape.getX() - deltaX, this.clickedShape.getY() - deltaY),
+                                         new Point(this.clickedShape.getWidth(), this.clickedShape.getHeight()));
+        return new JPaintShapeAdapter(shape, dims);
     }
 
     @Override
     public void resetDraggedShape()
     {
         this.draggedShape = null;
-        this.repaint();
     }
 
     @Override
@@ -190,27 +235,12 @@ public class ApplicationState implements IApplicationState, Serializable
         this.clickedShape = this.getShapeFromBuffer(point);
     }
 
-    @Override
-    public ArrayList<ShapeAdapter> getShapesinSelection(Rectangle selection)
+    private JPaintShapeAdapter getShapeFromBuffer(Point point)
     {
-        ArrayList<ShapeAdapter> selectedShapes = new ArrayList<ShapeAdapter>();
-        for (ShapeAdapter s: this.shapes) 
+        JPaintShapeAdapter _shape = null;
+        for (JPaintShapeAdapter s: this.shapes)
         {
-            if (s.shape.intersects(selection))
-            {
-                selectedShapes.add(s);
-            }
-        }
-        return selectedShapes;
-    }
-
-    @Override
-    public ShapeAdapter getShapeFromBuffer(Point point) 
-    {
-        ShapeAdapter _shape = null;
-        for (ShapeAdapter s: this.shapes)
-        {
-            if (s.shape.contains(point))
+            if (s.getShape().contains(point))
             {
                 _shape = s;
             }
@@ -218,15 +248,44 @@ public class ApplicationState implements IApplicationState, Serializable
         return _shape;
     }
 
-    public void setSelectedShape(ShapeAdapter _shape) {
-        ArrayList<ShapeAdapter>_shapes = new ArrayList<ShapeAdapter>();
-        _shapes.add(_shape);
+    @Override
+    public void setSelectedShape() {
+        ArrayList<JPaintShapeAdapter>_shapes = new ArrayList<>();
+        _shapes.add(this.clickedShape);
         this.selectedShapes = _shapes;
     }
 
     @Override 
-    public void setSelectedShapes(Rectangle selection) {
-        this.selectedShapes = this.getShapesinSelection(selection);
+    public void setSelectedShapesFromRectangle(Rectangle selection) {
+        this.selectedShapes = this.getShapesInSelection(selection);
+    }
+
+    private ArrayList<JPaintShapeAdapter> getShapesInSelection(Rectangle selection)
+    {
+        ArrayList<JPaintShapeAdapter> selectedShapes = new ArrayList<>();
+        for (JPaintShapeAdapter s: this.shapes)
+        {
+            if (s.getShape().intersects(selection))
+            {
+                selectedShapes.add(s);
+            }
+        }
+        return selectedShapes;
+    }
+
+    private void setColorInSelectMode(CommandType type, ShapeColor color) {
+        ICommand command = CommandFactory.Create(type, color, this.selectedShapes);
+        commandHistory.add(command);
+        command.execute();
+        this.repaint();
+    }
+
+    private void setShadingTypeInSelectMode(ShapeShadingType shading)
+    {
+        ICommand changeShadingType = CommandFactory.Create(CommandType.ChangeShadingType, shading, this.selectedShapes);
+        commandHistory.add(changeShadingType);
+        changeShadingType.execute();
+        this.repaint();
     }
 
     @Override
@@ -237,37 +296,13 @@ public class ApplicationState implements IApplicationState, Serializable
         uiModule.setStatusMenu();
     }
 
-    private void updatePrimaryColorInSelectMode(ShapeColor color)
-    {
-        for (ShapeAdapter s: this.getSelectedShapes())
-        {
-            s.updatePrimaryColor(color);
-        }
-    }
-
-    private void updateSecondaryColorInSelectMode(ShapeColor color)
-    {
-        for (ShapeAdapter s: this.getSelectedShapes())
-        {
-            s.updateSecondaryColor(color);
-        }
-    }
-
-    private void updateShadingTypeInSelectMode(ShapeShadingType shading)
-    {
-        for (ShapeAdapter s: this.getSelectedShapes())
-        {
-            s.updateShadingType(shading);
-        }
-    }
-
     @Override
     public void setActivePrimaryColor() {
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
-        displaySettingsShape.updatePrimaryColor(activePrimaryColor);
+        displaySettingsShape.setPrimaryColor(activePrimaryColor);
         if (this.activeStartAndEndPointMode == StartAndEndPointMode.SELECT)
         {
-            updatePrimaryColorInSelectMode(activePrimaryColor);
+            setColorInSelectMode(CommandType.ChangePrimaryColor, activePrimaryColor);
             this.repaint();
         }
         uiModule.setShape(displaySettingsShape);
@@ -277,10 +312,10 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void setActiveSecondaryColor() {
         activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
-        displaySettingsShape.updateSecondaryColor(activeSecondaryColor);
+        displaySettingsShape.setSecondaryColor(activeSecondaryColor);
         if (this.activeStartAndEndPointMode == StartAndEndPointMode.SELECT)
         {
-            updateSecondaryColorInSelectMode(activeSecondaryColor);
+            setColorInSelectMode(CommandType.ChangeSecondaryColor, activePrimaryColor);
             this.repaint();
         }
         uiModule.setShape(displaySettingsShape);
@@ -290,10 +325,10 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void setActiveShadingType() {
         activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
-        displaySettingsShape.shapeShadingType = activeShapeShadingType;
+        displaySettingsShape.setShapeShadingType(activeShapeShadingType);
         if (this.activeStartAndEndPointMode == StartAndEndPointMode.SELECT)
         {
-            updateShadingTypeInSelectMode(activeShapeShadingType);
+            setShadingTypeInSelectMode(activeShapeShadingType);
             this.repaint();
         }
         uiModule.setShape(displaySettingsShape);
@@ -303,7 +338,7 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void setActiveStartAndEndPointMode() {
         activeStartAndEndPointMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog());
-        displaySettingsShape.startAndEndPointMode = activeStartAndEndPointMode;
+        displaySettingsShape.setStartAndEndPointMode(activeStartAndEndPointMode);
         uiModule.setShape(displaySettingsShape);
         uiModule.setStatusMenu();
     }
