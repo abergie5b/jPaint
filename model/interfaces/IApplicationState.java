@@ -9,7 +9,7 @@ public interface IApplicationState
     void repaint();
     JPaintShapeAdapter getDraggedShape();
     JPaintShapeAdapter getClickedShape();
-    void addShapeAttribute(JPaintShapeAdapter _shape);
+    void addShape(JPaintShapeAdapter _shape);
     void move(JPaintShapeAdapter to, JPaintShapeAdapter from);
     void undo();
     void redo();
@@ -25,7 +25,6 @@ public interface IApplicationState
     void setActiveSecondaryColor();
     void setActiveShadingType();
     void setActiveStartAndEndPointMode();
-    void resetDraggedShape();
     ArrayList<JPaintShapeAdapter> getShapes();
     ShapeType getActiveShapeType();
     ShapeColor getActivePrimaryColor();
@@ -33,6 +32,4 @@ public interface IApplicationState
     ShapeShadingType getActiveShapeShadingType();
     StartAndEndPointMode getActiveStartAndEndPointMode();
     ArrayList<JPaintShapeAdapter> getSelectedShapes();
-    JPaintShapeAdapter getMouseDraggedMoveShape(Point mousePoint, Point mouseDragPoint);
-    JPaintShapeAdapter getMouseDraggedDrawShape(Point mousePoint, Point mouseDragPoint, boolean flippedColors);
 }

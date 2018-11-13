@@ -62,10 +62,6 @@ public class JPaintShape {
         this.shapeShadingType = shadingType;
     }
 
-    public void setStartAndEndPointMode(StartAndEndPointMode mode) {
-        this.startAndEndPointMode = mode;
-    }
-
     public String getShapeName() {
         return this.shapeType.name();
     }
@@ -78,10 +74,6 @@ public class JPaintShape {
         return this.secondaryShapeColor.name();
     }
 
-    public void setShapeType(ShapeType shapeType) {
-        this.shapeType = shapeType;
-    }
-
     public void setPrimaryColor(ShapeColor color) {
         this.primaryShapeColor = color;
         this.primaryColor = this.colorToObject(color);
@@ -92,19 +84,16 @@ public class JPaintShape {
         this.secondaryColor = this.colorToObject(color);
     }
 
-    public void updateShadingType(ShapeShadingType shading) {
-        this.shapeShadingType = shading;
-    }
-
-    private Color colorToObject(ShapeColor color) {
+    private Color colorToObject(ShapeColor shapeColor) {
+        Color color = Color.BLACK;
         Field[] fields = Color.class.getDeclaredFields();
         for (Field f: fields) 
         {
-            if (color.name().equals(f.getName()) && Modifier.isStatic(f.getModifiers()))
+            if (shapeColor.name().equals(f.getName()) && Modifier.isStatic(f.getModifiers()))
             {
                 try
                 {
-                    return (Color)Color.class.getDeclaredField(color.name()).get(null);
+                    color = (Color)Color.class.getDeclaredField(shapeColor.name()).get(null);
                 }
                 catch (NoSuchFieldException e) {
                     System.out.println("Invalid Color found trying to convert from string\n" + e);
@@ -114,7 +103,6 @@ public class JPaintShape {
                 }
             }
         }
-        // #TODO throw error
-        return Color.BLACK;
+        return color;
     }
 }

@@ -10,8 +10,10 @@ import view.gui.GuiWindow;
 import view.gui.PaintCanvas;
 import view.interfaces.IGuiWindow;
 
-public class Main {
-    public static void main(String[] args){
+public class Main
+{
+    public static void main(String[] args)
+    {
         PaintCanvas paintCanvas = new PaintCanvas();
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         ApplicationState appState = new ApplicationState(guiWindow);

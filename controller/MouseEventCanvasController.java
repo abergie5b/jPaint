@@ -2,6 +2,7 @@ package controller;
 
 import model.*;
 import model.interfaces.IApplicationState;
+import model.persistence.JPaintShapeAdapterFactory;
 
 import java.awt.*;
 import javax.swing.*;
@@ -40,15 +41,10 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
     @Override
     public void mouseDraggedDraw(MouseEvent e) {
         this.setMouseDraggedPosition(e.getPoint());
-        JPaintShapeAdapter adapter;
-        if (SwingUtilities.isRightMouseButton(e))
-        {
-            adapter = this.appState.getMouseDraggedDrawShape(this.mousePoint, this.mouseDragPoint, true);
-        }
-        else
-        {
-            adapter = this.appState.getMouseDraggedDrawShape(this.mousePoint, this.mouseDragPoint, false);
-        }
+        JPaintShapeAdapter adapter = JPaintShapeAdapterFactory.Create(this.appState,
+                                                                      this.mousePoint,
+                                                                      this.mouseDragPoint,
+                                                                      SwingUtilities.isRightMouseButton(e));
         this.appState.setDraggedShape(adapter);
         this.appState.repaint();
     }
@@ -56,9 +52,9 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
     @Override
     public void mouseReleasedDraw(MouseEvent e) {
         JPaintShapeAdapter draggedShape = this.appState.getDraggedShape();
-        this.appState.addShapeAttribute(draggedShape);
+        this.appState.addShape(draggedShape);
         this.setMousePosition(e.getPoint());
-        this.appState.resetDraggedShape();
+        this.appState.setDraggedShape(null);
         this.appState.repaint();
     }
 
@@ -74,7 +70,9 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
     public void mouseDraggedMove(MouseEvent e) {
         if (this.appState.getClickedShape() != null)
         {
-            JPaintShapeAdapter adapter = this.appState.getMouseDraggedMoveShape(this.mousePoint, this.mouseDragPoint);
+            JPaintShapeAdapter adapter = JPaintShapeAdapterFactory.Create(this.appState,
+                                                                          this.mousePoint,
+                                                                          this.mouseDragPoint);
             this.appState.setDraggedShape(adapter);
             this.appState.repaint();
         }
@@ -83,11 +81,10 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
 
     @Override
     public void mouseReleasedMove(MouseEvent e) {
-        JPaintShapeAdapter draggedShape = this.appState.getDraggedShape();
-        JPaintShapeAdapter clickedShape = this.appState.getClickedShape();
-        this.appState.move(clickedShape, draggedShape);
+        this.appState.move(this.appState.getClickedShape(),
+                           this.appState.getDraggedShape());
         this.setMousePosition(e.getPoint());
-        this.appState.resetDraggedShape();
+        this.appState.setDraggedShape(null);
         this.appState.repaint();
     }
 
@@ -102,16 +99,10 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
 
     @Override
     public void mouseDraggedSelect(MouseEvent e) {
-        Dimensions dims = Geometry.getDimensionsWithInvert(this.mousePoint, this.mouseDragPoint);
-        Rectangle selectionRectangle = new Rectangle(dims.xy.x, dims.xy.y, dims.wh.x, dims.wh.y);
-        this.appState.setSelectedShapesFromRectangle(selectionRectangle);
-        JPaintShape shape = new JPaintShape(ShapeType.RECTANGLE,
-                                            ShapeColor.BLACK,
-                                            ShapeColor.BLACK,
-                                            ShapeShadingType.OUTLINE,
-                                            StartAndEndPointMode.SELECT);
-        JPaintShapeAdapter adapter = new JPaintShapeAdapter(shape, dims);
         this.setMouseDraggedPosition(e.getPoint());
+        JPaintShapeAdapter adapter = JPaintShapeAdapterFactory.Create(this.appState,
+                                                                      this.mousePoint,
+                                                                      this.mouseDragPoint);
         this.appState.setDraggedShape(adapter);
         this.appState.repaint();
     }
@@ -119,7 +110,7 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
     @Override
     public void mouseReleasedSelect(MouseEvent e) {
         this.setMousePosition(e.getPoint());
-        this.appState.resetDraggedShape();
+        this.appState.setDraggedShape(null);
         this.appState.repaint();
     }
 }

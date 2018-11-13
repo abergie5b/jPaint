@@ -7,10 +7,9 @@ import view.gui.PaintCanvas;
 import javax.swing.*;
 
 public interface IGuiWindow {
-	public void addEvent(EventName eventName, IEventCallback callback);
-    public <T> T getDialogResponse(IDialogChoice dialogSettings);
+	void addEvent(EventName eventName, IEventCallback callback);
+    <T> T getDialogResponse(IDialogChoice dialogSettings);
     JButton getButton(EventName eventName);
-    void setStatusMenu();
-    void setShape(JPaintShape shapeType);
+    void setStatusMenu(JPaintShape shape);
     PaintCanvas getCanvas();
 }

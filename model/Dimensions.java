@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Point;
-import javax.swing.*;
 
 public class Dimensions
 {

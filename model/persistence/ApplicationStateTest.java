@@ -35,12 +35,12 @@ class ApplicationStateTest {
     }
 
     @Test
-    void addShapeAttributeAppendsToShapes() {
+    void addShapeAppendsToShapes() {
         JPaintShapeAdapter shapeAdapter = this.createShapeAdapter(new Point(0, 0), new Point(50, 50));
-        this.appState.addShapeAttribute(shapeAdapter);
+        this.appState.addShape(shapeAdapter);
         assertEquals(1, this.appState.getShapes().size());
         JPaintShapeAdapter shapeAdapter2 = this.createShapeAdapter(new Point(0, 0), new Point(50, 50));
-        this.appState.addShapeAttribute(shapeAdapter2);
+        this.appState.addShape(shapeAdapter2);
         assertEquals(2, this.appState.getShapes().size());
     }
 
@@ -48,7 +48,7 @@ class ApplicationStateTest {
     void moveUpdatesShapeDimensions() {
         JPaintShapeAdapter from = this.createShapeAdapter(new Point(0, 0), new Point(50, 50));
         JPaintShapeAdapter to = this.createShapeAdapter(new Point(25, 25), new Point(50, 50));
-        this.appState.addShapeAttribute(from);
+        this.appState.addShape(from);
         assertEquals(this.appState.getShapes().get(0), from);
         this.appState.move(from, to);
         JPaintShapeAdapter shape = this.appState.getShapes().get(0);
@@ -62,9 +62,9 @@ class ApplicationStateTest {
         JPaintShapeAdapter shapeAdapter = this.createShapeAdapter(new Point(25, 25), new Point(50, 50));
         JPaintShapeAdapter shapeAdapter2 = this.createShapeAdapter(new Point(25, 25), new Point(50, 50));
         JPaintShapeAdapter shapeAdapter3 = this.createShapeAdapter(new Point(75, 75), new Point(50, 50));
-        this.appState.addShapeAttribute(shapeAdapter);
-        this.appState.addShapeAttribute(shapeAdapter2);
-        this.appState.addShapeAttribute(shapeAdapter3);
+        this.appState.addShape(shapeAdapter);
+        this.appState.addShape(shapeAdapter2);
+        this.appState.addShape(shapeAdapter3);
         this.appState.setSelectedShapesFromRectangle(new Rectangle(0, 0, 50, 50));
         this.appState.delete();
         assertEquals(this.appState.getShapes().size(), 1);
@@ -76,9 +76,9 @@ class ApplicationStateTest {
         JPaintShapeAdapter shapeAdapter = this.createShapeAdapter(new Point(25, 25), new Point(50, 50));
         JPaintShapeAdapter shapeAdapter2 = this.createShapeAdapter(new Point(25, 25), new Point(50, 50));
         JPaintShapeAdapter shapeAdapter3 = this.createShapeAdapter(new Point(75, 75), new Point(50, 50));
-        this.appState.addShapeAttribute(shapeAdapter);
-        this.appState.addShapeAttribute(shapeAdapter2);
-        this.appState.addShapeAttribute(shapeAdapter3);
+        this.appState.addShape(shapeAdapter);
+        this.appState.addShape(shapeAdapter2);
+        this.appState.addShape(shapeAdapter3);
         this.appState.setSelectedShapesFromRectangle(new Rectangle(0, 0, 50, 50));
         this.appState.copy();
         this.appState.paste();
@@ -100,9 +100,9 @@ class ApplicationStateTest {
         JPaintShapeAdapter shapeAdapter = this.createShapeAdapter(new Point(25, 25), new Point(50, 50));
         JPaintShapeAdapter shapeAdapter2 = this.createShapeAdapter(new Point(25, 25), new Point(50, 50));
         JPaintShapeAdapter shapeAdapter3 = this.createShapeAdapter(new Point(75, 75), new Point(50, 50));
-        this.appState.addShapeAttribute(shapeAdapter);
-        this.appState.addShapeAttribute(shapeAdapter2);
-        this.appState.addShapeAttribute(shapeAdapter3);
+        this.appState.addShape(shapeAdapter);
+        this.appState.addShape(shapeAdapter2);
+        this.appState.addShape(shapeAdapter3);
         this.appState.setSelectedShapesFromRectangle(new Rectangle(0, 0, 50, 50));
         ArrayList<JPaintShapeAdapter> expected = new ArrayList<>();
         expected.add(shapeAdapter);
@@ -115,9 +115,9 @@ class ApplicationStateTest {
         JPaintShapeAdapter shapeAdapter = this.createShapeAdapter(new Point(25, 25), new Point(25, 25));
         JPaintShapeAdapter shapeAdapter2 = this.createShapeAdapter(new Point(50, 50), new Point(25, 25));
         JPaintShapeAdapter shapeAdapter3 = this.createShapeAdapter(new Point(75, 75), new Point(25, 25));
-        this.appState.addShapeAttribute(shapeAdapter);
-        this.appState.addShapeAttribute(shapeAdapter2);
-        this.appState.addShapeAttribute(shapeAdapter3);
+        this.appState.addShape(shapeAdapter);
+        this.appState.addShape(shapeAdapter2);
+        this.appState.addShape(shapeAdapter3);
         this.appState.setClickedShape(new Point(35, 35));
         assertEquals(this.appState.getClickedShape(), shapeAdapter);
         this.appState.setClickedShape(new Point(65, 65));

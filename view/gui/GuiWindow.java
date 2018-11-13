@@ -18,9 +18,6 @@ import java.awt.*;
 
 public class GuiWindow extends JFrame implements IGuiWindow 
 {
-    private final int defaultWidth = 1080;
-    private final int defaultHeight = 720;
-    private final String defaultTitle = "~JPaint~";
     private final Insets defaultButtonDimensions = new Insets(5, 8, 5, 8);
     private final Map<EventName, JButton> eventButtons = new HashMap<>();
     private JLabel label1 = new JLabel("");
@@ -29,14 +26,16 @@ public class GuiWindow extends JFrame implements IGuiWindow
     private JLabel label4 = new JLabel("");
     private JLabel label5 = new JLabel("");
     private PaintCanvas canvas;
-    private JPaintShape stateModel;
 
     public GuiWindow(PaintCanvas canvas)
     {
         this.canvas = canvas;
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        String defaultTitle = "JPaint";
         setTitle(defaultTitle);
+        int defaultWidth = 1080;
+        int defaultHeight = 720;
         setSize(defaultWidth, defaultHeight);
         JPanel window = createWindow();
         window.add(canvas, BorderLayout.CENTER);
@@ -74,22 +73,17 @@ public class GuiWindow extends JFrame implements IGuiWindow
 	}
 
     @Override
-    public void setShape(JPaintShape stateModel) {
-        this.stateModel = stateModel;
-    }
-
-    @Override
     public PaintCanvas getCanvas() {
         return this.canvas;
     }
 
     @Override
-    public void setStatusMenu() {
-        label1.setText("(" + "SHAPE: " + stateModel.getShapeName() + ")");
-        label2.setText("(" + "COLORS:  " + stateModel.getPrimaryColorName() + ",");
-        label3.setText(stateModel.getSecondaryColorName() + ")");
-        label4.setText("(" + "SHADING: " + stateModel.getShapeShadingType().name() + ")");
-        label5.setText("(" + "MODE: " + stateModel.getStartAndEndPointMode().name() + ")");
+    public void setStatusMenu(JPaintShape displayJPaintShape) {
+        label1.setText("(" + "SHAPE: " + displayJPaintShape.getShapeName() + ")");
+        label2.setText("(" + "COLORS:  " + displayJPaintShape.getPrimaryColorName() + ",");
+        label3.setText(displayJPaintShape.getSecondaryColorName() + ")");
+        label4.setText("(" + "SHADING: " + displayJPaintShape.getShapeShadingType().name() + ")");
+        label5.setText("(" + "MODE: " + displayJPaintShape.getStartAndEndPointMode().name() + ")");
     }
 
     private JPanel createStatusMenu() {

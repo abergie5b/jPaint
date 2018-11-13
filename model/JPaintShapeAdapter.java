@@ -2,8 +2,9 @@ package model;
 
 import java.awt.*;
 import java.awt.geom.*;
+import model.interfaces.IShapeAdapter;
 
-public class JPaintShapeAdapter {
+public class JPaintShapeAdapter implements IShapeAdapter {
     private int x;
     private int y;
     private int width;
@@ -21,26 +22,32 @@ public class JPaintShapeAdapter {
         this.shape = this.getShapeWithDimensions();
     }
 
+    @Override
     public int getX() {
         return this.x;
     }
 
+    @Override
     public int getY() {
         return this.y;
     }
 
+    @Override
     public int getWidth() {
         return this.width;
     }
 
+    @Override
     public int getHeight() {
         return this.height;
     }
 
+    @Override
     public Shape getShape() {
         return this.shape;
     }
 
+    @Override
     public JPaintShape getJPaintShape() {
         return this.jpaintShape;
     }
