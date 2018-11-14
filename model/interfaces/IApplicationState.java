@@ -22,6 +22,7 @@ public interface IApplicationState
     void setSelectedShapesFromRectangle(Rectangle selection);
     void setActiveShape();
     void setActivePrimaryColor();
+    void setActivePrimaryColor(ShapeColor color);
     void setActiveSecondaryColor();
     void setActiveShadingType();
     void setActiveStartAndEndPointMode();
@@ -32,4 +33,5 @@ public interface IApplicationState
     ShapeShadingType getActiveShapeShadingType();
     StartAndEndPointMode getActiveStartAndEndPointMode();
     ArrayList<JPaintShapeAdapter> getSelectedShapes();
+    void showConsole();
 }

@@ -6,6 +6,7 @@ import model.interfaces.IApplicationState;
 import model.interfaces.IDialogProvider;
 import view.interfaces.IGuiWindow;
 import view.gui.PaintCanvas;
+import console.Console;
 
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -89,10 +90,14 @@ public class ApplicationState implements IApplicationState, Serializable
         }
     }
 
+    public void showConsole() {
+        Console console = new Console(this);
+        console.showTextArea();
+    }
+
     @Override
     public ArrayList<JPaintShapeAdapter> getShapes()
     {
-        // Only used for tests
         return this.shapes;
     }
 
@@ -281,6 +286,17 @@ public class ApplicationState implements IApplicationState, Serializable
     public void setActiveShape()
     {
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
+        this.setUIStatusMenu();
+    }
+
+    @Override
+    public void setActivePrimaryColor(ShapeColor color) {
+        activePrimaryColor = color;
+        if (this.activeStartAndEndPointMode == StartAndEndPointMode.SELECT)
+        {
+            setColorInSelectMode(CommandType.ChangePrimaryColor, activePrimaryColor);
+            this.repaint();
+        }
         this.setUIStatusMenu();
     }
 
