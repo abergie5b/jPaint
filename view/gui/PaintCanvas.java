@@ -8,16 +8,11 @@ import java.util.ArrayList;
 
 public class PaintCanvas extends JPanel 
 {
-    private ArrayList<JPaintShapeAdapter> shapes; // TODO this shouldt be public
+    private ArrayList<JPaintShapeAdapter> shapes;
 
     public PaintCanvas() 
     {
         shapes = new ArrayList<>();
-    }
-
-    public void setShapes(ArrayList<JPaintShapeAdapter> shapes)
-    {
-        this.shapes = shapes;
     }
 
     public void repaintCanvas(ArrayList<JPaintShapeAdapter> shapes, JPaintShapeAdapter mouseDraggedShape)
@@ -27,7 +22,7 @@ public class PaintCanvas extends JPanel
         {
             allShapes.add(mouseDraggedShape);
         }
-        this.setShapes(allShapes);
+        this.shapes = allShapes;
         this.repaint();
     }
     
@@ -39,7 +34,6 @@ public class PaintCanvas extends JPanel
 
         for (JPaintShapeAdapter s: shapes)
         {
-            //System.out.println(shapes.size() + " Drawing shape: " + s.getShape() + " X: " + s.getX() + " y: " + s.getY() + " w: " + s.getWidth() + " h: " + s.getHeight());
             IPaintStrategy strategy;
             switch (s.getJPaintShape().getShapeShadingType())
             {

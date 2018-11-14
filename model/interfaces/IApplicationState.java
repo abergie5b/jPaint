@@ -16,7 +16,8 @@ public interface IApplicationState
     void copy();
     void paste();
     void delete();
-    void setClickedShape(Point point);
+    void setClickedShapeFromBuffer(Point point);
+    void setClickedShape(JPaintShapeAdapter shape);
     void setDraggedShape(JPaintShapeAdapter shape);
     void setSelectedShape();
     void setSelectedShapesFromRectangle(Rectangle selection);

@@ -5,24 +5,14 @@ import java.util.ArrayList;
 import model.ShapeColor;
 import model.ShapeShadingType;
 
-class CommandFactory {
+public class CommandFactory {
     /**
-     * @param type
      * @param shapes
      * @param shape
      * @return
      */
-    static ICommand CreateAddShapeCommand(CommandType type, ArrayList<JPaintShapeAdapter> shapes, JPaintShapeAdapter shape) {
-        ICommand command;
-        switch (type)
-        {
-            case AddShape:
-                command = new AddShapeCommand(shapes, shape);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid shape command type: " + type);
-        }
-        return command;
+    public static ICommand CreateAddShapeCommand(ArrayList<JPaintShapeAdapter> shapes, JPaintShapeAdapter shape) {
+        return new AddShapeCommand(shapes, shape);
     }
 
     /**
@@ -31,7 +21,7 @@ class CommandFactory {
      * @param selectedShapes
      * @return
      */
-    static ICommand CreateChangeColorCommand(CommandType type, ShapeColor color, ArrayList<JPaintShapeAdapter> selectedShapes) {
+    public static ICommand CreateChangeColorCommand(CommandType type, ShapeColor color, ArrayList<JPaintShapeAdapter> selectedShapes) {
         ICommand command;
         switch (type)
         {
@@ -48,42 +38,22 @@ class CommandFactory {
     }
 
     /**
-     * @param type
      * @param shading
      * @param selectedShapes
      * @return
      */
-    static ICommand CreateChangeShadingCommand(CommandType type, ShapeShadingType shading, ArrayList<JPaintShapeAdapter> selectedShapes) {
-        ICommand command;
-        switch (type)
-        {
-            case ChangeShadingType:
-                command = new ChangeShadingTypeCommand(shading, selectedShapes);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid shape shading command type: " + type);
-        }
-        return command;
+    public static ICommand CreateChangeShadingCommand(ShapeShadingType shading, ArrayList<JPaintShapeAdapter> selectedShapes) {
+        return new ChangeShadingTypeCommand(shading, selectedShapes);
     }
 
     /**
-     * @param type
      * @param shapes
      * @param from
      * @param to
      * @return
      */
-    static ICommand CreateMoveCommand(CommandType type, ArrayList<JPaintShapeAdapter> shapes, JPaintShapeAdapter from, JPaintShapeAdapter to) {
-        ICommand command;
-        switch (type)
-        {
-            case Move:
-                command = new MoveCommand(shapes, from, to);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid move command type: " + type);
-        }
-        return command;
+    public static ICommand CreateMoveCommand(ArrayList<JPaintShapeAdapter> shapes, JPaintShapeAdapter from, JPaintShapeAdapter to) {
+        return new MoveCommand(shapes, from, to);
     }
 
     /**
@@ -92,7 +62,7 @@ class CommandFactory {
      * @param selectedShapes
      * @return
      */
-    static ICommand CreateSelectionCommand(CommandType type, ArrayList<JPaintShapeAdapter> shapes, ArrayList<JPaintShapeAdapter> selectedShapes) {
+    public static ICommand CreateSelectionCommand(CommandType type, ArrayList<JPaintShapeAdapter> shapes, ArrayList<JPaintShapeAdapter> selectedShapes) {
         ICommand command;
         switch (type)
         {

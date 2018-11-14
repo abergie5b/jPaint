@@ -1,5 +1,6 @@
-package model.persistence;
+package tests;
 
+import model.persistence.ApplicationState;
 import view.gui.PaintCanvas;
 import view.interfaces.IGuiWindow;
 import view.gui.GuiWindow;
@@ -30,8 +31,7 @@ class ApplicationStateTest {
                 StartAndEndPointMode.DRAW
         );
         Dimensions dims = new Dimensions(xy, wh);
-        JPaintShapeAdapter shapeAdapter = new JPaintShapeAdapter(shape, dims);
-        return shapeAdapter;
+        return new JPaintShapeAdapter(shape, dims);
     }
 
     @Test
@@ -111,18 +111,18 @@ class ApplicationStateTest {
     }
 
     @Test
-    void setClickedShapeReturnsShapeFromShapes() {
+    void setClickedShapeFromBufferReturnsShapeFromShapes() {
         JPaintShapeAdapter shapeAdapter = this.createShapeAdapter(new Point(25, 25), new Point(25, 25));
         JPaintShapeAdapter shapeAdapter2 = this.createShapeAdapter(new Point(50, 50), new Point(25, 25));
         JPaintShapeAdapter shapeAdapter3 = this.createShapeAdapter(new Point(75, 75), new Point(25, 25));
         this.appState.addShape(shapeAdapter);
         this.appState.addShape(shapeAdapter2);
         this.appState.addShape(shapeAdapter3);
-        this.appState.setClickedShape(new Point(35, 35));
+        this.appState.setClickedShapeFromBuffer(new Point(35, 35));
         assertEquals(this.appState.getClickedShape(), shapeAdapter);
-        this.appState.setClickedShape(new Point(65, 65));
+        this.appState.setClickedShapeFromBuffer(new Point(65, 65));
         assertEquals(this.appState.getClickedShape(), shapeAdapter2);
-        this.appState.setClickedShape(new Point(85, 85));
+        this.appState.setClickedShapeFromBuffer(new Point(85, 85));
         assertEquals(this.appState.getClickedShape(), shapeAdapter3);
     }
 

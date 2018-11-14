@@ -35,7 +35,7 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
     public void mousePressedDraw(MouseEvent e) {
         this.setMousePosition(e.getPoint());
         this.setMouseDraggedPosition(e.getPoint());
-        this.appState.setClickedShape(e.getPoint());
+        this.appState.setClickedShapeFromBuffer(e.getPoint());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
         Point point = e.getPoint();
         this.setMousePosition(e.getPoint());
         this.setMouseDraggedPosition(point);
-        this.appState.setClickedShape(point);
+        this.appState.setClickedShapeFromBuffer(point);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class MouseEventCanvasController implements IMouseEventCanvasController
     public void mousePressedSelect(MouseEvent e) {
         this.setMousePosition(e.getPoint());
         this.setMouseDraggedPosition(e.getPoint());
-        this.appState.setClickedShape(e.getPoint());
+        this.appState.setClickedShapeFromBuffer(e.getPoint());
         this.appState.setSelectedShape();
         this.appState.repaint();
     }

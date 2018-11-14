@@ -108,8 +108,7 @@ public class ApplicationState implements IApplicationState, Serializable
     public void addShape(JPaintShapeAdapter _shape)
     {
         if (_shape != null) {
-            ICommand addShape = CommandFactory.CreateAddShapeCommand(CommandType.AddShape,
-                                                                     this.shapes,
+            ICommand addShape = CommandFactory.CreateAddShapeCommand(this.shapes,
                                                                      _shape);
             this.commandHistory.add(addShape);
             addShape.execute();
@@ -151,8 +150,7 @@ public class ApplicationState implements IApplicationState, Serializable
     public void move(JPaintShapeAdapter from, JPaintShapeAdapter to)
     {
         if (from != null && to != null) {
-            ICommand move = CommandFactory.CreateMoveCommand(CommandType.Move,
-                                                             this.shapes,
+            ICommand move = CommandFactory.CreateMoveCommand(this.shapes,
                                                              from,
                                                              to);
             this.commandHistory.add(move);
@@ -231,9 +229,15 @@ public class ApplicationState implements IApplicationState, Serializable
      * @param point
      */
     @Override
-    public void setClickedShape(Point point)
+    public void setClickedShapeFromBuffer(Point point)
     {
         this.clickedShape = this.getShapeFromBuffer(point);
+    }
+
+    @Override
+    public void setClickedShape(JPaintShapeAdapter shape)
+    {
+        this.clickedShape = shape;
     }
 
     private JPaintShapeAdapter getShapeFromBuffer(Point point)
@@ -274,8 +278,7 @@ public class ApplicationState implements IApplicationState, Serializable
 
     private void setShadingTypeInSelectMode(ShapeShadingType shading)
     {
-        ICommand changeShadingType = CommandFactory.CreateChangeShadingCommand(CommandType.ChangeShadingType,
-                                                                               shading,
+        ICommand changeShadingType = CommandFactory.CreateChangeShadingCommand(shading,
                                                                                this.selectedShapes);
         this.commandHistory.add(changeShadingType);
         changeShadingType.execute();

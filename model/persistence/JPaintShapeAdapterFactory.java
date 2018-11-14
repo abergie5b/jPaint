@@ -72,7 +72,7 @@ public class JPaintShapeAdapterFactory {
         int deltaX = mousePoint.x - mouseDragPoint.x;
         int deltaY = mousePoint.y - mouseDragPoint.y;
         Dimensions dims = new Dimensions(new Point(appState.getClickedShape().getX() - deltaX, appState.getClickedShape().getY() - deltaY),
-                new Point(appState.getClickedShape().getWidth(), appState.getClickedShape().getHeight()));
+                                         new Point(appState.getClickedShape().getWidth(), appState.getClickedShape().getHeight()));
         return new JPaintShapeAdapter(shape, dims);
     }
 

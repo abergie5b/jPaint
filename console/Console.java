@@ -169,6 +169,10 @@ public class Console {
         {
             throw new IllegalArgumentException("Could not find ConsoleCommand");
         }
+        else
+        {
+            System.out.println("Found console command: " + command);
+        }
 
         Class[] classArgs = this.getClassType(command);
         Method method = null;
@@ -176,29 +180,46 @@ public class Console {
             switch (command)
             {
                 case GETSHAPES:
-
+                    method = this.appState.getClass().getMethod(name);
+                    ArrayList<JPaintShapeAdapter> shapes = (ArrayList<JPaintShapeAdapter>) method.invoke(this.appState);
+                    String output = "";
+                    for (JPaintShapeAdapter s: shapes)
+                    {
+                        output += s + "\n";
+                    }
+                    this.statusLabel.setText(output);
+                    break;
                 case UNDO:
                     method = this.appState.getClass().getMethod(name);
                     method.invoke(this.appState);
+                    break;
                 case REDO:
                     method = this.appState.getClass().getMethod(name);
                     method.invoke(this.appState);
+                    break;
                 case COPY:
                     method = this.appState.getClass().getMethod(name);
                     method.invoke(this.appState);
+                    break;
                 case DELETE:
                     method = this.appState.getClass().getMethod(name);
                     method.invoke(this.appState);
+                    break;
                 case PASTE:
                     method = this.appState.getClass().getMethod(name);
                     method.invoke(this.appState);
+                    break;
                 case ADDSHAPE:
                     method = this.appState.getClass().getMethod(name, classArgs[0]);
                     this.addShapeConsoleCommand(method, args);
+                    break;
                 case SETACTIVEPRIMARYCOLOR:
                     String color = args.get(1);
                     method = this.appState.getClass().getMethod(name, classArgs[0]);
                     this.setPrimaryColorCommand(method, color.toUpperCase());
+                    break;
+                default:
+                    throw new IllegalArgumentException("Could not find ConsoleCommand type");
             }
         }
         catch (NoSuchMethodException e) {
