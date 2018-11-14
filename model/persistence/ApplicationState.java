@@ -134,12 +134,15 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void delete()
     {
-        ICommand delete = CommandFactory.CreateSelectionCommand(CommandType.Delete,
-                                                                this.shapes,
-                                                                this.selectedShapes);
-        this.commandHistory.add(delete);
-        delete.execute();
-        this.repaint();
+        if (this.selectedShapes != null)
+        {
+            ICommand delete = CommandFactory.CreateSelectionCommand(CommandType.Delete,
+                    this.shapes,
+                    this.selectedShapes);
+            this.commandHistory.add(delete);
+            delete.execute();
+            this.repaint();
+        }
     }
 
     /**
@@ -167,12 +170,14 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void paste()
     {
-        ICommand paste = CommandFactory.CreateSelectionCommand(CommandType.Paste,
-                                                               this.shapes,
-                                                               this.copiedShapes);
-        this.commandHistory.add(paste);
-        paste.execute();
-        repaint();
+        if (this.selectedShapes != null) {
+            ICommand paste = CommandFactory.CreateSelectionCommand(CommandType.Paste,
+                    this.shapes,
+                    this.copiedShapes);
+            this.commandHistory.add(paste);
+            paste.execute();
+            repaint();
+        }
     }
 
     @Override
@@ -190,9 +195,16 @@ public class ApplicationState implements IApplicationState, Serializable
     @Override
     public void setSelectedShape()
     {
-        ArrayList<JPaintShapeAdapter>_shapes = new ArrayList<>();
-        _shapes.add(this.clickedShape);
-        this.selectedShapes = _shapes;
+        if (this.clickedShape == null)
+        {
+            this.selectedShapes = null;
+        }
+        else
+        {
+            ArrayList<JPaintShapeAdapter>_shapes = new ArrayList<>();
+            _shapes.add(this.clickedShape);
+            this.selectedShapes = _shapes;
+        }
     }
 
     /**
