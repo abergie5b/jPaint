@@ -17,69 +17,70 @@ import model.interfaces.IApplicationState;
 
 public class Console {
     private JFrame mainFrame;
-    private JLabel headerLabel;
-    private JLabel statusLabel;
+    private JTextArea outputTextArea;
     private JPanel controlPanel;
+    private JLabel previousCommandLabel;
     private IApplicationState appState;
-    private HashMap<ConsoleCommand, Class[]> consoleCommands;
+    private HashMap<ConsoleCommand, Class[]> consoleCommandClassTypes;
+    private JTextArea commandTextArea;
 
     public Console(IApplicationState appState) {
         this.appState = appState;
-        this.consoleCommands = new HashMap<>();
-        this.setConsoleCommands();
+        this.consoleCommandClassTypes = new HashMap<>();
+        this.setConsoleCommandClassTypes();
         prepareGUI();
     }
 
     private void prepareGUI() {
         mainFrame = new JFrame("JPaint Console");
-        mainFrame.setSize(700,300);
-        mainFrame.setLayout(new GridLayout(3, 3));
+        mainFrame.setSize(650,300);
+        mainFrame.setLayout(new FlowLayout());
 
         mainFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
                 System.exit(0);
             }
         });
-        headerLabel = new JLabel("", JLabel.CENTER);
-        statusLabel = new JLabel("", JLabel.CENTER);
-        statusLabel.setSize(500,100);
+
+        previousCommandLabel = new JLabel("");
+
+        outputTextArea = new JTextArea("",3,45);
+        outputTextArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(outputTextArea);
 
         controlPanel = new JPanel();
         controlPanel.setLayout(new FlowLayout());
 
-        mainFrame.add(headerLabel);
+        commandTextArea = new JTextArea("",1,45);
+
         mainFrame.add(controlPanel);
-        mainFrame.add(statusLabel);
+        mainFrame.add(outputTextArea);
+        mainFrame.add(scrollPane);
+        mainFrame.add(previousCommandLabel);
         mainFrame.setVisible(true);
     }
 
     public void showTextArea() {
-        headerLabel.setText("JPaint Console");
-        JLabel commentLabel = new JLabel("", JLabel.RIGHT);
 
-        final JTextArea commentTextArea = new JTextArea("",5,20);
-
-        JScrollPane scrollPane = new JScrollPane(commentTextArea);
+        JScrollPane scrollPane = new JScrollPane(commandTextArea);
         JButton showButton = new JButton("Execute");
 
-        showButton.addActionListener(e -> this.execute(commentTextArea.getText()));
-        commentTextArea.setText("");
-        controlPanel.add(commentLabel);
+        showButton.addActionListener(e -> this.execute(commandTextArea.getText()));
+        commandTextArea.setText("");
         controlPanel.add(scrollPane);
         controlPanel.add(showButton);
         mainFrame.setVisible(true);
     }
 
-    private void setConsoleCommands() {
-        consoleCommands.put(ConsoleCommand.ADDSHAPE, new Class[] {JPaintShapeAdapter.class});
-        consoleCommands.put(ConsoleCommand.UNDO, new Class[] {});
-        consoleCommands.put(ConsoleCommand.REDO, new Class[] {});
-        consoleCommands.put(ConsoleCommand.GETSHAPES, new Class[] {});
-        consoleCommands.put(ConsoleCommand.SETACTIVEPRIMARYCOLOR, new Class[] {ShapeColor.class});
-    }
-
-    private Class[] getClassType(ConsoleCommand command) {
-        return consoleCommands.get(command);
+    private void setConsoleCommandClassTypes() {
+        consoleCommandClassTypes.put(ConsoleCommand.ADDSHAPE, new Class[] {JPaintShapeAdapter.class});
+        consoleCommandClassTypes.put(ConsoleCommand.UNDO, new Class[] {});
+        consoleCommandClassTypes.put(ConsoleCommand.REDO, new Class[] {});
+        consoleCommandClassTypes.put(ConsoleCommand.PASTE, new Class[] {});
+        consoleCommandClassTypes.put(ConsoleCommand.DELETE, new Class[] {});
+        consoleCommandClassTypes.put(ConsoleCommand.COPY, new Class[] {});
+        consoleCommandClassTypes.put(ConsoleCommand.GETSHAPES, new Class[] {});
+        consoleCommandClassTypes.put(ConsoleCommand.SETACTIVEPRIMARYCOLOR, new Class[] {ShapeColor.class});
     }
 
     private ShapeColor getColorType (String name) {
@@ -143,7 +144,6 @@ public class Console {
     }
 
     private void execute(String text) {
-        this.statusLabel.setText(text);
         ArrayList<String> args = new ArrayList<> (Arrays.asList(text.split(" ")));
         String name = args.get(0);
 
@@ -174,7 +174,12 @@ public class Console {
             System.out.println("Found console command: " + command);
         }
 
-        Class[] classArgs = this.getClassType(command);
+        Class[] classArgs = consoleCommandClassTypes.get(command);
+        if (classArgs == null)
+        {
+            throw new IllegalArgumentException("Could not find class types from console command type");
+        }
+
         Method method = null;
         try {
             switch (command)
@@ -187,7 +192,7 @@ public class Console {
                     {
                         output += s + "\n";
                     }
-                    this.statusLabel.setText(output);
+                    this.outputTextArea.setText(output);
                     break;
                 case UNDO:
                     method = this.appState.getClass().getMethod(name);
@@ -231,6 +236,8 @@ public class Console {
         catch (IllegalAccessException e) {
             System.out.println("Unable to access appState trying to execute command\n" + e);
         }
+        this.commandTextArea.setText("");
+        this.previousCommandLabel.setText(text);
         this.appState.repaint();
     }
 }
